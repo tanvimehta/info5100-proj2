@@ -1,0 +1,14 @@
+Category,CS-male,CS-female,CS-nr,CS-male_%,CS-female_%,CE-male,CE-female,CE-nr,CE-male_%,CE-female_%,I-male,I-female,I-nr,I-male_%,I-female_%,Total,Total %
+Non resident ,3500,1124,118,66,75,245,105,0,60,76,393,252,62,33,21,5799,57.7
+Amer Indian or Alaska Native ,6,1,0,0,0,1,0,0,0,0,0,0,0,0,0,8,0.1
+Asian,358,124,18,7,8,38,13,0,9,9,101,90,16,9,7,758,7.5
+Black or African-American ,60,25,1,1,2,6,0,0,2,0,77,75,1,7,6,245,2.4
+Native Hawaiian/Pac Islander,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,3,0
+White,1270,207,30,24,14,107,16,0,26,12,532,732,32,45,60,2926,29.1
+"Multiracial, not Hispanic",27,3,1,1,0,0,0,0,0,0,20,21,0,2,2,72,0.7
+"Hispanic, any Race",99,20,4,2,1,13,4,0,3,3,63,41,3,5,3,247,2.5
+Total Res & Ethnicity Known  ,5321,1504,172,~,~,410,138,0,~,~,1187,1212,114,~,~,10058,~
+"Resident, Ethnicity Unknown",200,69,3,~,~,21,4,0,~,~,83,47,10,~,~,437,~
+Nr,292,68,0,~,~,60,14,0,~,~,116,40,0,~,~,326,~
+Gender Totals,5813,1641,34,~,~,491,156,0,~,~,1386,1299,1,~,~,10821,~
+Gender  %,78,22,~,~,~,75.9,24.1,~,~,~,51.6,48.4,~,~,~,~,~
