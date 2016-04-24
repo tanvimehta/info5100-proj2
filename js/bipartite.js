@@ -345,10 +345,10 @@
 		.attr("stroke", "black");
 		var defs = svg.append("defs");
 		var lg = defs.append("linearGradient").attr("id","gradient").attr("x1","0%").attr("y1","0%").attr("x2","100%").attr("y2","0%");
-		lg.append("stop").attr("offset","0%").attr("style","stop-color:#dd1c77;stop-opacity:1");
-		lg.append("stop").attr("offset",genderData[logoName].female).attr("style","stop-color:#dd1c77;stop-opacity:1");
-		lg.append("stop").attr("offset",genderData[logoName].female).attr("style","stop-color:blue;stop-opacity:1");
-		lg.append("stop").attr("offset","100%").attr("style","stop-color:blue;stop-opacity:1");		
+		lg.append("stop").attr("offset","0%").attr("style","stop-color:#F9BAD5;stop-opacity:1");
+		lg.append("stop").attr("offset",genderData[logoName].female).attr("style","stop-color:#F9BAD5;stop-opacity:1");
+		lg.append("stop").attr("offset",genderData[logoName].female).attr("style","stop-color:#789DCA;stop-opacity:1");
+		lg.append("stop").attr("offset","100%").attr("style","stop-color:#789DCA;stop-opacity:1");		
 
 		path.attr("fill-rule","nonzero").attr("fill","url(#gradient)");
 
