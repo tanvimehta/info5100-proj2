@@ -131,10 +131,40 @@ div.tooltip {
 	font-weight: bold;
 	color: black;
 }
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
 </style>
 </head>
 <body>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 	<script src="js/biPartite.js"></script>
 	<script type="text/javascript" src="js/companyInfo.js"></script>
 	<script src="data/logos.json"></script>
@@ -369,16 +399,15 @@ div.tooltip {
 						}).attr(
 								"transform",
 								function(d) {
-									return "translate(" + x.rangeBand()
-											/ education_levels + ",0)";
+									return "translate(" + x.rangeBand() / education_levels + ",0)";
 								}).attr("class", "undergrad").style("fill",
 								function(d) {
 									return color(d.name);
 								});
+
 						masters.selectAll("rect").data(function(d) {
 							return d.races;
-						}).enter().append("rect").attr("width",
-								x.rangeBand() / education_levels - 6).attr("y",
+						}).enter().append("rect").attr("width", x.rangeBand() / education_levels - 6).attr("y",
 								function(d) {
 									return y(d.y1);
 								}).attr("height", function(d) {
@@ -386,12 +415,12 @@ div.tooltip {
 						}).attr(
 								"transform",
 								function(d) {
-									return "translate(" + 2 * x.rangeBand()
-											/ education_levels + ",0)";
+									return "translate(" + 2 * x.rangeBand()/ education_levels + ",0)";
 								}).attr("class", "mas").style("fill",
 								function(d) {
 									return color(d.name);
 								});
+
 						phd.selectAll("rect").data(function(d) {
 							return d.races;
 						}).enter().append("rect").attr("width",
@@ -403,8 +432,7 @@ div.tooltip {
 						}).attr(
 								"transform",
 								function(d) {
-									return "translate(" + 3 * x.rangeBand()
-											/ education_levels + ",0)";
+									return "translate(" + 3 * x.rangeBand()/ education_levels + ",0)";
 								}).attr("class", "pd").style("fill",
 								function(d) {
 									return color(d.name);
@@ -419,18 +447,27 @@ div.tooltip {
 											+ ") rotate(-45)";
 								}).text("High School");
 
+						var tip = d3.tip()
+						  .attr('class', 'd3-tip')
+						  .offset([-10, 0])
+						  .html(function(d) {
+						    return "<strong>Data:</strong> <span style='color:red'>" + d.name + "</span>";
+						 })
+						svg.call(tip);
+						d3.selectAll(".advp").on('mouseover', tip.show).on('mouseout', tip.hide);
+						d3.selectAll(".undergrad").on('mouseover', tip.show).on('mouseout', tip.hide);
+						d3.selectAll(".mas").on('mouseover', tip.show).on('mouseout', tip.hide);
+						d3.selectAll(".pd").on('mouseover', tip.show).on('mouseout', tip.hide);
+
 						ugrad.append("text").attr("y", function(d) {
 							return y(0) + 20;
 						}).attr("class", "degree").attr(
 								"transform",
 								function(d) {
 									return "translate("
-											+ (1 * x.rangeBand()
-													/ education_levels - 290)
+											+ (1 * x.rangeBand()/ education_levels - 290)
 											+ "," + 140 + ") rotate(-45)";
 								}).text("Undergrad");
-
-						// ugrad.selectAll("text").attr("transform", "rotate(-35)");
 
 						masters.append("text").attr("y", function(d) {
 							return y(0) + 20;
@@ -438,8 +475,7 @@ div.tooltip {
 								"transform",
 								function(d) {
 									return "translate("
-											+ (2 * x.rangeBand()
-													/ education_levels - 280)
+											+ (2 * x.rangeBand()/ education_levels - 280)
 											+ "," + 130 + ") rotate(-45)";
 								}).text("Masters");
 
@@ -449,12 +485,9 @@ div.tooltip {
 								"transform",
 								function(d) {
 									return "translate("
-											+ (3 * x.rangeBand()
-													/ education_levels - 270)
+											+ (3 * x.rangeBand()/ education_levels - 270)
 											+ "," + 120 + ") rotate(-45)";
 								}).text("PhD");
-
-						// d3.selectAll(".degree").attr("transform", function(d) { return "rotate(-35)"; });
 
 						var legend = svg.selectAll(".legend").data(
 								color.domain().slice().reverse()).enter()
