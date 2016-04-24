@@ -260,7 +260,7 @@ div.tooltip {
 				d3.csv("Data/masters-stats.csv", function(error2, m_data) {
 					d3.csv("Data/phd-stats.csv", function(error3, p_data) {
 
-						if (error)
+						if(error)
 							throw error;
 						if (error1)
 							throw error1;
@@ -279,7 +279,7 @@ div.tooltip {
 								return {
 									name : name,
 									y0 : y0,
-									y1 : y0 += +d[name]
+									y1 : y0 += +((d[name]/d["Total"])*100)
 								};
 							});
 							d.total = d.races[d.races.length - 1].y1;
@@ -291,29 +291,31 @@ div.tooltip {
 								return {
 									name : name,
 									y0 : y0,
-									y1 : y0 += +d[name]
+									y1 : y0 += +((d[name]/d["Total"])*100)
 								};
 							});
 							d.total = d.races[d.races.length - 1].y1;
 						});
+
 						m_data.forEach(function(d) {
 							var y0 = 0;
 							d.races = color.domain().map(function(name) {
 								return {
 									name : name,
 									y0 : y0,
-									y1 : y0 += +d[name]
+									y1 : y0 += +((d[name]/d["Total"])*100)
 								};
 							});
 							d.total = d.races[d.races.length - 1].y1;
 						});
+
 						p_data.forEach(function(d) {
 							var y0 = 0;
 							d.races = color.domain().map(function(name) {
 								return {
 									name : name,
 									y0 : y0,
-									y1 : y0 += +d[name]
+									y1 : y0 += +((d[name]/d["Total"])*100)
 								};
 							});
 							d.total = d.races[d.races.length - 1].y1;
@@ -335,9 +337,7 @@ div.tooltip {
 						x.domain(u_data.map(function(d) {
 							return d.Year;
 						}));
-						y.domain([ 0, d3.max(u_data, function(d) {
-							return d.total;
-						}) ]);
+						y.domain([ 0, 100 ]);
 
 						svg.append("g").attr("class", "x axis").attr(
 								"transform",
@@ -510,25 +510,26 @@ div.tooltip {
 						legend.on('click', function(d) {
 							d.disabled = !d.disabled;
 							d3.transition().duration(600).each(function() {
-								raceTransition(d);
+								draw([d]);
 							});
 						});
 					});
 				});
 			});
 		});
+
 		var transAP = [];
 		d3.csv("Data/ap-stats.csv", function(d) {
 			return {
 				Year : d.Year,
-				Asian : d.Asian,
-				Black : d.Black,
-				Latino : d.Latino,
-				White : d.White,
-				Other : d.Other,
-				Male : d.Male,
-				Female : d.Female,
-				NotReported : d.NotReported,
+				Asian : 100 * d.Asian / d.Total,
+				Black : 100 * d.Black / d.Total,
+				Latino : 100 * d.Latino / d.Total,
+				White : 100 * d.White / d.Total,
+				Other : 100 * d.Other / d.Total,
+				Male : 100 * d.Male / d.Total,
+				Female : 100 * d.Female / d.Total,
+				NotReported : 100 * d.NotReported / d.Total,
 				Total : d.Total
 			};
 		}, function(data) {
@@ -539,14 +540,14 @@ div.tooltip {
 		d3.csv("Data/ugrad-stats.csv", function(d) {
 			return {
 				Year : d.Year,
-				Asian : d.Asian,
-				Black : d.Black,
-				Latino : d.Latino,
-				White : d.White,
-				Other : d.Other,
-				Male : d.Male,
-				Female : d.Female,
-				NotReported : d.NotReported,
+				Asian : 100 * d.Asian / d.Total,
+				Black : 100 * d.Black / d.Total,
+				Latino : 100 * d.Latino / d.Total,
+				White : 100 * d.White / d.Total,
+				Other : 100 * d.Other / d.Total,
+				Male : 100 * d.Male / d.Total,
+				Female : 100 * d.Female / d.Total,
+				NotReported : 100 * d.NotReported / d.Total,
 				Total : d.Total
 			};
 		}, function(data) {
@@ -557,14 +558,14 @@ div.tooltip {
 		d3.csv("Data/masters-stats.csv", function(d) {
 			return {
 				Year : d.Year,
-				Asian : d.Asian,
-				Black : d.Black,
-				Latino : d.Latino,
-				White : d.White,
-				Other : d.Other,
-				Male : d.Male,
-				Female : d.Female,
-				NotReported : d.NotReported,
+				Asian : 100 * d.Asian / d.Total,
+				Black : 100 * d.Black / d.Total,
+				Latino : 100 * d.Latino / d.Total,
+				White : 100 * d.White / d.Total,
+				Other : 100 * d.Other / d.Total,
+				Male : 100 * d.Male / d.Total,
+				Female : 100 * d.Female / d.Total,
+				NotReported : 100 * d.NotReported / d.Total,
 				Total : d.Total
 			};
 		}, function(data) {
@@ -575,14 +576,14 @@ div.tooltip {
 		d3.csv("Data/phd-stats.csv", function(d) {
 			return {
 				Year : d.Year,
-				Asian : d.Asian,
-				Black : d.Black,
-				Latino : d.Latino,
-				White : d.White,
-				Other : d.Other,
-				Male : d.Male,
-				Female : d.Female,
-				NotReported : d.NotReported,
+				Asian : 100 * d.Asian / d.Total,
+				Black : 100 * d.Black / d.Total,
+				Latino : 100 * d.Latino / d.Total,
+				White : 100 * d.White / d.Total,
+				Other : 100 * d.Other / d.Total,
+				Male : 100 * d.Male / d.Total,
+				Female : 100 * d.Female / d.Total,
+				NotReported : 100 * d.NotReported / d.Total,
 				Total : d.Total
 			};
 		}, function(data) {
@@ -600,12 +601,11 @@ div.tooltip {
 			return this;
 		};
 
-		function raceTransition(selectedLegend) {
-
+		function draw(labels) {
 			transAP.forEach(function(d) {
 				var y0 = 0;
 				d.races = color.domain().map(function(name) {
-					if (name == selectedLegend) {
+					if (labels.indexOf(name) > -1) {
 						return {
 							name : name,
 							y0 : y0,
@@ -623,7 +623,7 @@ div.tooltip {
 			transUGrad.forEach(function(d) {
 				var y0 = 0;
 				d.races = color.domain().map(function(name) {
-					if (name == selectedLegend) {
+					if (labels.indexOf(name) > -1) {
 						return {
 							name : name,
 							y0 : y0,
@@ -641,7 +641,7 @@ div.tooltip {
 			transMasters.forEach(function(d) {
 				var y0 = 0;
 				d.races = color.domain().map(function(name) {
-					if (name == selectedLegend) {
+					if (labels.indexOf(name) > -1) {
 						return {
 							name : name,
 							y0 : y0,
@@ -659,7 +659,7 @@ div.tooltip {
 			transPhd.forEach(function(d) {
 				var y0 = 0;
 				d.races = color.domain().map(function(name) {
-					if (name == selectedLegend) {
+					if (labels.indexOf(name) > -1) {
 						return {
 							name : name,
 							y0 : y0,
@@ -760,7 +760,6 @@ div.tooltip {
 					}).attr("class", "pd").style("fill", function(d) {
 				return color(d.name);
 			});
-
 		}
 	</script>
 </body>
