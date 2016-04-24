@@ -2,13 +2,13 @@
 	var bP={};	
 	var b=30, bb=150, height=600, buffMargin=1, minHeight=14;
 	var c1=[-130, 40], c2=[-50, 100], c3=[-10, 140]; //Column positions of labels.
-	var colors =["#800026", "#feb24c",  "#081d58","#7fcdbb", "#004529", "#addd2f", "#49006a", "#fa9f00", "#ff00af", "#969696"];
+	var colors =["#e41a1c", "#377eb8",  "#4daf4a", "#984ea3", "#ff7f00","#a65628", "#49006a", "#fa9f00", "#ff00af", "#969696"];
 	
 	bP.partData = function(data,p){
 		var sData={};
 		
 		sData.keys=[
-		d3.set(data.map(function(d){ return d[0];})).values().sort(function(a,b){ return ( a<b? -1 : a>b ? 1 : 0);}),
+		d3.set(data.map(function(d){ return d[0];})).values(),//.sort(function(a,b){ return ( a<b? -1 : a>b ? 1 : 0);}),
 		d3.set(data.map(function(d){ return d[1];})).values().sort(function(a,b){ return ( a<b? -1 : a>b ? 1 : 0);})		
 		];
 		
@@ -113,6 +113,7 @@
 		.selectAll(".mainbar").data(data.mainBars[p])
 		.enter().append("g").attr("class","mainbar");
 
+		//Draw the rectangle bars
 		mainbar.append("rect").attr("class","mainrect")
 		.attr("x", 0).attr("y",function(d){ return d.middle-d.height/2; })
 		.attr("width",b).attr("height",function(d){ return d.height; })
@@ -120,27 +121,66 @@
 		.style("fill-opacity",0).style("stroke-width","0.5")
 		.style("stroke","black").style("stroke-opacity",5);
 
-		mainbar.append("text").attr("class","barlabel")
-		.attr("x", c1[p]-5).attr("y",function(d){ return d.middle+5;})
-		.text(function(d,i){ return data.keys[p][i];})
-		.attr("text-anchor","start" );
-
-		mainbar.append("text").attr("class","barvalue")
-		.attr("x", c2[p]+8).attr("y",function(d){ return d.middle+5;})
-		.text(function(d,i){ return d.value ;})
-		.attr("text-anchor","end");
-
-		mainbar.append("text").attr("class","barpercent")
-		.attr("x", c3[p]+8).attr("y",function(d){ return d.middle+5;})
-		.text(function(d,i){ return "( "+Math.round(100*d.percent)+"%)" ;})
-		.attr("text-anchor","end").style("fill","grey");
-
 		d3.select("#"+id).select(".part"+p).select(".subbars")
 		.selectAll(".subbar").data(data.subBars[p]).enter()
 		.append("rect").attr("class","subbar")
 		.attr("x", 0).attr("y",function(d){ return d.y})
 		.attr("width",b).attr("height",function(d){ return d.h})
 		.style("fill",function(d){ return colors[d.key1];});
+
+		if(p==0){
+			//Labels for the ethnic groups
+
+			mainbar.append("text").attr("class","barlabel")
+			.attr("x", c1[p]).attr("y",function(d){ return d.middle+5;})
+			.text(function(d,i){ return data.keys[p][i];})
+			.attr("text-anchor","start" );
+
+			mainbar.append("text").attr("class","barvalue")
+			.attr("x", c2[p]).attr("y",function(d){ return d.middle+5;})
+			.text(function(d,i){ return d.value ;})
+			.attr("text-anchor","end");
+
+			mainbar.append("text").attr("class","barpercent")
+			.attr("x", c3[p]).attr("y",function(d){ return d.middle+5;})
+			.text(function(d,i){ return "( "+Math.round(100*d.percent)+"%)" ;})
+			.attr("text-anchor","end").style("fill","grey");
+
+		}else{
+			//Labels for the company bars
+			mainbar.append("text").attr("class","barlabel")
+			.attr("x", c1[p]).attr("y",function(d){ return d.middle+5;})
+			.text(function(d,i){ return data.keys[p][i];})
+			.attr("text-anchor","start" );
+
+			mainbar.append("text").attr("class","barvalue")
+			.attr("x", c2[p]+35).attr("y",function(d){ return d.middle+5;})
+			.text(function(d,i){ return d.value ;})
+			.attr("text-anchor","end");
+
+			mainbar.append("text").attr("class","barpercent")
+			.attr("x", c3[p]+35).attr("y",function(d){ return d.middle+5;})
+			.text(function(d,i){ return "( "+Math.round(100*d.percent)+"%)" ;})
+			.attr("text-anchor","end").style("fill","grey");
+
+		}
+
+		/*mainbar.append("text").attr("class","barlabel")
+		.attr("x", c1[p]-5).attr("y",function(d){ return d.middle+5;})
+		.text(function(d,i){ return data.keys[p][i];})
+		.attr("text-anchor","start" );
+
+		mainbar.append("text").attr("class","barvalue")
+		.attr("x", c2[p]+20).attr("y",function(d){ return d.middle+5;})
+		.text(function(d,i){ return d.value ;})
+		.attr("text-anchor","end");
+
+		mainbar.append("text").attr("class","barpercent")
+		.attr("x", c3[p]+8).attr("y",function(d){ return d.middle+5;})
+		.text(function(d,i){ return "( "+Math.round(100*d.percent)+"%)" ;})
+		.attr("text-anchor","end").style("fill","grey");*/
+
+		
 	}
 	
 	function drawEdges(data, id){
@@ -264,9 +304,7 @@
 
 	function showLogo(p,index){
 
-		var tag = document.getElementById("info");
-		tag.innerHTML = "";
-		if(p==0){
+		if(p==1){
 			logoName = data[0].data.keys[p][index];
 			showGenderInLogo(logoName);
 
@@ -279,14 +317,14 @@
 		}else{
 			var ethnicName = data[0].data.keys[p][index];
 			var tag = document.getElementById("info");
-			tag.innerHTML = ethnicName;
+			//tag.innerHTML = ethnicName;
 			//resetMoreInfo();
 		}
 		
 	}
 
 	function resetMoreInfo(p){
-		if(p==0){
+		if(p==1){
 			removeLogo();
 			drawMoreInfo();
 		}
@@ -299,6 +337,7 @@
 
 	function showGenderInLogo(logoName){
 		removeLogo();
+
 		var svg= d3.select("#logoSVG").append("svg").attr("class","companyLogo").attr("viewBox",genderData[logoName].viewbox)
 		.attr("fill-rule","nonzero").attr("clip-rule","evenodd").attr("stroke-linejoin","round")
 		.attr("stroke-miterlimit","1.414");
@@ -306,25 +345,50 @@
 		.attr("stroke", "black");
 		var defs = svg.append("defs");
 		var lg = defs.append("linearGradient").attr("id","gradient").attr("x1","0%").attr("y1","0%").attr("x2","100%").attr("y2","0%");
-		lg.append("stop").attr("offset","0%").attr("style","stop-color:#dd1c77;stop-opacity:1");
-		lg.append("stop").attr("offset",genderData[logoName].female).attr("style","stop-color:#dd1c77;stop-opacity:1");
-		lg.append("stop").attr("offset",genderData[logoName].female).attr("style","stop-color:blue;stop-opacity:1");
-		lg.append("stop").attr("offset","100%").attr("style","stop-color:blue;stop-opacity:1");		
+		lg.append("stop").attr("offset","0%").attr("style","stop-color:#F9BAD5;stop-opacity:1");
+		lg.append("stop").attr("offset",genderData[logoName].female).attr("style","stop-color:#F9BAD5;stop-opacity:1");
+		lg.append("stop").attr("offset",genderData[logoName].female).attr("style","stop-color:#789DCA;stop-opacity:1");
+		lg.append("stop").attr("offset","100%").attr("style","stop-color:#789DCA;stop-opacity:1");		
 
 		path.attr("fill-rule","nonzero").attr("fill","url(#gradient)");
-		var div = document.getElementById("logoSVG");
-		//div.style.visibility='visible';
-	}
 
-	function showBulletChart(Name){
+		
+		//Show tooltip on hover above logo
+		var div = d3.select("#logoSVG").append("div")	
+		.attr("class", "tooltip").attr("id","maleP")		
+		.style("opacity", 0);
 
-		var margin = {top: 5, right: 40, bottom: 20, left: 20},
-		bWidth = 400 - margin.left - margin.right,
-		bHeight = 50 - margin.top - margin.bottom;
+		var div = d3.select("#logoSVG").select("#maleP");
+		div.transition()		
+		.duration(200)		
+		.style("opacity", .9);		
+		div.html("Female: "+ genderData[logoName].female)	
+		.style("left","880px")		
+		.style("top", "190px");	
 
-		chart = d3.bullet()
-		.width(bWidth)
-		.height(bHeight);
+		var div = d3.select("#logoSVG").append("div")	
+		.attr("class", "tooltip").attr("id","femaleP")		
+		.style("opacity", 0);
+		//path.on("mouseover",function(d, i){ 
+			var div = d3.select("#logoSVG").select("#femaleP");
+			div.transition()		
+			.duration(200)		
+			.style("opacity", .9);		
+			div.html("Male: "+ (100 - parseInt(genderData[logoName].female))+"%")	
+			.style("left","1250px")		
+			.style("top", "190px");	
+
+		}
+
+		function showBulletChart(Name){
+
+			var margin = {top: 5, right: 40, bottom: 20, left: 20},
+			bWidth = 400 - margin.left - margin.right,
+			bHeight = 50 - margin.top - margin.bottom;
+
+			chart = d3.bullet()
+			.width(bWidth)
+			.height(bHeight);
 
 		//chart.duration(1000);
 
