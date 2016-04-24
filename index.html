@@ -101,6 +101,10 @@ button {
 .bullet .subtitle {
 	fill: #999;
 }
+.degree {
+	font-size: 10px;
+	fill: #404048;
+}
 </style>
 </head>
 <body>
@@ -194,7 +198,7 @@ button {
 
 		var svg = d3.select("body").append("svg").attr("width",
 				width + margin.left + margin.right).attr("height",
-				height + margin.top + margin.bottom).append("g").attr(
+				height + margin.top + margin.bottom + 100).append("g").attr(
 				"transform",
 				"translate(" + margin.left + "," + margin.top + ")");
 
@@ -283,7 +287,7 @@ button {
 					}) ]);
 
 					svg.append("g").attr("class", "x axis").attr("transform",
-							"translate(0," + height + ")").call(xAxis);
+							"translate(0," + (height+50) + ")").call(xAxis);
 
 					svg.append("g").attr("class", "y axis").call(yAxis);
 
@@ -311,11 +315,12 @@ button {
 
 					ap.selectAll("rect").data(function(d) {
 						return d.races;
-					}).enter().append("rect").attr("width",
-							x.rangeBand() / education_levels - 6).attr("y",
+					}).enter().append("rect").attr("width", x.rangeBand() / education_levels - 6)
+					.attr("y",
 							function(d) {
 								return y(d.y1);
-							}).attr("height", function(d) {
+							})
+					.attr("height", function(d) {
 						return y(d.y0) - y(d.y1);
 					}).attr("class", "advp").style("fill", function(d) {
 						return color(d.name);
@@ -366,6 +371,54 @@ button {
 							}).attr("class", "pd").style("fill", function(d) {
 						return color(d.name);
 					});
+
+					ap.append("text")
+					.attr("y", function(d) {
+							return y(0)+20;
+					}).attr("class", "degree")
+					.attr(
+							"transform",
+							function(d) {
+								return "translate(" + -290 + "," + 143 + ") rotate(-45)";
+							})
+					.text("High School");
+
+					ugrad.append("text")
+					.attr("y", function(d) {
+							return y(0)+20;
+					}).attr("class", "degree")
+					.attr(
+							"transform",
+							function(d) {
+								return "translate(" + (1 * x.rangeBand()/ education_levels - 290) + "," + 140 + ") rotate(-45)";
+							})
+					.text("Undergrad");
+
+					// ugrad.selectAll("text").attr("transform", "rotate(-35)");
+
+					masters.append("text")
+					.attr("y", function(d) {
+							return y(0)+20;
+					}).attr("class", "degree")
+					.attr(
+							"transform",
+							function(d) {
+								return "translate(" + (2 * x.rangeBand()/ education_levels - 280) + "," + 130 + ") rotate(-45)";
+							})
+					.text("Masters");
+
+					phd.append("text")
+					.attr("y", function(d) {
+							return y(0)+20;
+					}).attr("class", "degree")
+					.attr(
+							"transform",
+							function(d) {
+								return "translate(" + (3 * x.rangeBand()/ education_levels - 270) + "," + 120 + ") rotate(-45)";
+							})
+					.text("PhD");
+
+					// d3.selectAll(".degree").attr("transform", function(d) { return "rotate(-35)"; });
 
 					var legend = svg.selectAll(".legend").data(
 							color.domain().slice().reverse()).enter().append(
