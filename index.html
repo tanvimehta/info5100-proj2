@@ -145,7 +145,7 @@ button {
 	<script>
 		var width = 700, height = 600, margin = {
 			b : 0,
-			t : 40,
+			t : 0,
 			l : 170,
 			r : 50
 		};
@@ -166,14 +166,14 @@ button {
 	<!-- Visualization 2 -->
 	<script>
 		var margin = {
-			top : 20,
+			top : 100,
 			right : 20,
 			bottom : 30,
 			left : 40
 		}, width = 960 - margin.left - margin.right, height = 500 - margin.top
 				- margin.bottom;
 
-		var education_levels = 3;
+		var education_levels = 4;
 
 		var x = d3.scale.ordinal().rangeRoundBands([ 0, width ], .1);
 
@@ -198,10 +198,13 @@ button {
 				"transform",
 				"translate(" + margin.left + "," + margin.top + ")");
 
+	d3.csv("Data/ap-stats.csv", function(error, ap_data) {
 		d3.csv("Data/ugrad-stats.csv", function(error1, u_data) {
 			d3.csv("Data/masters-stats.csv", function(error2, m_data) {
 				d3.csv("Data/phd-stats.csv", function(error3, p_data) {
 
+					if(error)
+						throw error;
 					if (error1)
 						throw error1;
 					if (error2)
@@ -212,6 +215,18 @@ button {
 					color.domain(d3.keys(u_data[0]).filter(function(key) {
 						return key !== "Year" && key !== "Total";
 					}));
+
+					ap_data.forEach(function(d) {
+						var y0 = 0;
+						d.races = color.domain().map(function(name) {
+							return {
+								name : name,
+								y0 : y0,
+								y1 : y0 += +d[name]
+							};
+						});
+						d.total = d.races[d.races.length - 1].y1;
+					});
 
 					u_data.forEach(function(d) {
 						var y0 = 0;
@@ -247,6 +262,9 @@ button {
 						d.total = d.races[d.races.length - 1].y1;
 					});
 
+					ap_data.sort(function(a, b) {
+						return a.Year - b.Year;
+					});
 					u_data.sort(function(a, b) {
 						return a.Year - b.Year;
 					});
@@ -269,6 +287,12 @@ button {
 
 					svg.append("g").attr("class", "y axis").call(yAxis);
 
+					var ap = svg.selectAll(".ap").data(ap_data).enter()
+							.append("g").attr("class", "g")
+							.attr("transform", function(d) {
+								return "translate(" + x(d.Year) + ",0)";
+							});
+
 					var ugrad = svg.selectAll(".ugrad").data(u_data).enter()
 							.append("g").attr("class", "g")
 							.attr("transform", function(d) {
@@ -285,6 +309,18 @@ button {
 								return "translate(" + x(d.Year) + ",0)";
 							});
 
+					ap.selectAll("rect").data(function(d) {
+						return d.races;
+					}).enter().append("rect").attr("width",
+							x.rangeBand() / education_levels - 6).attr("y",
+							function(d) {
+								return y(d.y1);
+							}).attr("height", function(d) {
+						return y(d.y0) - y(d.y1);
+					}).attr("class", "advp").style("fill", function(d) {
+						return color(d.name);
+					});
+
 					ugrad.selectAll("rect").data(function(d) {
 						return d.races;
 					}).enter().append("rect").attr("width",
@@ -293,7 +329,11 @@ button {
 								return y(d.y1);
 							}).attr("height", function(d) {
 						return y(d.y0) - y(d.y1);
-					}).attr("class", "undergrad").style("fill", function(d) {
+					}).attr(
+							"transform",
+							function(d) {
+								return "translate(" + x.rangeBand()/ education_levels + ",0)";
+							}).attr("class", "undergrad").style("fill", function(d) {
 						return color(d.name);
 					});
 					masters.selectAll("rect").data(function(d) {
@@ -307,15 +347,14 @@ button {
 					}).attr(
 							"transform",
 							function(d) {
-								return "translate(" + x.rangeBand()
-										/ education_levels + ",0)";
+								return "translate(" + 2 * x.rangeBand()/ education_levels + ",0)";
 							}).attr("class", "mas").style("fill", function(d) {
 						return color(d.name);
 					});
 					phd.selectAll("rect").data(function(d) {
 						return d.races;
 					}).enter().append("rect").attr("width",
-							x.rangeBand() / education_levels).attr("y",
+							x.rangeBand() / education_levels - 6).attr("y",
 							function(d) {
 								return y(d.y1);
 							}).attr("height", function(d) {
@@ -323,8 +362,7 @@ button {
 					}).attr(
 							"transform",
 							function(d) {
-								return "translate(" + 2 * x.rangeBand()
-										/ education_levels + ",0)";
+								return "translate(" + 3 * x.rangeBand()/ education_levels + ",0)";
 							}).attr("class", "pd").style("fill", function(d) {
 						return color(d.name);
 					});
@@ -352,6 +390,24 @@ button {
 					});
 				});
 			});
+		});
+	});
+		var transAP = [];
+		d3.csv("Data/ap-stats.csv", function(d) {
+			return {
+				Year : d.Year,
+				Asian : d.Asian,
+				Black : d.Black,
+				Latino : d.Latino,
+				White : d.White,
+				Other : d.Other,
+				Male : d.Male,
+				Female : d.Female,
+				NonResident : d.NonResident,
+				Total : d.Total
+			};
+		}, function(data) {
+			transAP = data;
 		});
 
 		var transUGrad = [];
@@ -421,6 +477,24 @@ button {
 
 		function raceTransition(selectedLegend) {
 
+			transAP.forEach(function(d) {
+				var y0 = 0;
+				d.races = color.domain().map(function(name) {
+					if (name == selectedLegend) {
+						return {
+							name : name,
+							y0 : y0,
+							y1 : y0 += +d[name]
+						}
+					} else {
+						return;
+					}
+					;
+				});
+				d.races.clean(undefined);
+				d.total = d.races[d.races.length - 1].y1;
+			});
+
 			transUGrad.forEach(function(d) {
 				var y0 = 0;
 				d.races = color.domain().map(function(name) {
@@ -478,6 +552,12 @@ button {
 			d3.selectAll(".undergrad").transition().remove();
 			d3.selectAll(".mas").transition().remove();
 			d3.selectAll(".pd").transition().remove();
+			d3.selectAll(".advp").transition().remove();
+
+			var ap = svg.selectAll(".ap").data(transAP).enter().append("g")
+					.attr("class", "g").attr("transform", function(d) {
+						return "translate(" + x(d.Year) + ",0)";
+					});
 
 			var ugrad = svg.selectAll(".ugrad").data(transUGrad).enter()
 					.append("g").attr("class", "g").attr("transform",
@@ -496,6 +576,18 @@ button {
 						return "translate(" + x(d.Year) + ",0)";
 					});
 
+			ap.selectAll("rect").data(function(d) {
+				return d.races;
+			}).enter().append("rect").transition().attr("width",
+					x.rangeBand() / education_levels - 6).attr("y",
+					function(d) {
+						return y(d.y1);
+					}).transition().attr("height", function(d) {
+				return y(d.y0) - y(d.y1);
+			}).attr("class", "advp").style("fill", function(d) {
+				return color(d.name);
+			});
+
 			ugrad.selectAll("rect").data(function(d) {
 				return d.races;
 			}).enter().append("rect").transition().attr("width",
@@ -504,6 +596,8 @@ button {
 						return y(d.y1);
 					}).transition().attr("height", function(d) {
 				return y(d.y0) - y(d.y1);
+			}).attr("transform", function(d) {
+				return "translate(" + x.rangeBand() / education_levels + ",0)";
 			}).attr("class", "undergrad").style("fill", function(d) {
 				return color(d.name);
 			});
@@ -517,7 +611,7 @@ button {
 					}).transition().attr("height", function(d) {
 				return y(d.y0) - y(d.y1);
 			}).attr("transform", function(d) {
-				return "translate(" + x.rangeBand() / education_levels + ",0)";
+				return "translate(" + 2 * x.rangeBand() / education_levels + ",0)";
 			}).attr("class", "mas").style("fill", function(d) {
 				return color(d.name);
 			});
@@ -533,8 +627,7 @@ button {
 			}).attr(
 					"transform",
 					function(d) {
-						return "translate(" + 2 * x.rangeBand()
-								/ education_levels + ",0)";
+						return "translate(" + 3 * x.rangeBand()/ education_levels + ",0)";
 					}).attr("class", "pd").style("fill", function(d) {
 				return color(d.name);
 			});
