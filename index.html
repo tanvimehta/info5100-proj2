@@ -40,36 +40,101 @@ rect {
 	height: auto;
 }
 
-img {
+#logoSVG {
 	margin: 0 auto;
 	display: block;
 }
 
-#logoSVG {
-	visibility: hidden;
+#bullet {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	margin: auto;
+	padding-top: 40px;
+	position: relative;
+	width: 960px;
+}
+
+button {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+.bullet {
+	font: 10px sans-serif;
+}
+
+.bullet .marker {
+	stroke: #000;
+	stroke-width: 2px;
+}
+
+.bullet .tick line {
+	stroke: #666;
+	stroke-width: .5px;
+}
+
+.bullet .range.s0 {
+	fill: #eee;
+}
+
+.bullet .range.s1 {
+	fill: #ddd;
+}
+
+.bullet .range.s2 {
+	fill: #ccc;
+}
+
+.bullet .measure.s0 {
+	fill: lightsteelblue;
+}
+
+.bullet .measure.s1 {
+	fill: steelblue;
+}
+
+.bullet .title {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.bullet .subtitle {
+	fill: #999;
 }
 </style>
 </head>
 <body>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script src="js/biPartite.js"></script>
+	<script type="text/javascript" src="js/companyInfo.js"></script>
+	<script src="data/logos.json"></script>
 	<script type="text/javascript" src="data/data.js"></script>
 
-	<!-- Visualization 1 -->
+	<button>Update</button>
+	<script src="js/companyInfo.js"></script>
 
+	<script>
+		logoName = "US";
+		ethnicData = {};
+	</script>
+
+	<!-- Visualization 1 -->
 	<table>
 		<tr>
 			<td>
 				<div id="idCompanies" style="float: left"></div>
 			</td>
 			<td>
-				<div id="moreInfo" style="visibility: hidden;">
-					<div class="panel"
-						style="height: 500px; width: 500px; border: 1px solid; align-content: center;">
-						<div class="panel-heading">More Information</div>
-						<div class="panel-body" style="align-content: center;">
-							<img id="logoSVG" width="200" height="100" alt="Company Logo" />
-							<p id="info"></p>
+				<div id="moreInfo">
+					<div id="moreInfoHeader" class="panel"
+						style="height: 600px; width: 500px; border: 1px solid; align-content: center;">
+						<div class="">More Information</div>
+						<div class="" style="align-content: center;">
+							<div id="logoSVG" style="height: 150px; width: 500px;">
+								<p id="info"></p>
+							</div>
+							<div id="bullet" style="height: 150px; width: 500px;"></div>
+
 						</div>
 					</div>
 				</div>
@@ -100,7 +165,6 @@ img {
 
 	<!-- Visualization 2 -->
 	<script>
-
 		var margin = {
 			top : 20,
 			right : 20,
@@ -229,8 +293,7 @@ img {
 								return y(d.y1);
 							}).attr("height", function(d) {
 						return y(d.y0) - y(d.y1);
-					}).attr("class", "undergrad")
-					.style("fill", function(d) {
+					}).attr("class", "undergrad").style("fill", function(d) {
 						return color(d.name);
 					});
 					masters.selectAll("rect").data(function(d) {
@@ -244,9 +307,9 @@ img {
 					}).attr(
 							"transform",
 							function(d) {
-								return "translate(" + x.rangeBand()/ education_levels + ",0)";
-							}).attr("class", "mas")
-					.style("fill", function(d) {
+								return "translate(" + x.rangeBand()
+										/ education_levels + ",0)";
+							}).attr("class", "mas").style("fill", function(d) {
 						return color(d.name);
 					});
 					phd.selectAll("rect").data(function(d) {
@@ -260,9 +323,9 @@ img {
 					}).attr(
 							"transform",
 							function(d) {
-								return "translate(" + 2 * x.rangeBand()/ education_levels + ",0)";
-							}).attr("class", "pd")
-					.style("fill", function(d) {
+								return "translate(" + 2 * x.rangeBand()
+										/ education_levels + ",0)";
+							}).attr("class", "pd").style("fill", function(d) {
 						return color(d.name);
 					});
 
@@ -282,201 +345,201 @@ img {
 								return d;
 							});
 					legend.on('click', function(d) {
-						    d.disabled = !d.disabled;
-						    d3.transition().duration(600).each(function(){
-						    	raceTransition(d);
-						    });
-					  		});
+						d.disabled = !d.disabled;
+						d3.transition().duration(600).each(function() {
+							raceTransition(d);
+						});
+					});
 				});
 			});
 		});
-		
-	var transUGrad = [];
-	d3.csv("Data/ugrad-stats.csv", function(d) {
-	return {
-	    Year: d.Year,
-	    Asian: d.Asian,
-	    Black: d.Black,
-	    Latino: d.Latino,
-	    White: d.White,
-	    Other: d.Other,
-	    Male: d.Male,
-	    Female: d.Female,
-	    NonResident: d.NonResident,
-	    Total: d.Total
-	  };
-	}, function (data) {
-	  	transUGrad = data;
-	});
 
-	var transMasters = [];
-	d3.csv("Data/masters-stats.csv", function(d) {
-	return {
-	    Year: d.Year,
-	    Asian: d.Asian,
-	    Black: d.Black,
-	    Latino: d.Latino,
-	    White: d.White,
-	    Other: d.Other,
-	    Male: d.Male,
-	    Female: d.Female,
-	    NonResident: d.NonResident,
-	    Total: d.Total
-	  };
-	}, function (data) {
-	  	transMasters = data;
-	});
-
-	var transPhd = [];
-	d3.csv("Data/phd-stats.csv", function(d) {
-	return {
-	    Year: d.Year,
-	    Asian: d.Asian,
-	    Black: d.Black,
-	    Latino: d.Latino,
-	    White: d.White,
-	    Other: d.Other,
-	    Male: d.Male,
-	    Female: d.Female,
-	    NonResident: d.NonResident,
-	    Total: d.Total
-	  };
-	}, function (data) {
-	  	transPhd = data;
-	});
-
-	//http://stackoverflow.com/questions/281264/remove-empty-elements-from-an-array-in-javascript
-	Array.prototype.clean = function(deleteValue) {
-	  for (var i = 0; i < this.length; i++) {
-	    if (this[i] == deleteValue) {         
-	      this.splice(i, 1);
-	      i--;
-	    }
-	  }
-	  return this;
-	};
-
-	function raceTransition(selectedLegend) {
-
-		transUGrad.forEach(function(d) {
-			var y0 = 0;
-			d.races = color.domain().map(function(name) {
-				if(name == selectedLegend) {
-				return {
-					name : name,
-					y0 : y0,
-					y1 : y0 += +d[name]
-				}} else {
-					return;
-				};
-			});
-			d.races.clean(undefined);
-			d.total = d.races[d.races.length - 1].y1;
+		var transUGrad = [];
+		d3.csv("Data/ugrad-stats.csv", function(d) {
+			return {
+				Year : d.Year,
+				Asian : d.Asian,
+				Black : d.Black,
+				Latino : d.Latino,
+				White : d.White,
+				Other : d.Other,
+				Male : d.Male,
+				Female : d.Female,
+				NonResident : d.NonResident,
+				Total : d.Total
+			};
+		}, function(data) {
+			transUGrad = data;
 		});
 
-		transMasters.forEach(function(d) {
-			var y0 = 0;
-			d.races = color.domain().map(function(name) {
-				if(name == selectedLegend) {
-				return {
-					name : name,
-					y0 : y0,
-					y1 : y0 += +d[name]
-				}} else {
-					return;
-				};
-			});
-			d.races.clean(undefined);
-			d.total = d.races[d.races.length - 1].y1;
+		var transMasters = [];
+		d3.csv("Data/masters-stats.csv", function(d) {
+			return {
+				Year : d.Year,
+				Asian : d.Asian,
+				Black : d.Black,
+				Latino : d.Latino,
+				White : d.White,
+				Other : d.Other,
+				Male : d.Male,
+				Female : d.Female,
+				NonResident : d.NonResident,
+				Total : d.Total
+			};
+		}, function(data) {
+			transMasters = data;
 		});
 
-		transPhd.forEach(function(d) {
-			var y0 = 0;
-			d.races = color.domain().map(function(name) {
-				if(name == selectedLegend) {
-				return {
-					name : name,
-					y0 : y0,
-					y1 : y0 += +d[name]
-				}} else {
-					return;
-				};
-			});
-			d.races.clean(undefined);
-			d.total = d.races[d.races.length - 1].y1;
+		var transPhd = [];
+		d3.csv("Data/phd-stats.csv", function(d) {
+			return {
+				Year : d.Year,
+				Asian : d.Asian,
+				Black : d.Black,
+				Latino : d.Latino,
+				White : d.White,
+				Other : d.Other,
+				Male : d.Male,
+				Female : d.Female,
+				NonResident : d.NonResident,
+				Total : d.Total
+			};
+		}, function(data) {
+			transPhd = data;
 		});
 
-		d3.selectAll(".undergrad").transition().remove();
-		d3.selectAll(".mas").transition().remove();
-		d3.selectAll(".pd").transition().remove();
+		//http://stackoverflow.com/questions/281264/remove-empty-elements-from-an-array-in-javascript
+		Array.prototype.clean = function(deleteValue) {
+			for (var i = 0; i < this.length; i++) {
+				if (this[i] == deleteValue) {
+					this.splice(i, 1);
+					i--;
+				}
+			}
+			return this;
+		};
 
-		var ugrad = svg.selectAll(".ugrad").data(transUGrad).enter()
-				.append("g").attr("class", "g")
-				.attr("transform", function(d) {
-					return "translate(" + x(d.Year) + ",0)";
+		function raceTransition(selectedLegend) {
+
+			transUGrad.forEach(function(d) {
+				var y0 = 0;
+				d.races = color.domain().map(function(name) {
+					if (name == selectedLegend) {
+						return {
+							name : name,
+							y0 : y0,
+							y1 : y0 += +d[name]
+						}
+					} else {
+						return;
+					}
+					;
 				});
+				d.races.clean(undefined);
+				d.total = d.races[d.races.length - 1].y1;
+			});
 
-		var masters = svg.selectAll(".masters").data(transMasters)
-				.enter().append("g").attr("class", "g")
-				.attr("transform", function(d) {
-					return "translate(" + x(d.Year) + ",0)";
+			transMasters.forEach(function(d) {
+				var y0 = 0;
+				d.races = color.domain().map(function(name) {
+					if (name == selectedLegend) {
+						return {
+							name : name,
+							y0 : y0,
+							y1 : y0 += +d[name]
+						}
+					} else {
+						return;
+					}
+					;
 				});
+				d.races.clean(undefined);
+				d.total = d.races[d.races.length - 1].y1;
+			});
 
-		var phd = svg.selectAll(".phd").data(transPhd).enter()
-				.append("g").attr("class", "g")
-				.attr("transform", function(d) {
-					return "translate(" + x(d.Year) + ",0)";
+			transPhd.forEach(function(d) {
+				var y0 = 0;
+				d.races = color.domain().map(function(name) {
+					if (name == selectedLegend) {
+						return {
+							name : name,
+							y0 : y0,
+							y1 : y0 += +d[name]
+						}
+					} else {
+						return;
+					}
+					;
 				});
+				d.races.clean(undefined);
+				d.total = d.races[d.races.length - 1].y1;
+			});
 
-		ugrad.selectAll("rect").data(function(d) {
-			return d.races;
-		}).enter().append("rect").transition().attr("width",
-				x.rangeBand() / education_levels-6).attr("y",
-				function(d) {
-					return y(d.y1);
-				}).transition().attr("height", function(d) {
-			return y(d.y0) - y(d.y1);
-		}).attr("class", "undergrad")
-		.style("fill", function(d) {
-			return color(d.name);
-		});
+			d3.selectAll(".undergrad").transition().remove();
+			d3.selectAll(".mas").transition().remove();
+			d3.selectAll(".pd").transition().remove();
 
-		masters.selectAll("rect").data(function(d) {
-			return d.races;
-		}).enter().append("rect").transition().attr("width",
-				x.rangeBand() / education_levels-6).attr("y",
-				function(d) {
-					return y(d.y1);
-				}).transition().attr("height", function(d) {
-			return y(d.y0) - y(d.y1);
-		}).attr(
-				"transform",
-				function(d) {
-					return "translate(" + x.rangeBand()/ education_levels + ",0)";
-				}).attr("class", "mas")
-		.style("fill", function(d) {
-			return color(d.name);
-		});
+			var ugrad = svg.selectAll(".ugrad").data(transUGrad).enter()
+					.append("g").attr("class", "g").attr("transform",
+							function(d) {
+								return "translate(" + x(d.Year) + ",0)";
+							});
 
-		phd.selectAll("rect").data(function(d) {
-			return d.races;
-		}).enter().append("rect").transition().attr("width",
-				x.rangeBand() / education_levels-6).attr("y",
-				function(d) {
-					return y(d.y1);
-				}).transition().attr("height", function(d) {
-			return y(d.y0) - y(d.y1);
-		}).attr(
-				"transform",
-				function(d) {
-					return "translate(" + 2 * x.rangeBand()/ education_levels+ ",0)";
-				}).attr("class", "pd")
-		.style("fill", function(d) {
-			return color(d.name);
-		});
+			var masters = svg.selectAll(".masters").data(transMasters).enter()
+					.append("g").attr("class", "g").attr("transform",
+							function(d) {
+								return "translate(" + x(d.Year) + ",0)";
+							});
 
-	}
+			var phd = svg.selectAll(".phd").data(transPhd).enter().append("g")
+					.attr("class", "g").attr("transform", function(d) {
+						return "translate(" + x(d.Year) + ",0)";
+					});
 
+			ugrad.selectAll("rect").data(function(d) {
+				return d.races;
+			}).enter().append("rect").transition().attr("width",
+					x.rangeBand() / education_levels - 6).attr("y",
+					function(d) {
+						return y(d.y1);
+					}).transition().attr("height", function(d) {
+				return y(d.y0) - y(d.y1);
+			}).attr("class", "undergrad").style("fill", function(d) {
+				return color(d.name);
+			});
+
+			masters.selectAll("rect").data(function(d) {
+				return d.races;
+			}).enter().append("rect").transition().attr("width",
+					x.rangeBand() / education_levels - 6).attr("y",
+					function(d) {
+						return y(d.y1);
+					}).transition().attr("height", function(d) {
+				return y(d.y0) - y(d.y1);
+			}).attr("transform", function(d) {
+				return "translate(" + x.rangeBand() / education_levels + ",0)";
+			}).attr("class", "mas").style("fill", function(d) {
+				return color(d.name);
+			});
+
+			phd.selectAll("rect").data(function(d) {
+				return d.races;
+			}).enter().append("rect").transition().attr("width",
+					x.rangeBand() / education_levels - 6).attr("y",
+					function(d) {
+						return y(d.y1);
+					}).transition().attr("height", function(d) {
+				return y(d.y0) - y(d.y1);
+			}).attr(
+					"transform",
+					function(d) {
+						return "translate(" + 2 * x.rangeBand()
+								/ education_levels + ",0)";
+					}).attr("class", "pd").style("fill", function(d) {
+				return color(d.name);
+			});
+
+		}
 	</script>
 </body>
 </html>
