@@ -194,7 +194,7 @@ div.tooltip {
 	<script>
 		var margin = {
 			top : 100,
-			right : 20,
+			right : 80,
 			bottom : 30,
 			left : 40
 		}, width = 960 - margin.left - margin.right, height = 500 - margin.top
@@ -202,7 +202,7 @@ div.tooltip {
 
 		var education_levels = 4;
 
-		var x = d3.scale.ordinal().rangeRoundBands([ 0, width ], .1);
+		var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 
 		var band_width = width / 5; // number of years
 
@@ -224,6 +224,9 @@ div.tooltip {
 				height + margin.top + margin.bottom + 100).append("g").attr(
 				"transform",
 				"translate(" + margin.left + "," + margin.top + ")");
+
+		var ethnicities = ["Asian", "Black", "Latino", "White", "Other"];
+		var genders = ["Male", "Female", "NotReported"];
 
 		d3.csv("Data/ap-stats.csv", function(error, ap_data) {
 			d3.csv("Data/ugrad-stats.csv", function(error1, u_data) {
@@ -705,8 +708,7 @@ div.tooltip {
 			}).attr(
 					"transform",
 					function(d) {
-						return "translate(" + 2 * x.rangeBand()
-								/ education_levels + ",0)";
+						return "translate(" + 2 * x.rangeBand() / education_levels + ",0)";
 					}).attr("class", "mas").style("fill", function(d) {
 				return color(d.name);
 			});
@@ -722,8 +724,7 @@ div.tooltip {
 			}).attr(
 					"transform",
 					function(d) {
-						return "translate(" + 3 * x.rangeBand()
-								/ education_levels + ",0)";
+						return "translate(" + 3 * x.rangeBand() / education_levels + ",0)";
 					}).attr("class", "pd").style("fill", function(d) {
 				return color(d.name);
 			});
