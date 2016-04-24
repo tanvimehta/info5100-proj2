@@ -101,9 +101,35 @@ button {
 .bullet .subtitle {
 	fill: #999;
 }
+
 .degree {
 	font-size: 10px;
 	fill: #404048;
+}
+
+div.tooltip {
+	position: absolute;
+	text-align: center;
+	width: 80px;
+	height: 20px;
+	padding: 2px;
+	font: 12px sans-serif;
+	background: lightsteelblue;
+	border: 0px;
+	border-radius: 8px;
+	pointer-events: none;
+	display: inline;
+}
+
+.alignClass {
+	display: inline;
+}
+
+.headerClass {
+	font-size: 15pt;
+	text-align: center;
+	font-weight: bold;
+	color: black;
 }
 </style>
 </head>
@@ -132,13 +158,10 @@ button {
 				<div id="moreInfo">
 					<div id="moreInfoHeader" class="panel"
 						style="height: 600px; width: 500px; border: 1px solid; align-content: center;">
-						<div class="">More Information</div>
-						<div class="" style="align-content: center;">
-							<div id="logoSVG" style="height: 150px; width: 500px;">
-								<p id="info"></p>
-							</div>
+						<div class="headerClass">Total US Population</div>
+						<div class="">
+							<div id="logoSVG" style="height: 150px; width: 500px;"></div>
 							<div id="bullet" style="height: 150px; width: 500px;"></div>
-
 						</div>
 					</div>
 				</div>
@@ -202,249 +225,265 @@ button {
 				"transform",
 				"translate(" + margin.left + "," + margin.top + ")");
 
-	d3.csv("Data/ap-stats.csv", function(error, ap_data) {
-		d3.csv("Data/ugrad-stats.csv", function(error1, u_data) {
-			d3.csv("Data/masters-stats.csv", function(error2, m_data) {
-				d3.csv("Data/phd-stats.csv", function(error3, p_data) {
+		d3.csv("Data/ap-stats.csv", function(error, ap_data) {
+			d3.csv("Data/ugrad-stats.csv", function(error1, u_data) {
+				d3.csv("Data/masters-stats.csv", function(error2, m_data) {
+					d3.csv("Data/phd-stats.csv", function(error3, p_data) {
 
-					if(error)
-						throw error;
-					if (error1)
-						throw error1;
-					if (error2)
-						throw error2;
-					if (error3)
-						throw error3;
+						if (error)
+							throw error;
+						if (error1)
+							throw error1;
+						if (error2)
+							throw error2;
+						if (error3)
+							throw error3;
 
-					color.domain(d3.keys(u_data[0]).filter(function(key) {
-						return key !== "Year" && key !== "Total";
-					}));
+						color.domain(d3.keys(u_data[0]).filter(function(key) {
+							return key !== "Year" && key !== "Total";
+						}));
 
-					ap_data.forEach(function(d) {
-						var y0 = 0;
-						d.races = color.domain().map(function(name) {
-							return {
-								name : name,
-								y0 : y0,
-								y1 : y0 += +d[name]
-							};
+						ap_data.forEach(function(d) {
+							var y0 = 0;
+							d.races = color.domain().map(function(name) {
+								return {
+									name : name,
+									y0 : y0,
+									y1 : y0 += +d[name]
+								};
+							});
+							d.total = d.races[d.races.length - 1].y1;
 						});
-						d.total = d.races[d.races.length - 1].y1;
-					});
 
-					u_data.forEach(function(d) {
-						var y0 = 0;
-						d.races = color.domain().map(function(name) {
-							return {
-								name : name,
-								y0 : y0,
-								y1 : y0 += +d[name]
-							};
+						u_data.forEach(function(d) {
+							var y0 = 0;
+							d.races = color.domain().map(function(name) {
+								return {
+									name : name,
+									y0 : y0,
+									y1 : y0 += +d[name]
+								};
+							});
+							d.total = d.races[d.races.length - 1].y1;
 						});
-						d.total = d.races[d.races.length - 1].y1;
-					});
-					m_data.forEach(function(d) {
-						var y0 = 0;
-						d.races = color.domain().map(function(name) {
-							return {
-								name : name,
-								y0 : y0,
-								y1 : y0 += +d[name]
-							};
+						m_data.forEach(function(d) {
+							var y0 = 0;
+							d.races = color.domain().map(function(name) {
+								return {
+									name : name,
+									y0 : y0,
+									y1 : y0 += +d[name]
+								};
+							});
+							d.total = d.races[d.races.length - 1].y1;
 						});
-						d.total = d.races[d.races.length - 1].y1;
-					});
-					p_data.forEach(function(d) {
-						var y0 = 0;
-						d.races = color.domain().map(function(name) {
-							return {
-								name : name,
-								y0 : y0,
-								y1 : y0 += +d[name]
-							};
+						p_data.forEach(function(d) {
+							var y0 = 0;
+							d.races = color.domain().map(function(name) {
+								return {
+									name : name,
+									y0 : y0,
+									y1 : y0 += +d[name]
+								};
+							});
+							d.total = d.races[d.races.length - 1].y1;
 						});
-						d.total = d.races[d.races.length - 1].y1;
-					});
 
-					ap_data.sort(function(a, b) {
-						return a.Year - b.Year;
-					});
-					u_data.sort(function(a, b) {
-						return a.Year - b.Year;
-					});
-					m_data.sort(function(a, b) {
-						return a.Year - b.Year;
-					});
-					p_data.sort(function(a, b) {
-						return a.Year - b.Year;
-					});
+						ap_data.sort(function(a, b) {
+							return a.Year - b.Year;
+						});
+						u_data.sort(function(a, b) {
+							return a.Year - b.Year;
+						});
+						m_data.sort(function(a, b) {
+							return a.Year - b.Year;
+						});
+						p_data.sort(function(a, b) {
+							return a.Year - b.Year;
+						});
 
-					x.domain(u_data.map(function(d) {
-						return d.Year;
-					}));
-					y.domain([ 0, d3.max(u_data, function(d) {
-						return d.total;
-					}) ]);
+						x.domain(u_data.map(function(d) {
+							return d.Year;
+						}));
+						y.domain([ 0, d3.max(u_data, function(d) {
+							return d.total;
+						}) ]);
 
-					svg.append("g").attr("class", "x axis").attr("transform",
-							"translate(0," + (height+50) + ")").call(xAxis);
+						svg.append("g").attr("class", "x axis").attr(
+								"transform",
+								"translate(0," + (height + 50) + ")").call(
+								xAxis);
 
-					svg.append("g").attr("class", "y axis").call(yAxis);
+						svg.append("g").attr("class", "y axis").call(yAxis);
 
-					var ap = svg.selectAll(".ap").data(ap_data).enter()
-							.append("g").attr("class", "g")
-							.attr("transform", function(d) {
-								return "translate(" + x(d.Year) + ",0)";
+						var ap = svg.selectAll(".ap").data(ap_data).enter()
+								.append("g").attr("class", "g").attr(
+										"transform",
+										function(d) {
+											return "translate(" + x(d.Year)
+													+ ",0)";
+										});
+
+						var ugrad = svg.selectAll(".ugrad").data(u_data)
+								.enter().append("g").attr("class", "g").attr(
+										"transform",
+										function(d) {
+											return "translate(" + x(d.Year)
+													+ ",0)";
+										});
+						var masters = svg.selectAll(".masters").data(m_data)
+								.enter().append("g").attr("class", "g").attr(
+										"transform",
+										function(d) {
+											return "translate(" + x(d.Year)
+													+ ",0)";
+										});
+						var phd = svg.selectAll(".phd").data(p_data).enter()
+								.append("g").attr("class", "g").attr(
+										"transform",
+										function(d) {
+											return "translate(" + x(d.Year)
+													+ ",0)";
+										});
+
+						ap.selectAll("rect").data(function(d) {
+							return d.races;
+						}).enter().append("rect").attr("width",
+								x.rangeBand() / education_levels - 6).attr("y",
+								function(d) {
+									return y(d.y1);
+								}).attr("height", function(d) {
+							return y(d.y0) - y(d.y1);
+						}).attr("class", "advp").style("fill", function(d) {
+							return color(d.name);
+						});
+
+						ugrad.selectAll("rect").data(function(d) {
+							return d.races;
+						}).enter().append("rect").attr("width",
+								x.rangeBand() / education_levels - 6).attr("y",
+								function(d) {
+									return y(d.y1);
+								}).attr("height", function(d) {
+							return y(d.y0) - y(d.y1);
+						}).attr(
+								"transform",
+								function(d) {
+									return "translate(" + x.rangeBand()
+											/ education_levels + ",0)";
+								}).attr("class", "undergrad").style("fill",
+								function(d) {
+									return color(d.name);
+								});
+						masters.selectAll("rect").data(function(d) {
+							return d.races;
+						}).enter().append("rect").attr("width",
+								x.rangeBand() / education_levels - 6).attr("y",
+								function(d) {
+									return y(d.y1);
+								}).attr("height", function(d) {
+							return y(d.y0) - y(d.y1);
+						}).attr(
+								"transform",
+								function(d) {
+									return "translate(" + 2 * x.rangeBand()
+											/ education_levels + ",0)";
+								}).attr("class", "mas").style("fill",
+								function(d) {
+									return color(d.name);
+								});
+						phd.selectAll("rect").data(function(d) {
+							return d.races;
+						}).enter().append("rect").attr("width",
+								x.rangeBand() / education_levels - 6).attr("y",
+								function(d) {
+									return y(d.y1);
+								}).attr("height", function(d) {
+							return y(d.y0) - y(d.y1);
+						}).attr(
+								"transform",
+								function(d) {
+									return "translate(" + 3 * x.rangeBand()
+											/ education_levels + ",0)";
+								}).attr("class", "pd").style("fill",
+								function(d) {
+									return color(d.name);
+								});
+
+						ap.append("text").attr("y", function(d) {
+							return y(0) + 20;
+						}).attr("class", "degree").attr(
+								"transform",
+								function(d) {
+									return "translate(" + -290 + "," + 143
+											+ ") rotate(-45)";
+								}).text("High School");
+
+						ugrad.append("text").attr("y", function(d) {
+							return y(0) + 20;
+						}).attr("class", "degree").attr(
+								"transform",
+								function(d) {
+									return "translate("
+											+ (1 * x.rangeBand()
+													/ education_levels - 290)
+											+ "," + 140 + ") rotate(-45)";
+								}).text("Undergrad");
+
+						// ugrad.selectAll("text").attr("transform", "rotate(-35)");
+
+						masters.append("text").attr("y", function(d) {
+							return y(0) + 20;
+						}).attr("class", "degree").attr(
+								"transform",
+								function(d) {
+									return "translate("
+											+ (2 * x.rangeBand()
+													/ education_levels - 280)
+											+ "," + 130 + ") rotate(-45)";
+								}).text("Masters");
+
+						phd.append("text").attr("y", function(d) {
+							return y(0) + 20;
+						}).attr("class", "degree").attr(
+								"transform",
+								function(d) {
+									return "translate("
+											+ (3 * x.rangeBand()
+													/ education_levels - 270)
+											+ "," + 120 + ") rotate(-45)";
+								}).text("PhD");
+
+						// d3.selectAll(".degree").attr("transform", function(d) { return "rotate(-35)"; });
+
+						var legend = svg.selectAll(".legend").data(
+								color.domain().slice().reverse()).enter()
+								.append("g").attr("class", "legend").attr(
+										"transform",
+										function(d, i) {
+											return "translate(0," + i * 20
+													+ ")";
+										});
+
+						legend.append("rect").attr("x", width - 18).attr(
+								"width", 18).attr("height", 18).style("fill",
+								color);
+
+						legend.append("text").attr("x", width - 24)
+								.attr("y", 9).attr("dy", ".35em").style(
+										"text-anchor", "end").text(function(d) {
+									return d;
+								});
+						legend.on('click', function(d) {
+							d.disabled = !d.disabled;
+							d3.transition().duration(600).each(function() {
+								raceTransition(d);
 							});
-
-					var ugrad = svg.selectAll(".ugrad").data(u_data).enter()
-							.append("g").attr("class", "g")
-							.attr("transform", function(d) {
-								return "translate(" + x(d.Year) + ",0)";
-							});
-					var masters = svg.selectAll(".masters").data(m_data)
-							.enter().append("g").attr("class", "g")
-							.attr("transform", function(d) {
-								return "translate(" + x(d.Year) + ",0)";
-							});
-					var phd = svg.selectAll(".phd").data(p_data).enter()
-							.append("g").attr("class", "g")
-							.attr("transform", function(d) {
-								return "translate(" + x(d.Year) + ",0)";
-							});
-
-					ap.selectAll("rect").data(function(d) {
-						return d.races;
-					}).enter().append("rect").attr("width", x.rangeBand() / education_levels - 6)
-					.attr("y",
-							function(d) {
-								return y(d.y1);
-							})
-					.attr("height", function(d) {
-						return y(d.y0) - y(d.y1);
-					}).attr("class", "advp").style("fill", function(d) {
-						return color(d.name);
-					});
-
-					ugrad.selectAll("rect").data(function(d) {
-						return d.races;
-					}).enter().append("rect").attr("width",
-							x.rangeBand() / education_levels - 6).attr("y",
-							function(d) {
-								return y(d.y1);
-							}).attr("height", function(d) {
-						return y(d.y0) - y(d.y1);
-					}).attr(
-							"transform",
-							function(d) {
-								return "translate(" + x.rangeBand()/ education_levels + ",0)";
-							}).attr("class", "undergrad").style("fill", function(d) {
-						return color(d.name);
-					});
-					masters.selectAll("rect").data(function(d) {
-						return d.races;
-					}).enter().append("rect").attr("width",
-							x.rangeBand() / education_levels - 6).attr("y",
-							function(d) {
-								return y(d.y1);
-							}).attr("height", function(d) {
-						return y(d.y0) - y(d.y1);
-					}).attr(
-							"transform",
-							function(d) {
-								return "translate(" + 2 * x.rangeBand()/ education_levels + ",0)";
-							}).attr("class", "mas").style("fill", function(d) {
-						return color(d.name);
-					});
-					phd.selectAll("rect").data(function(d) {
-						return d.races;
-					}).enter().append("rect").attr("width",
-							x.rangeBand() / education_levels - 6).attr("y",
-							function(d) {
-								return y(d.y1);
-							}).attr("height", function(d) {
-						return y(d.y0) - y(d.y1);
-					}).attr(
-							"transform",
-							function(d) {
-								return "translate(" + 3 * x.rangeBand()/ education_levels + ",0)";
-							}).attr("class", "pd").style("fill", function(d) {
-						return color(d.name);
-					});
-
-					ap.append("text")
-					.attr("y", function(d) {
-							return y(0)+20;
-					}).attr("class", "degree")
-					.attr(
-							"transform",
-							function(d) {
-								return "translate(" + -290 + "," + 143 + ") rotate(-45)";
-							})
-					.text("High School");
-
-					ugrad.append("text")
-					.attr("y", function(d) {
-							return y(0)+20;
-					}).attr("class", "degree")
-					.attr(
-							"transform",
-							function(d) {
-								return "translate(" + (1 * x.rangeBand()/ education_levels - 290) + "," + 140 + ") rotate(-45)";
-							})
-					.text("Undergrad");
-
-					// ugrad.selectAll("text").attr("transform", "rotate(-35)");
-
-					masters.append("text")
-					.attr("y", function(d) {
-							return y(0)+20;
-					}).attr("class", "degree")
-					.attr(
-							"transform",
-							function(d) {
-								return "translate(" + (2 * x.rangeBand()/ education_levels - 280) + "," + 130 + ") rotate(-45)";
-							})
-					.text("Masters");
-
-					phd.append("text")
-					.attr("y", function(d) {
-							return y(0)+20;
-					}).attr("class", "degree")
-					.attr(
-							"transform",
-							function(d) {
-								return "translate(" + (3 * x.rangeBand()/ education_levels - 270) + "," + 120 + ") rotate(-45)";
-							})
-					.text("PhD");
-
-					// d3.selectAll(".degree").attr("transform", function(d) { return "rotate(-35)"; });
-
-					var legend = svg.selectAll(".legend").data(
-							color.domain().slice().reverse()).enter().append(
-							"g").attr("class", "legend").attr("transform",
-							function(d, i) {
-								return "translate(0," + i * 20 + ")";
-							});
-
-					legend.append("rect").attr("x", width - 18).attr("width",
-							18).attr("height", 18).style("fill", color);
-
-					legend.append("text").attr("x", width - 24).attr("y", 9)
-							.attr("dy", ".35em").style("text-anchor", "end")
-							.text(function(d) {
-								return d;
-							});
-					legend.on('click', function(d) {
-						d.disabled = !d.disabled;
-						d3.transition().duration(600).each(function() {
-							raceTransition(d);
 						});
 					});
 				});
 			});
 		});
-	});
 		var transAP = [];
 		d3.csv("Data/ap-stats.csv", function(d) {
 			return {
@@ -663,9 +702,12 @@ button {
 						return y(d.y1);
 					}).transition().attr("height", function(d) {
 				return y(d.y0) - y(d.y1);
-			}).attr("transform", function(d) {
-				return "translate(" + 2 * x.rangeBand() / education_levels + ",0)";
-			}).attr("class", "mas").style("fill", function(d) {
+			}).attr(
+					"transform",
+					function(d) {
+						return "translate(" + 2 * x.rangeBand()
+								/ education_levels + ",0)";
+					}).attr("class", "mas").style("fill", function(d) {
 				return color(d.name);
 			});
 
@@ -680,7 +722,8 @@ button {
 			}).attr(
 					"transform",
 					function(d) {
-						return "translate(" + 3 * x.rangeBand()/ education_levels + ",0)";
+						return "translate(" + 3 * x.rangeBand()
+								/ education_levels + ",0)";
 					}).attr("class", "pd").style("fill", function(d) {
 				return color(d.name);
 			});
