@@ -118,8 +118,8 @@
 		.attr("x", 0).attr("y",function(d){ return d.middle-d.height/2; })
 		.attr("width",b).attr("height",function(d){ return d.height; })
 		.style("shape-rendering","auto")
-		.style("fill-opacity",0).style("stroke-width","0.5")
-		.style("stroke","black").style("stroke-opacity",5);
+		.style("fill-opacity",0).style("stroke-width","0")
+		.style("stroke","#ccc").style("stroke-opacity",0);
 
 		d3.select("#"+id).select(".part"+p).select(".subbars")
 		.selectAll(".subbar").data(data.subBars[p]).enter()
@@ -130,7 +130,6 @@
 
 		if(p==0){
 			//Labels for the ethnic groups
-
 			mainbar.append("text").attr("class","barlabel")
 			.attr("x", c1[p]).attr("y",function(d){ return d.middle+5;})
 			.text(function(d,i){ return data.keys[p][i];})
@@ -207,10 +206,10 @@
 			var h = d3.select("#"+id).select(".part"+d).append("g").attr("class","header");
 			
 			h.append("text").text(header[d]).attr("x", (c1[d]-5))
-			.attr("y", -5).style("fill","grey");
+			.attr("y", -5).style("fill","black");
 			
 			h.append("text").text("Count").attr("x", (c2[d]-10))
-			.attr("y", -5).style("fill","grey");
+			.attr("y", -5).style("fill","black");
 			
 			h.append("line").attr("x1",c1[d]-10).attr("y1", -2)
 			.attr("x2",c3[d]+10).attr("y2", -2).style("stroke","black")
@@ -273,6 +272,7 @@
 			drawPart(visData, biP.id, 0);
 			drawPart(visData, biP.id, 1); 
 		//	drawEdges(visData, biP.id);
+		drawTooltip();
 		drawMoreInfo();
 		drawHeader(biP.header, biP.id);
 
@@ -294,12 +294,25 @@
 	});	
 	}
 
+	function drawTooltip(){
+		d3.select("#logoSVG").append("div")	
+		.attr("class", "tooltip").attr("id","femaleP")		
+		.style("opacity", 0).style("left","750px")		
+		.style("top", "190px");
+
+		d3.select("#logoSVG").append("div")	
+		.attr("class", "tooltip").attr("id","maleP")		
+		.style("opacity", 0).style("left","1150px")		
+		.style("top", "190px");
+	}
+
 	function drawMoreInfo(){
 
 		showGenderInLogo("US");
 		showBulletChart("US");
-		//var div = document.getElementById("logoSVG");
-		//div.style.visibility='visible';
+		var div = document.getElementById("moreInfoHeader");
+		div.innerHTML = "Total US Population";
+		
 	}
 
 	function showLogo(p,index){
@@ -307,6 +320,8 @@
 		if(p==1){
 			logoName = data[0].data.keys[p][index];
 			showGenderInLogo(logoName);
+			var div = document.getElementById("moreInfoHeader");
+			div.innerHTML = "Employees vs US Population";
 
 			/*var svg = d3.select("#bullet");
 			ethnicIndex = -1;
@@ -333,6 +348,7 @@
 	function removeLogo(){
 		d3.select(".companyLogo").remove();
 		d3.selectAll(".bullet").remove();
+		//d3.selectAll(".tooltip").remove();
 	}
 
 	function showGenderInLogo(logoName){
@@ -341,6 +357,10 @@
 		var svg= d3.select("#logoSVG").append("svg").attr("class","companyLogo").attr("viewBox",genderData[logoName].viewbox)
 		.attr("fill-rule","nonzero").attr("clip-rule","evenodd").attr("stroke-linejoin","round")
 		.attr("stroke-miterlimit","1.414");
+		//.attr("width","200px").attr("height","200px")
+		//-50 -50 1000 700
+		//svg.append("text").text("Something").attr("x","-50").attr("y","0");
+
 		var path = svg.append("path").attr("d",genderData[logoName].d)
 		.attr("stroke", "black");
 		var defs = svg.append("defs");
@@ -349,51 +369,38 @@
 		lg.append("stop").attr("offset",genderData[logoName].female).attr("style","stop-color:#E75480;stop-opacity:1");
 		lg.append("stop").attr("offset",genderData[logoName].female).attr("style","stop-color:#3657A8;stop-opacity:1");
 		lg.append("stop").attr("offset","100%").attr("style","stop-color:#3657A8;stop-opacity:1");		
-
 		path.attr("fill-rule","nonzero").attr("fill","url(#gradient)");
 
-		
 		//Show tooltip on hover above logo
-		var div = d3.select("#logoSVG").append("div")	
-		.attr("class", "tooltip").attr("id","maleP")		
-		.style("opacity", 0);
-
-		var div = d3.select("#logoSVG").select("#maleP");
+		var div = d3.select("#logoSVG").select("#femaleP");
 		div.transition()		
-		.duration(200)		
+		.duration(1000)		
 		.style("opacity", .9);		
-		div.html("Female: "+ genderData[logoName].female)	
-		.style("left","880px")		
-		.style("top", "190px");	
-
-		var div = d3.select("#logoSVG").append("div")	
-		.attr("class", "tooltip").attr("id","femaleP")		
-		.style("opacity", 0);
+		div.html("Female: "+ genderData[logoName].female);
+		
 		//path.on("mouseover",function(d, i){ 
-			var div = d3.select("#logoSVG").select("#femaleP");
+			var div = d3.select("#logoSVG").select("#maleP");
 			div.transition()		
-			.duration(200)		
+			.duration(1000)		
 			.style("opacity", .9);		
 			div.html("Male: "+ (100 - parseInt(genderData[logoName].female))+"%")	
-			.style("left","1250px")		
-			.style("top", "190px");	
 
 		}
 
 		function showBulletChart(Name){
 
 			var margin = {top: 5, right: 40, bottom: 20, left: 20},
-			bWidth = 400 - margin.left - margin.right,
+			bWidth = 500 - margin.left - margin.right,
 			bHeight = 50 - margin.top - margin.bottom;
 
 			chart = d3.bullet()
 			.width(bWidth)
 			.height(bHeight);
 
-		//chart.duration(1000);
+			//chart.duration(1000);
 
-		d3.json("data/ethnicInTotal.json", function(error, data) {
-			if (error) throw error;
+			d3.json("data/ethnicInTotal.json", function(error, data) {
+				if (error) throw error;
 
 			//Global variable
 			ethnicData = data;
@@ -405,7 +412,7 @@
 			.attr("width", bWidth + margin.left + margin.right)
 			.attr("height", bHeight + margin.top + margin.bottom)
 			.append("g")
-			.attr("transform", "translate(100," + margin.top + ")")
+			.attr("transform", "translate(50," + margin.top + ")")
 			.call(chart);
 
 			var title = svg.append("g")
@@ -421,57 +428,57 @@
 			.attr("dy", "1em")
 			.text(function(d) { return d.subtitle; });
 		});
-	}
-
-	function randomize(d) {
-		if(ethnicIndex>5){
-			ethnicIndex = -1;
 		}
-		ethnicIndex++;
-		return ethnicData[logoName][ethnicIndex];
-	}
+
+		function randomize(d) {
+			if(ethnicIndex>5){
+				ethnicIndex = -1;
+			}
+			ethnicIndex++;
+			return ethnicData[logoName][ethnicIndex];
+		}
 
 
-	bP.selectSegment = function(data, m, s, visData, biPid){
+		bP.selectSegment = function(data, m, s, visData, biPid){
 
-		drawEdges(visData, biPid);
-		data.forEach(function(k){
-			var newdata =  {keys:[], data:[]};	
+			drawEdges(visData, biPid);
+			data.forEach(function(k){
+				var newdata =  {keys:[], data:[]};	
 
-			newdata.keys = k.data.keys.map( function(d){ return d;});
+				newdata.keys = k.data.keys.map( function(d){ return d;});
 
-			newdata.data[m] = k.data.data[m].map( function(d){ return d;});
+				newdata.data[m] = k.data.data[m].map( function(d){ return d;});
 
-			newdata.data[1-m] = k.data.data[1-m]
-			.map( function(v){ return v.map(function(d, i){ return (s==i ? d : 0);}); });
+				newdata.data[1-m] = k.data.data[1-m]
+				.map( function(v){ return v.map(function(d, i){ return (s==i ? d : 0);}); });
 
-			transition(visualize(newdata), k.id);
+				transition(visualize(newdata), k.id);
 
-			var selectedBar = d3.select("#"+k.id).select(".part"+m).select(".mainbars")
-			.selectAll(".mainbar").filter(function(d,i){ return (i==s);});
+				var selectedBar = d3.select("#"+k.id).select(".part"+m).select(".mainbars")
+				.selectAll(".mainbar").filter(function(d,i){ return (i==s);});
 
-			selectedBar.select(".mainrect").style("stroke-opacity",1);			
-			selectedBar.select(".barlabel").style('font-weight','bold');
-			selectedBar.select(".barvalue").style('font-weight','bold');
-			selectedBar.select(".barpercent").style('font-weight','bold');
-		});
-	}	
+				selectedBar.select(".mainrect").style("stroke-opacity",1);			
+				selectedBar.select(".barlabel").style('font-weight','bold');
+				selectedBar.select(".barvalue").style('font-weight','bold');
+				selectedBar.select(".barpercent").style('font-weight','bold');
+			});
+		}	
 
-	bP.deSelectSegment = function(data, m, s){
-		data.forEach(function(k){
-			transition(visualize(k.data), k.id);
+		bP.deSelectSegment = function(data, m, s){
+			data.forEach(function(k){
+				transition(visualize(k.data), k.id);
 
-			removeEdges();
+				removeEdges();
 
-			var selectedBar = d3.select("#"+k.id).select(".part"+m).select(".mainbars")
-			.selectAll(".mainbar").filter(function(d,i){ return (i==s);});
+				var selectedBar = d3.select("#"+k.id).select(".part"+m).select(".mainbars")
+				.selectAll(".mainbar").filter(function(d,i){ return (i==s);});
 
-			selectedBar.select(".mainrect").style("stroke-opacity",0);			
+			//selectedBar.select(".mainrect").style("stroke-opacity",0);			
 			selectedBar.select(".barlabel").style('font-weight','normal');
 			selectedBar.select(".barvalue").style('font-weight','normal');
 			selectedBar.select(".barpercent").style('font-weight','normal');
 		});		
-	}
+		}
 
-	this.bP = bP;
-}();
+		this.bP = bP;
+	}();
