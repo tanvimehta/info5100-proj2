@@ -1,145 +1,145 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<link rel="stylesheet"
+	<meta charset="utf-8">
+	<link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<style>
-body {
-	width: 1200px;
-	margin: 100px auto;
-	font: 10px sans-serif;
-	opacity: 0.8;
-}
+	<style>
+	body {
+		width: 1200px;
+		margin: 100px auto;
+		font: 10px sans-serif;
+		opacity: 0.8;
+	}
 
-svg text {
-	font-size: 12px;
-	margin: 100px auto;
-}
+	svg text {
+		font-size: 12px;
+		margin: 100px auto;
+	}
 
-rect {
-	shape-rendering: crispEdges;
-}
+	rect {
+		shape-rendering: crispEdges;
+	}
 
-.axis path, .axis line {
-	fill: none;
-	stroke: #000;
-	shape-rendering: crispEdges;
-}
+	.axis path, .axis line {
+		fill: none;
+		stroke: #000;
+		shape-rendering: crispEdges;
+	}
 
-.bar {
-	fill: steelblue;
-}
+	.bar {
+		fill: steelblue;
+	}
 
-.x.axis path {
-	display: none;
-}
+	.x.axis path {
+		display: none;
+	}
 
-.imgClass {
-	max-width: 100%;
-	height: auto;
-}
+	.imgClass {
+		max-width: 100%;
+		height: auto;
+	}
 
-#logoSVG {
-	margin: 0 auto;
-	display: block;
-}
+	#logoSVG {
+		margin: 0 auto;
+		display: block;
+	}
 
-#bullet {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	margin: auto;
-	padding-top: 40px;
-	position: relative;
-	width: 960px;
-}
+	#bullet {
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		margin: auto;
+		padding-top: 40px;
+		position: relative;
+		width: 960px;
+	}
 
-button {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-}
+	button {
+		position: absolute;
+		right: 10px;
+		top: 10px;
+	}
 
-.bullet {
-	font: 10px sans-serif;
-}
+	.bullet {
+		font: 10px sans-serif;
+	}
 
-.bullet .marker {
-	stroke: #000;
-	stroke-width: 2px;
-}
+	.bullet .marker {
+		stroke: #000;
+		stroke-width: 2px;
+	}
 
-.bullet .tick line {
-	stroke: #666;
-	stroke-width: .5px;
-}
+	.bullet .tick line {
+		stroke: #666;
+		stroke-width: .5px;
+	}
 
-.bullet .range.s0 {
-	fill: #eee;
-}
+	.bullet .range.s0 {
+		fill: #eee;
+	}
 
-.bullet .range.s1 {
-	fill: #ddd;
-}
+	.bullet .range.s1 {
+		fill: #ddd;
+	}
 
-.bullet .range.s2 {
-	fill: #ccc;
-}
+	.bullet .range.s2 {
+		fill: #ccc;
+	}
 
-.bullet .measure.s0 {
-	opacity: 0.5;
-}
+	.bullet .measure.s0 {
+		opacity: 0.5;
+	}
 
-.bullet .measure.s1 {
-	opacity: 1;
-}
+	.bullet .measure.s1 {
+		opacity: 1;
+	}
 
-.bullet .title {
-	font-size: 14px;
-	font-weight: bold;
-}
+	.bullet .title {
+		font-size: 14px;
+		font-weight: bold;
+	}
 
-.bullet .subtitle {
-	fill: #999;
-}
+	.bullet .subtitle {
+		fill: #999;
+	}
 
-.degree {
-	font-size: 10px;
-	fill: #404048;
-}
+	.degree {
+		font-size: 10px;
+		fill: #404048;
+	}
 
-div.tooltip {
-	position: absolute;
-	text-align: center;
-	width: 80px;
-	height: 20px;
-	padding: 2px;
-	font: 12px sans-serif;
-	background: lightsteelblue;
-	border: 0px;
-	border-radius: 8px;
-	pointer-events: none;
-	display: inline;
-}
+	div.tooltip {
+		position: absolute;
+		text-align: center;
+		width: 80px;
+		height: 20px;
+		padding: 2px;
+		font: 12px sans-serif;
+		background: lightsteelblue;
+		border: 0px;
+		border-radius: 8px;
+		pointer-events: none;
+		display: inline;
+	}
 
-.alignClass {
-	display: inline;
-}
+	.alignClass {
+		display: inline;
+	}
 
-.headerClass {
-	font-size: 15pt;
-	text-align: center;
-	font-weight: bold;
-	color: black;
-}
-.buttonSelected {
-	background-color:#555555;
-	color:#f6f6f6;
-}
-.buttonUnselected {
-	background-color:#f6f6f6;
-	color:#555555;
-}
-</style>
+	.headerClass {
+		font-size: 15pt;
+		text-align: center;
+		font-weight: bold;
+		color: black;
+	}
+	.buttonSelected {
+		background-color:#555555;
+		color:#f6f6f6;
+	}
+	.buttonUnselected {
+		background-color:#f6f6f6;
+		color:#555555;
+	}
+	</style>
 </head>
 <body>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
@@ -147,13 +147,11 @@ div.tooltip {
 	<script type="text/javascript" src="js/companyInfo.js"></script>
 	<script src="data/logos.json"></script>
 	<script type="text/javascript" src="data/data.js"></script>
-
-	<button>Update</button>
 	<script src="js/companyInfo.js"></script>
 
 	<script>
-		logoName = "US";
-		ethnicData = {};
+	logoName = "US";
+	ethnicData = {};
 	</script>
 
 	<!-- Visualization 1 -->
@@ -165,17 +163,17 @@ div.tooltip {
 			<td>
 				<div id="moreInfo">
 					<div class="panel"
-						style="height: 600px; width: 500px; border: 1px solid; align-content: center;">
-						<div class="headerClass" id="moreInfoHeader">Total US Population</div>
-						<div class="">
-							<div id="logoSVG" style="height: 150px; width: 500px;"></div>
-							<div id="bullet" style="height: 150px; width: 500px;"></div>
-						</div>
+					style="height: 600px; width: 550px; border: 1px solid; align-content: center;">
+					<div class="headerClass" id="moreInfoHeader">Total US Population</div>
+					<div class="">
+						<div id="logoSVG" style="height: 150px; width: 500px;"></div>
+						<div id="bullet" style="height: 150px; width: 500px;"></div>
 					</div>
 				</div>
-			</td>
-		</tr>
-	</table>
+			</div>
+		</td>
+	</tr>
+</table>
 
 <br>
 <br>
@@ -184,451 +182,452 @@ div.tooltip {
 <br>
 <br>
 
-	<div id="barchart">
-		<span id="breakdown-bar" style="font-size: 12pt; padding-top: 40px;display: inline-block;">
-			Breakdown by:
-			<input id="gender-button" type="button" value="Gender" onclick="categoryGender()"/>
-			<input id="ethnicity-button" type="button" value="Ethnicity" onclick="categoryEthnicity()"/>
-			Select one or more from:
-		</span>
-	</div>
+<div id="barchart">
+	<span id="breakdown-bar" style="font-size: 12pt; padding-top: 40px;display: inline-block;">
+		Breakdown by:
+		<input id="gender-button" type="button" value="Gender" onclick="categoryGender()"/>
+		<input id="ethnicity-button" type="button" value="Ethnicity" onclick="categoryEthnicity()"/>
+		Select one or more from:
+	</span>
+</div>
 
-	<script>
+<script>
 
-		var width = 700, height = 600, margin = {
-			b : 0,
-			t : 40,
-			l : 170,
-			r : 50
-		};
-		var svg = d3.select("#idCompanies").append("svg").attr('width', width)
-				.attr('height', (height + margin.b + margin.t)).append("g");
-				// .attr("transform",
-				// 		"translate(" + margin.l + "," + margin.t + ")");
+var width = 650, height = 600, margin = {
+	b : 0,
+	t : 40,
+	l : 170,
+	r : 50
+};
+var svg = d3.select("#idCompanies").append("svg").attr('width', width)
+.attr('height', (height + margin.b + margin.t)).append("g")
+.attr("transform",
+	"translate(" + margin.l + "," + margin.t + ")");
 
-		var data = [ {
-			data : bP.partData(company_ethnic_data, 2),
-			id : 'TechDiversity',
-			header : [ "Company", "Ethnicity", "Diversity in Tech Companies" ]
-		}, ];
+var data = [ {
+	data : bP.partData(company_ethnic_data, 2),
+	id : 'TechDiversity',
+	header : [ "Company", "Ethnicity", "Diversity in Tech Companies" ]
+}, ];
 
-		bP.draw(data, svg);
-	</script>
+bP.draw(data, svg);
 
-	<!-- Visualization 2 -->
-	<script>
-		var margin = {
-			top : 40,
-			right : 80,
-			bottom : 90,
-			left : 40
-		}, width = 1160 - margin.left - margin.right, height = 500 - margin.top
-				- margin.bottom;
+</script>
 
-		var education_levels = 4;
+<!-- Visualization 2 -->
+<script>
+var margin = {
+	top : 40,
+	right : 80,
+	bottom : 90,
+	left : 40
+}, width = 1160 - margin.left - margin.right, height = 500 - margin.top
+- margin.bottom;
 
-		var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
+var education_levels = 4;
+
+var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 
 		var band_width = width / 5; // number of years
 
 		var y = d3.scale.linear().rangeRound([ height, 0 ]);
 
 		var color = d3.scale.ordinal()
-				.range(["#377eb8", "#984ea3", "#4daf4a", "#e41a1c", "#a65628", "#e7298a", "#2980b9", "#ff7f00"]);
+		.range(["#377eb8", "#984ea3", "#4daf4a", "#e41a1c", "#a65628", "#e7298a", "#2980b9", "#ff7f00"]);
 
 		var xAxis = d3.svg.axis().scale(x).orient("bottom");
 
 		var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(
-				d3.format(".2s"));
+			d3.format(".2s"));
 
 		var svg = d3.select("body").append("svg").attr("width",
-				width + margin.left + margin.right).attr("height",
-				height + margin.top + margin.bottom + 100).append("g").attr(
-				"transform",
-				"translate(" + margin.left + "," + margin.top + ")").attr("display", "block");
+			width + margin.left + margin.right).attr("height",
+			height + margin.top + margin.bottom + 100).append("g").attr(
+			"transform",
+			"translate(" + margin.left + "," + margin.top + ")").attr("display", "block");
 
-		var ethnicities = ["Asian", "Black", "Latino", "White", "Other"];
-		var genders = ["Male", "Female", "NotReported"];
+			var ethnicities = ["Asian", "Black", "Latino", "White", "Other"];
+			var genders = ["Male", "Female", "NotReported"];
 
-		var category = "Ethnicity";
-		var selection = ethnicities.map(function (d) { return {name:d, sel:true}; });
+			var category = "Ethnicity";
+			var selection = ethnicities.map(function (d) { return {name:d, sel:true}; });
 
-		function categoryGender() {
-			category = "Gender"; 
-			selection = genders.map(function (d) { return {name:d, sel:true}; });
-			displayGenderButtons();
-			updateBarChart();
-		}
-
-		function categoryEthnicity() {
-			category = "Ethnicity"; 
-			selection = ethnicities.map(function (d) { return {name:d, sel:true}; });
-			displayEthnicityButtons();
-			updateBarChart();
-		}
-
-		function updateBarChart() {
-			updateButtonAppearance();
-			var labels = selection
-			.filter(function (d) { return d.sel; })
-			.map(function (d) { return d.name; });
-			draw(labels);
-		}
-
-		function toggleButton(d) {
-			var idx = selection.map(function (d) { return d.name; }).indexOf(d);
-			selection[idx].sel = !selection[idx].sel;
-			updateBarChart();
-		}
-
-		function updateButtonAppearance() {
-			if (category == "Ethnicity") {
-				d3.select('#ethnicity-button')
-				.attr('class', 'buttonSelected');
-				d3.select('#gender-button')
-				.attr('class', 'buttonUnselected');
+			function categoryGender() {
+				category = "Gender"; 
+				selection = genders.map(function (d) { return {name:d, sel:true}; });
+				displayGenderButtons();
+				updateBarChart();
 			}
-			else {
-				d3.select('#gender-button')
-				.attr('class', 'buttonSelected');
-				d3.select('#ethnicity-button')
-				.attr('class', 'buttonUnselected');
+
+			function categoryEthnicity() {
+				category = "Ethnicity"; 
+				selection = ethnicities.map(function (d) { return {name:d, sel:true}; });
+				displayEthnicityButtons();
+				updateBarChart();
 			}
-			for (var i = 0; i < selection.length; i++) {
-				var id = "#" +selection[i].name + "-button";
-				if (selection[i].sel)
-					d3.select(id).attr("class", "buttonSelected");
-				else
-					d3.select(id).attr("class", "buttonUnselected");
+
+			function updateBarChart() {
+				updateButtonAppearance();
+				var labels = selection
+				.filter(function (d) { return d.sel; })
+				.map(function (d) { return d.name; });
+				draw(labels);
 			}
-		}
 
-		function displayGenderButtons() {
-			var span = d3.select('#breakdown-bar');
-			for (var i = 0; i < ethnicities.length; i++) {
-				var id = "#" + ethnicities[i] + "-button";
-				d3.select(id).remove();
+			function toggleButton(d) {
+				var idx = selection.map(function (d) { return d.name; }).indexOf(d);
+				selection[idx].sel = !selection[idx].sel;
+				updateBarChart();
 			}
-			for (var i = 0; i < genders.length; i++) {
-				var id = "#" + genders[i] + "-button";
-				d3.select(id).remove();
+
+			function updateButtonAppearance() {
+				if (category == "Ethnicity") {
+					d3.select('#ethnicity-button')
+					.attr('class', 'buttonSelected');
+					d3.select('#gender-button')
+					.attr('class', 'buttonUnselected');
+				}
+				else {
+					d3.select('#gender-button')
+					.attr('class', 'buttonSelected');
+					d3.select('#ethnicity-button')
+					.attr('class', 'buttonUnselected');
+				}
+				for (var i = 0; i < selection.length; i++) {
+					var id = "#" +selection[i].name + "-button";
+					if (selection[i].sel)
+						d3.select(id).attr("class", "buttonSelected");
+					else
+						d3.select(id).attr("class", "buttonUnselected");
+				}
 			}
-			span.selectAll(".breakdown-button")
-			.data(genders).enter()
-			.append("input")
-			.attr("type", "button")
-			.attr("class", "breakdown-button")
-			.attr("id", function(d) { return d + "-button"; })
-			.attr("value", function(d) { return d; })
-			.on("click", toggleButton);
-		}
 
-		function displayEthnicityButtons() {
-			var span = d3.select('#breakdown-bar');
-			for (var i = 0; i < ethnicities.length; i++) {
-				var id = "#" + ethnicities[i] + "-button";
-				d3.select(id).remove();
+			function displayGenderButtons() {
+				var span = d3.select('#breakdown-bar');
+				for (var i = 0; i < ethnicities.length; i++) {
+					var id = "#" + ethnicities[i] + "-button";
+					d3.select(id).remove();
+				}
+				for (var i = 0; i < genders.length; i++) {
+					var id = "#" + genders[i] + "-button";
+					d3.select(id).remove();
+				}
+				span.selectAll(".breakdown-button")
+				.data(genders).enter()
+				.append("input")
+				.attr("type", "button")
+				.attr("class", "breakdown-button")
+				.attr("id", function(d) { return d + "-button"; })
+				.attr("value", function(d) { return d; })
+				.on("click", toggleButton);
 			}
-			for (var i = 0; i < genders.length; i++) {
-				var id = "#" + genders[i] + "-button";
-				d3.select(id).remove();
+
+			function displayEthnicityButtons() {
+				var span = d3.select('#breakdown-bar');
+				for (var i = 0; i < ethnicities.length; i++) {
+					var id = "#" + ethnicities[i] + "-button";
+					d3.select(id).remove();
+				}
+				for (var i = 0; i < genders.length; i++) {
+					var id = "#" + genders[i] + "-button";
+					d3.select(id).remove();
+				}
+				span.selectAll(".breakdown-button")
+				.data(ethnicities).enter()
+				.append("input")
+				.attr("type", "button")
+				.attr("class", "breakdown-button")
+				.attr("id", function(d) { return d + "-button"; })
+				.attr("value", function(d) { return d; })
+				.on("click", toggleButton);
 			}
-			span.selectAll(".breakdown-button")
-			.data(ethnicities).enter()
-			.append("input")
-			.attr("type", "button")
-			.attr("class", "breakdown-button")
-			.attr("id", function(d) { return d + "-button"; })
-			.attr("value", function(d) { return d; })
-			.on("click", toggleButton);
-		}
 
-		var transAP = [];
-		var transUGrad = [];
-		var transMasters = [];
-		var transPhd = [];
-		d3.csv("Data/ap-stats.csv", function(error, ap_data) {
-			d3.csv("Data/ugrad-stats.csv", function(error1, u_data) {
-				d3.csv("Data/masters-stats.csv", function(error2, m_data) {
-					d3.csv("Data/phd-stats.csv", function(error3, p_data) {
+			var transAP = [];
+			var transUGrad = [];
+			var transMasters = [];
+			var transPhd = [];
+			d3.csv("Data/ap-stats.csv", function(error, ap_data) {
+				d3.csv("Data/ugrad-stats.csv", function(error1, u_data) {
+					d3.csv("Data/masters-stats.csv", function(error2, m_data) {
+						d3.csv("Data/phd-stats.csv", function(error3, p_data) {
 
-						if(error)
-							throw error;
-						if (error1)
-							throw error1;
-						if (error2)
-							throw error2;
-						if (error3)
-							throw error3;
+							if(error)
+								throw error;
+							if (error1)
+								throw error1;
+							if (error2)
+								throw error2;
+							if (error3)
+								throw error3;
 
-						var percentagify = function (d) {
-              return {
-                Year : d.Year,
-                Asian : 100 * d.Asian / d.Total,
-                Black : 100 * d.Black / d.Total,
-                Latino : 100 * d.Latino / d.Total,
-                White : 100 * d.White / d.Total,
-                Other : 100 * d.Other / d.Total,
-                Male : 100 * d.Male / d.Total,
-                Female : 100 * d.Female / d.Total,
-                NotReported : 100 * d.NotReported / d.Total,
-                Total : d.Total
-              };
-            };
-            transAP = ap_data.map(percentagify);
-            transUGrad = u_data.map(percentagify);
-            transMasters = m_data.map(percentagify);
-            transPhd = p_data.map(percentagify);
-
-						color.domain(d3.keys(u_data[0]).filter(function(key) {
-							return key !== "Year" && key !== "Total";
-						}));
-
-						ap_data.forEach(function(d) {
-							var y0 = 0;
-							d.races = color.domain().map(function(name) {
+							var percentagify = function (d) {
 								return {
-									name : name,
-									y0 : y0,
-									y1 : y0 += +((d[name]/d["Total"])*100)
+									Year : d.Year,
+									Asian : 100 * d.Asian / d.Total,
+									Black : 100 * d.Black / d.Total,
+									Latino : 100 * d.Latino / d.Total,
+									White : 100 * d.White / d.Total,
+									Other : 100 * d.Other / d.Total,
+									Male : 100 * d.Male / d.Total,
+									Female : 100 * d.Female / d.Total,
+									NotReported : 100 * d.NotReported / d.Total,
+									Total : d.Total
 								};
+							};
+							transAP = ap_data.map(percentagify);
+							transUGrad = u_data.map(percentagify);
+							transMasters = m_data.map(percentagify);
+							transPhd = p_data.map(percentagify);
+
+							color.domain(d3.keys(u_data[0]).filter(function(key) {
+								return key !== "Year" && key !== "Total";
+							}));
+
+							ap_data.forEach(function(d) {
+								var y0 = 0;
+								d.races = color.domain().map(function(name) {
+									return {
+										name : name,
+										y0 : y0,
+										y1 : y0 += +((d[name]/d["Total"])*100)
+									};
+								});
+								d.total = d.races[d.races.length - 1].y1;
 							});
-							d.total = d.races[d.races.length - 1].y1;
-						});
 
-						u_data.forEach(function(d) {
-							var y0 = 0;
-							d.races = color.domain().map(function(name) {
-								return {
-									name : name,
-									y0 : y0,
-									y1 : y0 += +((d[name]/d["Total"])*100)
-								};
+							u_data.forEach(function(d) {
+								var y0 = 0;
+								d.races = color.domain().map(function(name) {
+									return {
+										name : name,
+										y0 : y0,
+										y1 : y0 += +((d[name]/d["Total"])*100)
+									};
+								});
+								d.total = d.races[d.races.length - 1].y1;
 							});
-							d.total = d.races[d.races.length - 1].y1;
-						});
 
-						m_data.forEach(function(d) {
-							var y0 = 0;
-							d.races = color.domain().map(function(name) {
-								return {
-									name : name,
-									y0 : y0,
-									y1 : y0 += +((d[name]/d["Total"])*100)
-								};
+							m_data.forEach(function(d) {
+								var y0 = 0;
+								d.races = color.domain().map(function(name) {
+									return {
+										name : name,
+										y0 : y0,
+										y1 : y0 += +((d[name]/d["Total"])*100)
+									};
+								});
+								d.total = d.races[d.races.length - 1].y1;
 							});
-							d.total = d.races[d.races.length - 1].y1;
-						});
 
-						p_data.forEach(function(d) {
-							var y0 = 0;
-							d.races = color.domain().map(function(name) {
-								return {
-									name : name,
-									y0 : y0,
-									y1 : y0 += +((d[name]/d["Total"])*100)
-								};
+							p_data.forEach(function(d) {
+								var y0 = 0;
+								d.races = color.domain().map(function(name) {
+									return {
+										name : name,
+										y0 : y0,
+										y1 : y0 += +((d[name]/d["Total"])*100)
+									};
+								});
+								d.total = d.races[d.races.length - 1].y1;
 							});
-							d.total = d.races[d.races.length - 1].y1;
-						});
 
-						ap_data.sort(function(a, b) {
-							return a.Year - b.Year;
-						});
-						u_data.sort(function(a, b) {
-							return a.Year - b.Year;
-						});
-						m_data.sort(function(a, b) {
-							return a.Year - b.Year;
-						});
-						p_data.sort(function(a, b) {
-							return a.Year - b.Year;
-						});
+							ap_data.sort(function(a, b) {
+								return a.Year - b.Year;
+							});
+							u_data.sort(function(a, b) {
+								return a.Year - b.Year;
+							});
+							m_data.sort(function(a, b) {
+								return a.Year - b.Year;
+							});
+							p_data.sort(function(a, b) {
+								return a.Year - b.Year;
+							});
 
-						x.domain(u_data.map(function(d) {
-							return d.Year;
-						}));
-						y.domain([ 0, 100 ]);
+							x.domain(u_data.map(function(d) {
+								return d.Year;
+							}));
+							y.domain([ 0, 100 ]);
 
-						svg.append("g").attr("class", "x axis").attr(
+							svg.append("g").attr("class", "x axis").attr(
 								"transform",
 								"translate(0," + (height + 50) + ")").call(
 								xAxis);
 
-						svg.append("g").attr("class", "y axis").call(yAxis);
+								svg.append("g").attr("class", "y axis").call(yAxis);
 
-						var ap = svg.selectAll(".ap").data(ap_data).enter()
+								var ap = svg.selectAll(".ap").data(ap_data).enter()
 								.append("g").attr("class", "g").attr(
-										"transform",
-										function(d) {
-											return "translate(" + x(d.Year)
-													+ ",0)";
-										});
+									"transform",
+									function(d) {
+										return "translate(" + x(d.Year)
+											+ ",0)";
+							});
 
-						var ugrad = svg.selectAll(".ugrad").data(u_data)
+								var ugrad = svg.selectAll(".ugrad").data(u_data)
 								.enter().append("g").attr("class", "g").attr(
-										"transform",
-										function(d) {
-											return "translate(" + x(d.Year)
-													+ ",0)";
-										});
-						var masters = svg.selectAll(".masters").data(m_data)
+									"transform",
+									function(d) {
+										return "translate(" + x(d.Year)
+											+ ",0)";
+							});
+								var masters = svg.selectAll(".masters").data(m_data)
 								.enter().append("g").attr("class", "g").attr(
-										"transform",
-										function(d) {
-											return "translate(" + x(d.Year)
-													+ ",0)";
-										});
-						var phd = svg.selectAll(".phd").data(p_data).enter()
+									"transform",
+									function(d) {
+										return "translate(" + x(d.Year)
+											+ ",0)";
+							});
+								var phd = svg.selectAll(".phd").data(p_data).enter()
 								.append("g").attr("class", "g").attr(
-										"transform",
-										function(d) {
-											return "translate(" + x(d.Year)
-													+ ",0)";
-										});
+									"transform",
+									function(d) {
+										return "translate(" + x(d.Year)
+											+ ",0)";
+							});
 
-						ap.selectAll("rect").data(function(d) {
-							return d.races;
-						}).enter().append("rect").attr("width",
+								ap.selectAll("rect").data(function(d) {
+									return d.races;
+								}).enter().append("rect").attr("width",
 								x.rangeBand() / education_levels - 6).attr("y",
 								function(d) {
 									return y(d.y1);
 								}).attr("opacity", 0).attr("height", function(d) {
-							return y(d.y0) - y(d.y1);
-						}).attr("class", "advp").style("fill", function(d) {
-							return color(d.name);
-						});
+									return y(d.y0) - y(d.y1);
+								}).attr("class", "advp").style("fill", function(d) {
+									return color(d.name);
+								});
 
-						ugrad.selectAll("rect").data(function(d) {
-							return d.races;
-						}).enter().append("rect").attr("width",
+								ugrad.selectAll("rect").data(function(d) {
+									return d.races;
+								}).enter().append("rect").attr("width",
 								x.rangeBand() / education_levels - 6).attr("y",
 								function(d) {
 									return y(d.y1);
 								}).attr("opacity", 0).attr("height", function(d) {
-							return y(d.y0) - y(d.y1);
-						}).attr(
+									return y(d.y0) - y(d.y1);
+								}).attr(
 								"transform",
 								function(d) {
 									return "translate(" + x.rangeBand()
-											/ education_levels + ",0)";
-								}).attr("class", "undergrad").style("fill",
-								function(d) {
-									return color(d.name);
-								});
-						masters.selectAll("rect").data(function(d) {
-							return d.races;
-						}).enter().append("rect").attr("width",
+										/ education_levels + ",0)";
+							}).attr("class", "undergrad").style("fill",
+							function(d) {
+								return color(d.name);
+							});
+								masters.selectAll("rect").data(function(d) {
+									return d.races;
+								}).enter().append("rect").attr("width",
 								x.rangeBand() / education_levels - 6).attr("y",
 								function(d) {
 									return y(d.y1);
 								}).attr("opacity", 0).attr("height", function(d) {
-							return y(d.y0) - y(d.y1);
-						}).attr(
+									return y(d.y0) - y(d.y1);
+								}).attr(
 								"transform",
 								function(d) {
 									return "translate(" + 2 * x.rangeBand()
-											/ education_levels + ",0)";
-								}).attr("class", "mas").style("fill",
-								function(d) {
-									return color(d.name);
-								});
-						phd.selectAll("rect").data(function(d) {
-							return d.races;
-						}).enter().append("rect").attr("width",
+										/ education_levels + ",0)";
+							}).attr("class", "mas").style("fill",
+							function(d) {
+								return color(d.name);
+							});
+								phd.selectAll("rect").data(function(d) {
+									return d.races;
+								}).enter().append("rect").attr("width",
 								x.rangeBand() / education_levels - 6).attr("y",
 								function(d) {
 									return y(d.y1);
 								}).attr("opacity", 0).attr("height", function(d) {
-							return y(d.y0) - y(d.y1);
-						}).attr(
+									return y(d.y0) - y(d.y1);
+								}).attr(
 								"transform",
 								function(d) {
 									return "translate(" + 3 * x.rangeBand()
-											/ education_levels + ",0)";
-								}).attr("class", "pd").style("fill",
-								function(d) {
-									return color(d.name);
-								});
+										/ education_levels + ",0)";
+							}).attr("class", "pd").style("fill",
+							function(d) {
+								return color(d.name);
+							});
 
-						ap.append("text").attr("y", function(d) {
-							return y(0) + 20;
-						}).attr("class", "degree").attr(
+								ap.append("text").attr("y", function(d) {
+									return y(0) + 20;
+								}).attr("class", "degree").attr(
 								"transform",
 								function(d) {
 									return "translate(" + -290 + "," + 143
-											+ ") rotate(-45)";
-								}).text("High School");
+										+ ") rotate(-45)";
+							}).text("High School");
 
-						ugrad.append("text").attr("y", function(d) {
-							return y(0) + 20;
-						}).attr("class", "degree").attr(
+								ugrad.append("text").attr("y", function(d) {
+									return y(0) + 20;
+								}).attr("class", "degree").attr(
 								"transform",
 								function(d) {
 									return "translate("
-											+ (1 * x.rangeBand()
-													/ education_levels - 290)
-											+ "," + 140 + ") rotate(-45)";
-								}).text("Undergrad");
+										+ (1 * x.rangeBand()
+											/ education_levels - 290)
+								+ "," + 140 + ") rotate(-45)";
+}).text("Undergrad");
 
 						// ugrad.selectAll("text").attr("transform", "rotate(-35)");
 
 						masters.append("text").attr("y", function(d) {
 							return y(0) + 20;
 						}).attr("class", "degree").attr(
-								"transform",
-								function(d) {
-									return "translate("
-											+ (2 * x.rangeBand()
-													/ education_levels - 280)
-											+ "," + 130 + ") rotate(-45)";
-								}).text("Masters");
+						"transform",
+						function(d) {
+							return "translate("
+								+ (2 * x.rangeBand()
+									/ education_levels - 280)
+								+ "," + 130 + ") rotate(-45)";
+							}).text("Masters");
 
-						phd.append("text").attr("y", function(d) {
-							return y(0) + 20;
-						}).attr("class", "degree").attr(
+								phd.append("text").attr("y", function(d) {
+									return y(0) + 20;
+								}).attr("class", "degree").attr(
 								"transform",
 								function(d) {
 									return "translate("
-											+ (3 * x.rangeBand()
-													/ education_levels - 270)
-											+ "," + 120 + ") rotate(-45)";
-								}).text("PhD");
+										+ (3 * x.rangeBand()
+											/ education_levels - 270)
+								+ "," + 120 + ") rotate(-45)";
+					}).text("PhD");
 
 						// d3.selectAll(".degree").attr("transform", function(d) { return "rotate(-35)"; });
 
 						var legend = svg.selectAll(".legend").data(
-								color.domain().slice().reverse()).enter()
-								.append("g").attr("class", "legend").attr(
-										"transform",
-										function(d, i) {
-											return "translate(0," + i * 20
-													+ ")";
-										});
+							color.domain().slice().reverse()).enter()
+						.append("g").attr("class", "legend").attr(
+							"transform",
+							function(d, i) {
+								return "translate(0," + i * 20
+									+ ")";
+					});
 
 						legend.append("rect").attr("x", width - 18).attr(
-								"width", 18).attr("height", 18).style("fill",
-								color);
+							"width", 18).attr("height", 18).style("fill",
+							color);
 
-						legend.append("text").attr("x", width - 24)
-								.attr("y", 9).attr("dy", ".35em").style(
-										"text-anchor", "end").text(function(d) {
+							legend.append("text").attr("x", width - 24)
+							.attr("y", 9).attr("dy", ".35em").style(
+								"text-anchor", "end").text(function(d) {
 									return d;
 								});
-						legend.on('click', function(d) {
-							d.disabled = !d.disabled;
-							d3.transition().duration(600).each(function() {
-								draw([d]);
+								legend.on('click', function(d) {
+									d.disabled = !d.disabled;
+									d3.transition().duration(600).each(function() {
+										draw([d]);
+									});
+								});
+
+								draw(ethnicities);
 							});
-						});
+});
+});
+});
 
-						draw(ethnicities);
-					});
-				});
-			});
-		});
-
-		categoryEthnicity();
+categoryEthnicity();
 
 		//http://stackoverflow.com/questions/281264/remove-empty-elements-from-an-array-in-javascript
 		Array.prototype.clean = function(deleteValue) {
@@ -732,34 +731,34 @@ div.tooltip {
 			d3.selectAll(".advp").transition().remove();
 
 			var ap = svg.selectAll(".ap").data(transAP).enter().append("g")
-					.attr("class", "g").attr("transform", function(d) {
-						return "translate(" + x(d.Year) + ",0)";
-					});
+			.attr("class", "g").attr("transform", function(d) {
+				return "translate(" + x(d.Year) + ",0)";
+			});
 
 			var ugrad = svg.selectAll(".ugrad").data(transUGrad).enter()
-					.append("g").attr("class", "g").attr("transform",
-							function(d) {
-								return "translate(" + x(d.Year) + ",0)";
-							});
+			.append("g").attr("class", "g").attr("transform",
+				function(d) {
+					return "translate(" + x(d.Year) + ",0)";
+				});
 
 			var masters = svg.selectAll(".masters").data(transMasters).enter()
-					.append("g").attr("class", "g").attr("transform",
-							function(d) {
-								return "translate(" + x(d.Year) + ",0)";
-							});
+			.append("g").attr("class", "g").attr("transform",
+				function(d) {
+					return "translate(" + x(d.Year) + ",0)";
+				});
 
 			var phd = svg.selectAll(".phd").data(transPhd).enter().append("g")
-					.attr("class", "g").attr("transform", function(d) {
-						return "translate(" + x(d.Year) + ",0)";
-					});
+			.attr("class", "g").attr("transform", function(d) {
+				return "translate(" + x(d.Year) + ",0)";
+			});
 
 			ap.selectAll("rect").data(function(d) {
 				return d.races;
 			}).enter().append("rect").transition().attr("width",
-					x.rangeBand() / education_levels - 6).attr("y",
-					function(d) {
-						return y(d.y1);
-					}).transition().attr("height", function(d) {
+			x.rangeBand() / education_levels - 6).attr("y",
+			function(d) {
+				return y(d.y1);
+			}).transition().attr("height", function(d) {
 				return y(d.y0) - y(d.y1);
 			}).attr("class", "advp").style("fill", function(d) {
 				return color(d.name);
@@ -768,10 +767,10 @@ div.tooltip {
 			ugrad.selectAll("rect").data(function(d) {
 				return d.races;
 			}).enter().append("rect").transition().attr("width",
-					x.rangeBand() / education_levels - 6).attr("y",
-					function(d) {
-						return y(d.y1);
-					}).transition().attr("height", function(d) {
+			x.rangeBand() / education_levels - 6).attr("y",
+			function(d) {
+				return y(d.y1);
+			}).transition().attr("height", function(d) {
 				return y(d.y0) - y(d.y1);
 			}).attr("transform", function(d) {
 				return "translate(" + x.rangeBand() / education_levels + ",0)";
@@ -782,35 +781,35 @@ div.tooltip {
 			masters.selectAll("rect").data(function(d) {
 				return d.races;
 			}).enter().append("rect").transition().attr("width",
-					x.rangeBand() / education_levels - 6).attr("y",
-					function(d) {
-						return y(d.y1);
-					}).transition().attr("height", function(d) {
+			x.rangeBand() / education_levels - 6).attr("y",
+			function(d) {
+				return y(d.y1);
+			}).transition().attr("height", function(d) {
 				return y(d.y0) - y(d.y1);
 			}).attr(
-					"transform",
-					function(d) {
-						return "translate(" + 2 * x.rangeBand() / education_levels + ",0)";
-					}).attr("class", "mas").style("fill", function(d) {
+			"transform",
+			function(d) {
+				return "translate(" + 2 * x.rangeBand() / education_levels + ",0)";
+			}).attr("class", "mas").style("fill", function(d) {
 				return color(d.name);
 			});
 
 			phd.selectAll("rect").data(function(d) {
 				return d.races;
 			}).enter().append("rect").transition().attr("width",
-					x.rangeBand() / education_levels - 6).attr("y",
-					function(d) {
-						return y(d.y1);
-					}).transition().attr("height", function(d) {
+			x.rangeBand() / education_levels - 6).attr("y",
+			function(d) {
+				return y(d.y1);
+			}).transition().attr("height", function(d) {
 				return y(d.y0) - y(d.y1);
 			}).attr(
-					"transform",
-					function(d) {
-						return "translate(" + 3 * x.rangeBand() / education_levels + ",0)";
-					}).attr("class", "pd").style("fill", function(d) {
+			"transform",
+			function(d) {
+				return "translate(" + 3 * x.rangeBand() / education_levels + ",0)";
+			}).attr("class", "pd").style("fill", function(d) {
 				return color(d.name);
 			});
 		}
-	</script>
-</body>
-</html>
+		</script>
+	</body>
+	</html>
