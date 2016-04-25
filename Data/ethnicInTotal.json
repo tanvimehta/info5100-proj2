@@ -39,371 +39,371 @@
 	"Amazon": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [0, 2.6, 100],
-		"measures": [2.6, 100],
-		"markers": [2.6]
+		"ranges": [0, 0.026, 0.5],
+		"measures": [0.026, 0.5],
+		"markers": [0.026]
 	}, {
 		"title": "Asian",
 		"subtitle": "",
-		"ranges": [0, 6.19, 100],
-		"measures": [6.19, 100],
-		"markers": [6.19]
+		"ranges": [0, 0.089, 0.5],
+		"measures": [0.089, 0.5],
+		"markers": [0.089]
 	}, {
 		"title": "Latino",
 		"subtitle": "",
-		"ranges": [0, 1.5, 100],
-		"measures": [1.5, 100],
-		"markers": [1.5]
+		"ranges": [0, 0.015, 0.5],
+		"measures": [0.015, 0.5],
+		"markers": [0.015]
 	}, {
 		"title": "Black",
 		"subtitle": "",
-		"ranges": [0, 3.4, 100],
-		"measures": [3.4, 100],
-		"markers": [3.4]
+		"ranges": [0, 0.034, 0.5],
+		"measures": [0.034, 0.5],
+		"markers": [0.034]
 	}, {
 		"title": "Multi",
 		"subtitle": "",
-		"ranges": [0, 0, 100],
-		"measures": [0, 100],
+		"ranges": [0, 0, 0.5],
+		"measures": [0, 0.5],
 		"markers": [0]
 	}, {
 		"title": "Other",
 		"subtitle": "",
-		"ranges": [0, 2.76, 100],
-		"measures": [2.76, 100],
-		"markers": [2.76]
+		"ranges": [0, 0.0276, 0.5],
+		"measures": [0.0276, 0.5],
+		"markers": [0.0276]
 	}],
 	"Apple": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [0, 2.1, 100],
-		"measures": [2.1, 100],
-		"markers": [2.1]
+		"ranges": [0, 0.021, 1],
+		"measures": [0.021, 1],
+		"markers": [0.021]
 	}, {
 		"title": "Asian",
 		"subtitle": "",
-		"ranges": [0, 11.24, 100],
-		"measures": [11.24, 100],
-		"markers": [11.24]
+		"ranges": [0, 0.1124, 1],
+		"measures": [0.1124, 1],
+		"markers": [0.1124]
 	}, {
 		"title": "Latino",
 		"subtitle": "",
-		"ranges": [0, 1.7, 100],
-		"measures": [1.7, 100],
-		"markers": [1.7]
+		"ranges": [0, 0.017, 1],
+		"measures": [0.017, 1],
+		"markers": [0.017]
 	}, {
 		"title": "Black",
 		"subtitle": "",
-		"ranges": [0, 1.66, 100],
-		"measures": [1.66, 100],
-		"markers": [1.66]
+		"ranges": [0, 0.0166, 1],
+		"measures": [0.0166, 1],
+		"markers": [0.0166]
 	}, {
 		"title": "Multi",
 		"subtitle": "",
-		"ranges": [0, 5, 100],
-		"measures": [5, 100],
-		"markers": [5]
+		"ranges": [0, 0.05, 1],
+		"measures": [0.05, 1],
+		"markers": [0.05]
 	}, {
 		"title": "Other",
 		"subtitle": "",
-		"ranges": [0, 0.83, 100],
-		"measures": [0.83, 100],
-		"markers": [0.83]
+		"ranges": [0, 0.0083, 1],
+		"measures": [0.0083, 1],
+		"markers": [0.0083]
 	}],
 	"eBay": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [0, 1, 100],
-		"measures": [1, 100],
-		"markers": [1]
+		"ranges": [0, 0.01, 0.5],
+		"measures": [0.01, 0.5],
+		"markers": [0.01]
 	}, {
 		"title": "Asian",
 		"subtitle": "",
-		"ranges": [0, 6.75, 100],
-		"measures": [6.75, 100],
-		"markers": [6.75]
+		"ranges": [0, 0.0675, 0.5],
+		"measures": [0.0675, 0.5],
+		"markers": [0.0675]
 	}, {
 		"title": "Latino",
 		"subtitle": "",
-		"ranges": [0, 0.33, 100],
-		"measures": [0.33, 100],
-		"markers": [0.33]
+		"ranges": [0, 0.0033, 0.5],
+		"measures": [0.0033, 0.5],
+		"markers": [0.0033]
 	}, {
 		"title": "Black",
 		"subtitle": "",
-		"ranges": [0, 0.72, 100],
-		"measures": [0.72, 100],
-		"markers": [0.72]
+		"ranges": [0, 0.0072, 0.5],
+		"measures": [0.0072, 0.5],
+		"markers": [0.0072]
 	}, {
 		"title": "Multi",
 		"subtitle": "",
-		"ranges": [0, 1.08, 100],
-		"measures": [1.08, 100],
-		"markers": [1.08]
+		"ranges": [0, 0.0108, 0.5],
+		"measures": [0.0108, 0.5],
+		"markers": [0.0108]
 	}, {
 		"title": "Other",
 		"subtitle": "",
-		"ranges": [0, 0.36, 100],
-		"measures": [0.36, 100],
-		"markers": [0.36]
+		"ranges": [0, 0.0036, 0.5],
+		"measures": [0.0036, 0.5],
+		"markers": [0.0036]
 	}],
 	"Facebook": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [0, 0.2, 100],
-		"measures": [1, 100],
-		"markers": [1]
+		"ranges": [0, 0.0027, 0.1],
+		"measures": [0.0027, 0.1],
+		"markers": [0.0027]
 	}, {
 		"title": "Asian",
 		"subtitle": "",
-		"ranges": [0, 2.8, 100],
-		"measures": [2.8, 100],
-		"markers": [2.8]
+		"ranges": [0, 0.028, 0.1],
+		"measures": [0.028, 0.1],
+		"markers": [0.028]
 	}, {
 		"title": "Latino",
 		"subtitle": "",
-		"ranges": [0, 0.078, 100],
-		"measures": [0.078, 100],
-		"markers": [0.078]
+		"ranges": [0, 0.00078, 0.1],
+		"measures": [0.00078, 0.1],
+		"markers": [0.00078]
 	}, {
 		"title": "Black",
 		"subtitle": "",
-		"ranges": [0, 0.05, 100],
-		"measures": [0.05, 100],
-		"markers": [0.05]
+		"ranges": [0, 0.0005, 0.1],
+		"measures": [0.0005, 0.1],
+		"markers": [0.0005]
 	}, {
 		"title": "Multi",
 		"subtitle": "",
-		"ranges": [0, 0.94, 100],
-		"measures": [0.94, 100],
-		"markers": [0.94]
+		"ranges": [0, 0.0094, 0.1],
+		"measures": [0.0094, 0.1],
+		"markers": [0.0094]
 	}, {
 		"title": "Other",
 		"subtitle": "",
-		"ranges": [0, 0, 100],
-		"measures": [0, 100],
+		"ranges": [0, 0, 0.1],
+		"measures": [0, 0.1],
 		"markers": [0]
 	}],
 	"LinkedIn": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [0, 0.2, 100],
-		"measures": [1, 100],
-		"markers": [1]
+		"ranges": [0, 0.002, 0.1],
+		"measures": [0.002, 0.1],
+		"markers": [0.002]
 	}, {
 		"title": "Asian",
 		"subtitle": "",
-		"ranges": [0, 2.2, 100],
-		"measures": [2.2, 100],
-		"markers": [2.2]
+		"ranges": [0, 0.022, 0.1],
+		"measures": [0.022, 0.1],
+		"markers": [0.022]
 	}, {
 		"title": "Latino",
 		"subtitle": "",
-		"ranges": [0, 0.059, 100],
-		"measures": [0.059, 100],
-		"markers": [0.059]
+		"ranges": [0, 0.00059, 0.1],
+		"measures": [0.00059, 0.1],
+		"markers": [0.00059]
 	}, {
 		"title": "Black",
 		"subtitle": "",
-		"ranges": [0, 0.0395, 100],
-		"measures": [0.0395, 100],
-		"markers": [0.0395]
+		"ranges": [0, 0.000395, 0.1],
+		"measures": [0.000395, 0.1],
+		"markers": [0.000395]
 	}, {
 		"title": "Multi",
 		"subtitle": "",
-		"ranges": [0, 0.237, 100],
-		"measures": [0.237, 100],
-		"markers": [0.237]
+		"ranges": [0, 0.00237, 0.1],
+		"measures": [0.00237, 0.1],
+		"markers": [0.00237]
 	}, {
 		"title": "Other",
 		"subtitle": "",
-		"ranges": [0, 0.079, 100],
-		"measures": [0.079, 100],
-		"markers": [0.079]
+		"ranges": [0, 0.00079, 0.1],
+		"measures": [0.00079, 0.1],
+		"markers": [0.00079]
 	}],
 	"Twitter": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [0, 0.1, 100],
-		"measures": [0.1, 100],
-		"markers": [0.1]
+		"ranges": [0, 0.001, 0.1],
+		"measures": [0.001, 0.1],
+		"markers": [0.001]
 	}, {
 		"title": "Asian",
 		"subtitle": "",
-		"ranges": [0, 0.8, 100],
-		"measures": [0.8, 100],
-		"markers": [0.8]
+		"ranges": [0, 0.008, 0.1],
+		"measures": [0.008, 0.1],
+		"markers": [0.008]
 	}, {
 		"title": "Latino",
 		"subtitle": "",
-		"ranges": [0, 0.02, 100],
-		"measures": [0.02, 100],
-		"markers": [0.02]
+		"ranges": [0, 0.0002, 0.1],
+		"measures": [0.0002, 0.1],
+		"markers": [0.0002]
 	}, {
 		"title": "Black",
 		"subtitle": "",
-		"ranges": [0, 0.018, 100],
-		"measures": [0.018, 100],
-		"markers": [0.018]
+		"ranges": [0, 0.00018, 0.1],
+		"measures": [0.00018, 0.1],
+		"markers": [0.00018]
 	}, {
 		"title": "Multi",
 		"subtitle": "",
-		"ranges": [0, 0.337, 100],
-		"measures": [0.337, 100],
-		"markers": [0.337]
+		"ranges": [0, 0.00337, 0.1],
+		"measures": [0.00337, 0.1],
+		"markers": [0.00337]
 	}, {
 		"title": "Other",
 		"subtitle": "",
-		"ranges": [0, 0.15, 100],
-		"measures": [0.15, 100],
-		"markers": [0.15]
+		"ranges": [0, 0.0015, 0.1],
+		"measures": [0.0015, 0.1],
+		"markers": [0.0015]
 	}],
 	"Google": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [0, 1.6, 100],
-		"measures": [1.6, 100],
-		"markers": [1.6]
+		"ranges": [0, 0.016, 0.5],
+		"measures": [0.016, 0.5],
+		"markers": [0.016]
 	}, {
 		"title": "Asian",
 		"subtitle": "",
-		"ranges": [0, 13.4, 100],
-		"measures": [13.4, 100],
-		"markers": [13.4]
+		"ranges": [0, 0.134, 0.5],
+		"measures": [0.134, 0.5],
+		"markers": [0.134]
 	}, {
 		"title": "Latino",
 		"subtitle": "",
-		"ranges": [0, 0.32, 100],
-		"measures": [0.32, 100],
-		"markers": [0.32]
+		"ranges": [0, 0.0032, 0.5],
+		"measures": [0.0032, 0.5],
+		"markers": [0.0032]
 	}, {
 		"title": "Black",
 		"subtitle": "",
-		"ranges": [0, 0.288, 100],
-		"measures": [0.288, 100],
-		"markers": [0.288]
+		"ranges": [0, 0.00288, 0.5],
+		"measures": [0.00288, 0.5],
+		"markers": [0.00288]
 	}, {
 		"title": "Multi",
 		"subtitle": "",
-		"ranges": [0, 5.19, 100],
-		"measures": [5.19, 100],
-		"markers": [5.19]
+		"ranges": [0, 0.0519, 0.5],
+		"measures": [0.0519, 0.5],
+		"markers": [0.0519]
 	}, {
 		"title": "Other",
 		"subtitle": "",
-		"ranges": [0, 0.577, 100],
-		"measures": [0.577, 100],
-		"markers": [0.577]
+		"ranges": [0, 0.00577, 0.5],
+		"measures": [0.00577, 0.5],
+		"markers": [0.00577]
 	}],
 	"Microsoft": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [0, 3.68, 100],
-		"measures": [3.68, 100],
-		"markers": [3.68]
+		"ranges": [0, 0.0368, 1],
+		"measures": [0.0368, 1],
+		"markers": [0.0368]
 	}, {
 		"title": "Asian",
 		"subtitle": "",
-		"ranges": [0, 29, 100],
-		"measures": [29, 100],
-		"markers": [29]
+		"ranges": [0, 0.29, 1],
+		"measures": [0.29, 1],
+		"markers": [0.29]
 	}, {
 		"title": "Latino",
 		"subtitle": "",
-		"ranges": [0, 1.25, 100],
-		"measures": [1.25, 100],
-		"markers": [1.25]
+		"ranges": [0, 0.0125, 1],
+		"measures": [0.0125, 1],
+		"markers": [0.0125]
 	}, {
 		"title": "Black",
 		"subtitle": "",
-		"ranges": [0, 1.33, 100],
-		"measures": [1.33, 100],
-		"markers": [1.33]
+		"ranges": [0, 0.0133, 1],
+		"measures": [0.0133, 1],
+		"markers": [0.0133]
 	}, {
 		"title": "Multi",
 		"subtitle": "",
-		"ranges": [0, 4, 100],
-		"measures": [4, 100],
-		"markers": [4]
+		"ranges": [0, 0.04, 1],
+		"measures": [0.04, 1],
+		"markers": [0.04]
 	}, {
 		"title": "Other",
 		"subtitle": "",
-		"ranges": [0, 1.33, 100],
-		"measures": [1.33, 100],
-		"markers": [1.33]
+		"ranges": [0, 0.0133, 1],
+		"measures": [0.0133, 1],
+		"markers": [0.0133]
 	}],
 	"Intel": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [0, 3.2, 100],
-		"measures": [3.2, 100],
-		"markers": [3.2]
+		"ranges": [0, 0.32, 1],
+		"measures": [0.032, 1],
+		"markers": [0.032]
 	}, {
 		"title": "Asian",
 		"subtitle": "",
-		"ranges": [0, 21.85, 100],
-		"measures": [21.85, 100],
-		"markers": [21.85]
+		"ranges": [0, 0.2185, 1],
+		"measures": [0.2185, 1],
+		"markers": [0.2185]
 	}, {
 		"title": "Latino",
 		"subtitle": "",
-		"ranges": [0, 1.89, 100],
-		"measures": [1.89, 100],
-		"markers": [1.89]
+		"ranges": [0, 0.0189, 1],
+		"measures": [0.0189, 1],
+		"markers": [0.0189]
 	}, {
 		"title": "Black",
 		"subtitle": "",
-		"ranges": [0, 1.12, 100],
-		"measures": [1.12, 100],
-		"markers": [1.12]
+		"ranges": [0, 0.0112, 1],
+		"measures": [0.0112, 1],
+		"markers": [0.0112]
 	}, {
 		"title": "Multi",
 		"subtitle": "",
-		"ranges": [0, 0, 100],
-		"measures": [0, 100],
+		"ranges": [0, 0, 1],
+		"measures": [0, 1],
 		"markers": [0]
 	}, {
 		"title": "Other",
 		"subtitle": "",
-		"ranges": [0, 1.12, 100],
-		"measures": [1.12, 100],
-		"markers": [1.12]
+		"ranges": [0, 0.0112, 1],
+		"measures": [0.0112, 1],
+		"markers": [0.0112]
 	}],
 	"Dell": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [0, 3.75, 100],
-		"measures": [3.75, 100],
-		"markers": [3.75]
+		"ranges": [0, 0.0375, 0.5],
+		"measures": [0.0375, 0.5],
+		"markers": [0.0375]
 	}, {
 		"title": "Asian",
 		"subtitle": "",
-		"ranges": [0, 7.82, 100],
-		"measures": [7.82, 100],
-		"markers": [7.82]
+		"ranges": [0, 0.0782, 0.5],
+		"measures": [0.0782, 0.5],
+		"markers": [0.0782]
 	}, {
 		"title": "Latino",
 		"subtitle": "",
-		"ranges": [0, 2.39, 100],
-		"measures": [2.39, 100],
-		"markers": [2.39]
+		"ranges": [0, 0.0239, 0.5],
+		"measures": [0.0239, 0.5],
+		"markers": [0.0239]
 	}, {
 		"title": "Black",
 		"subtitle": "",
-		"ranges": [0, 2.9, 100],
-		"measures": [2.9, 100],
-		"markers": [2.9]
+		"ranges": [0, 0.029, 0.5],
+		"measures": [0.029, 0.5],
+		"markers": [0.029]
 	}, {
 		"title": "Multi",
 		"subtitle": "",
-		"ranges": [0, 0, 100],
-		"measures": [0, 100],
+		"ranges": [0, 0, 0.5],
+		"measures": [0, 0.5],
 		"markers": [0]
 	}, {
 		"title": "Other",
 		"subtitle": "",
-		"ranges": [0, 0.15, 100],
-		"measures": [0.15, 100],
-		"markers": [0.15]
+		"ranges": [0, 0.0116, 0.5],
+		"measures": [0.0116, 0.5],
+		"markers": [0.0116]
 	}]
 }

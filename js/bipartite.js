@@ -272,6 +272,7 @@
 			drawPart(visData, biP.id, 0);
 			drawPart(visData, biP.id, 1); 
 		//	drawEdges(visData, biP.id);
+		drawTooltip();
 		drawMoreInfo();
 		drawHeader(biP.header, biP.id);
 
@@ -293,13 +294,24 @@
 	});	
 	}
 
+	function drawTooltip(){
+		d3.select("#logoSVG").append("div")	
+		.attr("class", "tooltip").attr("id","femaleP")		
+		.style("opacity", 0).style("left","750px")		
+		.style("top", "190px");
+
+		d3.select("#logoSVG").append("div")	
+		.attr("class", "tooltip").attr("id","maleP")		
+		.style("opacity", 0).style("left","1150px")		
+		.style("top", "190px");
+	}
+
 	function drawMoreInfo(){
 
 		showGenderInLogo("US");
 		showBulletChart("US");
 		var div = document.getElementById("moreInfoHeader");
-			div.innerHTML = "Total US Population";
-
+		div.innerHTML = "Total US Population";
 		
 	}
 
@@ -336,6 +348,7 @@
 	function removeLogo(){
 		d3.select(".companyLogo").remove();
 		d3.selectAll(".bullet").remove();
+		//d3.selectAll(".tooltip").remove();
 	}
 
 	function showGenderInLogo(logoName){
@@ -344,7 +357,8 @@
 		var svg= d3.select("#logoSVG").append("svg").attr("class","companyLogo").attr("viewBox",genderData[logoName].viewbox)
 		.attr("fill-rule","nonzero").attr("clip-rule","evenodd").attr("stroke-linejoin","round")
 		.attr("stroke-miterlimit","1.414");
-
+		//.attr("width","200px").attr("height","200px")
+		//-50 -50 1000 700
 		//svg.append("text").text("Something").attr("x","-50").attr("y","0");
 
 		var path = svg.append("path").attr("d",genderData[logoName].d)
@@ -359,36 +373,25 @@
 		path.attr("fill-rule","nonzero").attr("fill","url(#gradient)");
 
 		//Show tooltip on hover above logo
-		
-		var div = d3.select("#logoSVG").append("div")	
-		.attr("class", "tooltip").attr("id","femaleP")		
-		.style("opacity", 0);
 		var div = d3.select("#logoSVG").select("#femaleP");
 		div.transition()		
 		.duration(1000)		
 		.style("opacity", .9);		
-		div.html("Female: "+ genderData[logoName].female)	
-		.style("left","800px")		
-		.style("top", "190px");	
-
-		var div = d3.select("#logoSVG").append("div")	
-		.attr("class", "tooltip").attr("id","maleP")		
-		.style("opacity", 0);
+		div.html("Female: "+ genderData[logoName].female);
+		
 		//path.on("mouseover",function(d, i){ 
 			var div = d3.select("#logoSVG").select("#maleP");
 			div.transition()		
 			.duration(1000)		
 			.style("opacity", .9);		
 			div.html("Male: "+ (100 - parseInt(genderData[logoName].female))+"%")	
-			.style("left","1170px")		
-			.style("top", "190px");	
 
 		}
 
 		function showBulletChart(Name){
 
 			var margin = {top: 5, right: 40, bottom: 20, left: 20},
-			bWidth = 400 - margin.left - margin.right,
+			bWidth = 500 - margin.left - margin.right,
 			bHeight = 50 - margin.top - margin.bottom;
 
 			chart = d3.bullet()
@@ -410,7 +413,7 @@
 			.attr("width", bWidth + margin.left + margin.right)
 			.attr("height", bHeight + margin.top + margin.bottom)
 			.append("g")
-			.attr("transform", "translate(100," + margin.top + ")")
+			.attr("transform", "translate(50," + margin.top + ")")
 			.call(chart);
 
 			var title = svg.append("g")
