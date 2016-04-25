@@ -131,6 +131,14 @@ div.tooltip {
 	font-weight: bold;
 	color: black;
 }
+.buttonSelected {
+	background-color:#555555;
+	color:#f6f6f6;
+}
+.buttonUnselected {
+	background-color:#f6f6f6;
+	color:#555555;
+}
 </style>
 </head>
 <body>
@@ -168,8 +176,17 @@ div.tooltip {
 			</td>
 		</tr>
 	</table>
+	<div id="barchart">
+		<span id="breakdown-bar" style="font-size: 12pt; padding-top: 40px;display: inline-block;">
+			Breakdown by:
+			<input id="gender-button" type="button" value="Gender" onclick="categoryGender()"/>
+			<input id="ethnicity-button" type="button" value="Ethnicity" onclick="categoryEthnicity()"/>
+			Select one or more from:
+		</span>
+	</div>
 
 	<script>
+
 		var width = 700, height = 600, margin = {
 			b : 0,
 			t : 0,
@@ -177,9 +194,9 @@ div.tooltip {
 			r : 50
 		};
 		var svg = d3.select("#idCompanies").append("svg").attr('width', width)
-				.attr('height', (height + margin.b + margin.t)).append("g")
-				.attr("transform",
-						"translate(" + margin.l + "," + margin.t + ")");
+				.attr('height', (height + margin.b + margin.t)).append("g");
+				// .attr("transform",
+				// 		"translate(" + margin.l + "," + margin.t + ")");
 
 		var data = [ {
 			data : bP.partData(company_ethnic_data, 2),
@@ -193,11 +210,11 @@ div.tooltip {
 	<!-- Visualization 2 -->
 	<script>
 		var margin = {
-			top : 100,
+			top : 40,
 			right : 80,
-			bottom : 30,
+			bottom : 90,
 			left : 40
-		}, width = 960 - margin.left - margin.right, height = 500 - margin.top
+		}, width = 1160 - margin.left - margin.right, height = 500 - margin.top
 				- margin.bottom;
 
 		var education_levels = 4;
@@ -223,11 +240,100 @@ div.tooltip {
 				width + margin.left + margin.right).attr("height",
 				height + margin.top + margin.bottom + 100).append("g").attr(
 				"transform",
-				"translate(" + margin.left + "," + margin.top + ")");
+				"translate(" + margin.left + "," + margin.top + ")").attr("display", "block");
 
 		var ethnicities = ["Asian", "Black", "Latino", "White", "Other"];
 		var genders = ["Male", "Female", "NotReported"];
 
+		var category = "Ethnicity";
+		var selection = ethnicities.map(function (d) { return {name:d, sel:true}; });
+
+		function categoryGender() {
+			category = "Gender"; 
+			selection = genders.map(function (d) { return {name:d, sel:true}; });
+			displayGenderButtons();
+			updateBarChart();
+		}
+
+		function categoryEthnicity() {
+			category = "Ethnicity"; 
+			selection = ethnicities.map(function (d) { return {name:d, sel:true}; });
+			displayEthnicityButtons();
+			updateBarChart();
+		}
+
+		function updateBarChart() {
+			updateButtonAppearance();
+			var labels = selection
+			.filter(function (d) { return d.sel; })
+			.map(function (d) { return d.name; });
+			draw(labels);
+		}
+
+		function toggleButton(d) {
+			var idx = selection.map(function (d) { return d.name; }).indexOf(d);
+			selection[idx].sel = !selection[idx].sel;
+			updateBarChart();
+		}
+
+		function updateButtonAppearance() {
+			if (category == "Ethnicity") {
+				d3.select('#ethnicity-button')
+				.attr('class', 'buttonSelected');
+				d3.select('#gender-button')
+				.attr('class', 'buttonUnselected');
+			}
+			else {
+				d3.select('#gender-button')
+				.attr('class', 'buttonSelected');
+				d3.select('#ethnicity-button')
+				.attr('class', 'buttonUnselected');
+			}
+			for (var i = 0; i < selection.length; i++) {
+				var id = "#" +selection[i].name + "-button";
+				if (selection[i].sel)
+					d3.select(id).attr("class", "buttonSelected");
+				else
+					d3.select(id).attr("class", "buttonUnselected");
+			}
+		}
+
+		function displayGenderButtons() {
+			var span = d3.select('#breakdown-bar');
+			for (var i = 0; i < ethnicities.length; i++) {
+				var id = "#" + ethnicities[i] + "-button";
+				d3.select(id).remove();
+			}
+			span.selectAll(".breakdown-button")
+			.data(genders).enter()
+			.append("input")
+			.attr("type", "button")
+			.attr("class", "breakdown-button")
+			.attr("id", function(d) { return d + "-button"; })
+			.attr("value", function(d) { return d; })
+			.on("click", toggleButton);
+		}
+
+		function displayEthnicityButtons() {
+			var span = d3.select('#breakdown-bar');
+			for (var i = 0; i < genders.length; i++) {
+				var id = "#" + genders[i] + "-button";
+				d3.select(id).remove();
+			}
+			span.selectAll(".breakdown-button")
+			.data(ethnicities).enter()
+			.append("input")
+			.attr("type", "button")
+			.attr("class", "breakdown-button")
+			.attr("id", function(d) { return d + "-button"; })
+			.attr("value", function(d) { return d; })
+			.on("click", toggleButton);
+		}
+
+		var transAP = [];
+		var transUGrad = [];
+		var transMasters = [];
+		var transPhd = [];
 		d3.csv("Data/ap-stats.csv", function(error, ap_data) {
 			d3.csv("Data/ugrad-stats.csv", function(error1, u_data) {
 				d3.csv("Data/masters-stats.csv", function(error2, m_data) {
@@ -241,6 +347,25 @@ div.tooltip {
 							throw error2;
 						if (error3)
 							throw error3;
+
+						var percentagify = function (d) {
+              return {
+                Year : d.Year,
+                Asian : 100 * d.Asian / d.Total,
+                Black : 100 * d.Black / d.Total,
+                Latino : 100 * d.Latino / d.Total,
+                White : 100 * d.White / d.Total,
+                Other : 100 * d.Other / d.Total,
+                Male : 100 * d.Male / d.Total,
+                Female : 100 * d.Female / d.Total,
+                NotReported : 100 * d.NotReported / d.Total,
+                Total : d.Total
+              };
+            };
+            transAP = ap_data.map(percentagify);
+            transUGrad = u_data.map(percentagify);
+            transMasters = m_data.map(percentagify);
+            transPhd = p_data.map(percentagify);
 
 						color.domain(d3.keys(u_data[0]).filter(function(key) {
 							return key !== "Year" && key !== "Total";
@@ -355,7 +480,7 @@ div.tooltip {
 								x.rangeBand() / education_levels - 6).attr("y",
 								function(d) {
 									return y(d.y1);
-								}).attr("height", function(d) {
+								}).attr("opacity", 0).attr("height", function(d) {
 							return y(d.y0) - y(d.y1);
 						}).attr("class", "advp").style("fill", function(d) {
 							return color(d.name);
@@ -367,7 +492,7 @@ div.tooltip {
 								x.rangeBand() / education_levels - 6).attr("y",
 								function(d) {
 									return y(d.y1);
-								}).attr("height", function(d) {
+								}).attr("opacity", 0).attr("height", function(d) {
 							return y(d.y0) - y(d.y1);
 						}).attr(
 								"transform",
@@ -384,7 +509,7 @@ div.tooltip {
 								x.rangeBand() / education_levels - 6).attr("y",
 								function(d) {
 									return y(d.y1);
-								}).attr("height", function(d) {
+								}).attr("opacity", 0).attr("height", function(d) {
 							return y(d.y0) - y(d.y1);
 						}).attr(
 								"transform",
@@ -401,7 +526,7 @@ div.tooltip {
 								x.rangeBand() / education_levels - 6).attr("y",
 								function(d) {
 									return y(d.y1);
-								}).attr("height", function(d) {
+								}).attr("opacity", 0).attr("height", function(d) {
 							return y(d.y0) - y(d.y1);
 						}).attr(
 								"transform",
@@ -483,82 +608,14 @@ div.tooltip {
 								draw([d]);
 							});
 						});
+
+						draw(ethnicities);
 					});
 				});
 			});
 		});
 
-		var transAP = [];
-		d3.csv("Data/ap-stats.csv", function(d) {
-			return {
-				Year : d.Year,
-				Asian : 100 * d.Asian / d.Total,
-				Black : 100 * d.Black / d.Total,
-				Latino : 100 * d.Latino / d.Total,
-				White : 100 * d.White / d.Total,
-				Other : 100 * d.Other / d.Total,
-				Male : 100 * d.Male / d.Total,
-				Female : 100 * d.Female / d.Total,
-				NotReported : 100 * d.NotReported / d.Total,
-				Total : d.Total
-			};
-		}, function(data) {
-			transAP = data;
-		});
 
-		var transUGrad = [];
-		d3.csv("Data/ugrad-stats.csv", function(d) {
-			return {
-				Year : d.Year,
-				Asian : 100 * d.Asian / d.Total,
-				Black : 100 * d.Black / d.Total,
-				Latino : 100 * d.Latino / d.Total,
-				White : 100 * d.White / d.Total,
-				Other : 100 * d.Other / d.Total,
-				Male : 100 * d.Male / d.Total,
-				Female : 100 * d.Female / d.Total,
-				NotReported : 100 * d.NotReported / d.Total,
-				Total : d.Total
-			};
-		}, function(data) {
-			transUGrad = data;
-		});
-
-		var transMasters = [];
-		d3.csv("Data/masters-stats.csv", function(d) {
-			return {
-				Year : d.Year,
-				Asian : 100 * d.Asian / d.Total,
-				Black : 100 * d.Black / d.Total,
-				Latino : 100 * d.Latino / d.Total,
-				White : 100 * d.White / d.Total,
-				Other : 100 * d.Other / d.Total,
-				Male : 100 * d.Male / d.Total,
-				Female : 100 * d.Female / d.Total,
-				NotReported : 100 * d.NotReported / d.Total,
-				Total : d.Total
-			};
-		}, function(data) {
-			transMasters = data;
-		});
-
-		var transPhd = [];
-		d3.csv("Data/phd-stats.csv", function(d) {
-			return {
-				Year : d.Year,
-				Asian : 100 * d.Asian / d.Total,
-				Black : 100 * d.Black / d.Total,
-				Latino : 100 * d.Latino / d.Total,
-				White : 100 * d.White / d.Total,
-				Other : 100 * d.Other / d.Total,
-				Male : 100 * d.Male / d.Total,
-				Female : 100 * d.Female / d.Total,
-				NotReported : 100 * d.NotReported / d.Total,
-				Total : d.Total
-			};
-		}, function(data) {
-			transPhd = data;
-		});
 
 		//http://stackoverflow.com/questions/281264/remove-empty-elements-from-an-array-in-javascript
 		Array.prototype.clean = function(deleteValue) {
@@ -587,7 +644,10 @@ div.tooltip {
 					;
 				});
 				d.races.clean(undefined);
-				d.total = d.races[d.races.length - 1].y1;
+				if (d.races.length > 0)
+					d.total = d.races[d.races.length - 1].y1;
+				else
+					d.total = 0;
 			});
 
 			transUGrad.forEach(function(d) {
@@ -605,7 +665,10 @@ div.tooltip {
 					;
 				});
 				d.races.clean(undefined);
-				d.total = d.races[d.races.length - 1].y1;
+				if (d.races.length > 0)
+					d.total = d.races[d.races.length - 1].y1;
+				else
+					d.total = 0;
 			});
 
 			transMasters.forEach(function(d) {
@@ -623,7 +686,10 @@ div.tooltip {
 					;
 				});
 				d.races.clean(undefined);
-				d.total = d.races[d.races.length - 1].y1;
+				if (d.races.length > 0)
+					d.total = d.races[d.races.length - 1].y1;
+				else
+					d.total = 0;
 			});
 
 			transPhd.forEach(function(d) {
@@ -641,7 +707,10 @@ div.tooltip {
 					;
 				});
 				d.races.clean(undefined);
-				d.total = d.races[d.races.length - 1].y1;
+				if (d.races.length > 0)
+					d.total = d.races[d.races.length - 1].y1;
+				else
+					d.total = 0;
 			});
 
 			d3.selectAll(".undergrad").transition().remove();
