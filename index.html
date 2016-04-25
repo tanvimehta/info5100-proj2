@@ -86,11 +86,11 @@ button {
 }
 
 .bullet .measure.s0 {
-	fill: lightsteelblue;
+	opacity: 0.5;
 }
 
 .bullet .measure.s1 {
-	fill: steelblue;
+	opacity: 1;
 }
 
 .bullet .title {
@@ -156,9 +156,9 @@ div.tooltip {
 			</td>
 			<td>
 				<div id="moreInfo">
-					<div id="moreInfoHeader" class="panel"
+					<div class="panel"
 						style="height: 600px; width: 500px; border: 1px solid; align-content: center;">
-						<div class="headerClass">Total US Population</div>
+						<div class="headerClass" id="moreInfoHeader">Total US Population</div>
 						<div class="">
 							<div id="logoSVG" style="height: 150px; width: 500px;"></div>
 							<div id="bullet" style="height: 150px; width: 500px;"></div>
@@ -168,11 +168,16 @@ div.tooltip {
 			</td>
 		</tr>
 	</table>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 	<script>
 		var width = 700, height = 600, margin = {
 			b : 0,
-			t : 0,
+			t : 40,
 			l : 170,
 			r : 50
 		};
