@@ -234,10 +234,7 @@ div.tooltip {
 		var y = d3.scale.linear().rangeRound([ height, 0 ]);
 
 		var color = d3.scale.ordinal()
-				.range(
-						[ "#800026", "#feb24c", "#081d58", "#7fcdbb",
-								"#004529", "#addd2f", "#49006a", "#fa9f00",
-								"#ff00af", "#969696" ]);
+				.range(["#377eb8", "#984ea3", "#4daf4a", "#e41a1c", "#a65628", "#e7298a", "#2980b9", "#ff7f00"]);
 
 		var xAxis = d3.svg.axis().scale(x).orient("bottom");
 
@@ -312,6 +309,10 @@ div.tooltip {
 				var id = "#" + ethnicities[i] + "-button";
 				d3.select(id).remove();
 			}
+			for (var i = 0; i < genders.length; i++) {
+				var id = "#" + genders[i] + "-button";
+				d3.select(id).remove();
+			}
 			span.selectAll(".breakdown-button")
 			.data(genders).enter()
 			.append("input")
@@ -324,6 +325,10 @@ div.tooltip {
 
 		function displayEthnicityButtons() {
 			var span = d3.select('#breakdown-bar');
+			for (var i = 0; i < ethnicities.length; i++) {
+				var id = "#" + ethnicities[i] + "-button";
+				d3.select(id).remove();
+			}
 			for (var i = 0; i < genders.length; i++) {
 				var id = "#" + genders[i] + "-button";
 				d3.select(id).remove();
