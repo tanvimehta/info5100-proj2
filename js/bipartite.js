@@ -206,10 +206,10 @@
 			var h = d3.select("#"+id).select(".part"+d).append("g").attr("class","header");
 			
 			h.append("text").text(header[d]).attr("x", (c1[d]-5))
-			.attr("y", -5).style("fill","grey");
+			.attr("y", -5).style("fill","black");
 			
 			h.append("text").text("Count").attr("x", (c2[d]-10))
-			.attr("y", -5).style("fill","grey");
+			.attr("y", -5).style("fill","black");
 			
 			h.append("line").attr("x1",c1[d]-10).attr("y1", -2)
 			.attr("x2",c3[d]+10).attr("y2", -2).style("stroke","black")
