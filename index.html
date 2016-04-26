@@ -261,8 +261,11 @@ var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 
 		var y = d3.scale.linear().rangeRound([ height, 0 ]);
 
+		var ethnicities = ["White", "Asian", "Latino", "Black", "Other"];
+		var genders = ["Male", "Female"];
 		var color = d3.scale.ordinal()
-		.range(["#377eb8", "#984ea3", "#4daf4a", "#e41a1c", "#a65628", "#e7298a", "#2980b9", "#ff7f00"]);
+		.domain(ethnicities.concat(genders))
+		.range(["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#a65628", "#2980b9", "#e7298a"]);
 
 		var xAxis = d3.svg.axis().scale(x).orient("bottom");
 
@@ -275,8 +278,7 @@ var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 			"transform",
 			"translate(" + margin.left + "," + margin.top + ")").attr("display", "block");
 
-			var ethnicities = ["Asian", "Black", "Latino", "White", "Other"];
-			var genders = ["Male", "Female", "NotReported"];
+
 
 			var category = "Ethnicity";
 			var selection = ethnicities.map(function (d) { return {name:d, sel:true}; });
@@ -296,6 +298,7 @@ var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 				selection = genders.map(function (d) { return {name:d, sel:true}; });
 				displayGenderButtons();
 				updateBarChart();
+				drawLegend(svg, color, function (x) { return genders.indexOf(x) > -1});
 			}
 
 			function categoryEthnicity() {
@@ -303,6 +306,7 @@ var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 				selection = ethnicities.map(function (d) { return {name:d, sel:true}; });
 				displayEthnicityButtons();
 				updateBarChart();
+				drawLegend(svg, color, function (x) { return ethnicities.indexOf(x) > -1});
 			}
 
 			function updateBarChart() {
@@ -418,9 +422,9 @@ var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 							transMasters = m_data.map(percentagify);
 							transPhd = p_data.map(percentagify);
 
-							color.domain(d3.keys(u_data[0]).filter(function(key) {
-								return key !== "Year" && key !== "Total";
-							}));
+							// color.domain(d3.keys(u_data[0]).filter(function(key) {
+							// 	return key !== "Year" && key !== "Total";
+							// }));
 
 							ap_data.forEach(function(d) {
 								var y0 = 0;
@@ -629,31 +633,39 @@ var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 								+ "," + 120 + ") rotate(-45)";
 					}).text("PhD");
 
-						var legend = svg.selectAll(".legend").data(
-							color.domain().slice().reverse()).enter()
-						.append("g").attr("class", "legend").attr(
-							"transform",
-							function(d, i) {
-								return "translate(0," + i * 20
-									+ ")";
-					});
-
-						legend.append("rect").attr("x", width - 18).attr(
-							"width", 18).attr("height", 18).style("fill",
-							color);
-
-						legend.append("text").attr("x", width - 24)
-						.attr("y", 9).attr("dy", ".35em").style(
-							"text-anchor", "end").text(function(d) {
-								return d;
-							});
-
 						draw(ethnicities);
 							});
 				});
 		});
 });
 
+	function drawLegend(svg, color, f) {
+		svg.selectAll(".legend").remove();
+		var legend = svg.selectAll(".legend")
+		.data(color.domain().slice().filter(f))
+		.enter().append("g")
+		.attr("class", "legend")
+		.attr("transform", function(d, i) {
+			return "translate(0," + i * 20 + ")";
+		});
+
+		legend.append("rect")
+		.attr("x", width - 18)
+		.attr("width", 18)
+		.attr("height", 18)
+		.style("fill", color);
+
+		legend.append("text")
+		.attr("x", width - 24)
+		.attr("y", 9)
+		.attr("dy", ".35em")
+		.style("text-anchor", "end")
+		.text(function(d) {
+			return d;
+		});
+	}
+
+	// the visualization starts with a breakdown by ethnicity
 	categoryEthnicity();
 
 		//http://stackoverflow.com/questions/281264/remove-empty-elements-from-an-array-in-javascript
@@ -670,7 +682,7 @@ var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 		function draw(labels) {
 			transAP.forEach(function(d) {
 				var y0 = 0;
-				d.races = color.domain().map(function(name) {
+				d.races = color.domain().slice().reverse().map(function(name) {
 					if (labels.indexOf(name) > -1) {
 						return {
 							name : name,
@@ -691,7 +703,7 @@ var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 
 			transUGrad.forEach(function(d) {
 				var y0 = 0;
-				d.races = color.domain().map(function(name) {
+				d.races = color.domain().slice().reverse().map(function(name) {
 					if (labels.indexOf(name) > -1) {
 						return {
 							name : name,
@@ -712,7 +724,7 @@ var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 
 			transMasters.forEach(function(d) {
 				var y0 = 0;
-				d.races = color.domain().map(function(name) {
+				d.races = color.domain().slice().reverse().map(function(name) {
 					if (labels.indexOf(name) > -1) {
 						return {
 							name : name,
@@ -733,7 +745,7 @@ var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 
 			transPhd.forEach(function(d) {
 				var y0 = 0;
-				d.races = color.domain().map(function(name) {
+				d.races = color.domain().slice().reverse().map(function(name) {
 					if (labels.indexOf(name) > -1) {
 						return {
 							name : name,
