@@ -369,6 +369,11 @@ var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 			function toggleButton(d) {
 				var idx = selection.map(function (d) { return d.name; }).indexOf(d);
 				selection[idx].sel = !selection[idx].sel;
+        if (selection.filter(function (d) { return d.sel; }).length < 1) {
+					selection[idx].sel = !selection[idx].sel;
+					return;
+        }
+
 				updateBarChart();
 			}
 
