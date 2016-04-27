@@ -12,6 +12,24 @@
 		opacity: 0.8;
 	}
 
+	p {
+	  font-family: 'Raleway', sans-serif;
+	  font-size: 18px;	
+	}
+
+	h1 {
+		color: #1A202C;
+	}
+
+	h2 {
+		color: #1F7872;
+	}
+
+	svg {
+		background-color:#EEE;
+		margin:10px;
+	}
+
 	svg text {
 		font-size: 12px;
 		margin: 100px auto;
@@ -131,14 +149,7 @@
 		font-weight: bold;
 		color: black;
 	}
-	.buttonSelected {
-		background-color:#555555;
-		color:#f6f6f6;
-	}
-	.buttonUnselected {
-		background-color:#f6f6f6;
-		color:#555555;
-	}
+
 	.d3-tip {
 	  line-height: 1;
 	  font-weight: bold;
@@ -167,9 +178,43 @@
 	  top: 100%;
 	  left: 0;
 	}
+	
+	.buttonSelected {
+		background-color: #1F7872; /* Green */
+		border: none;
+	    color: white;
+	    padding: 15px 32px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 14px;
+	    margin:5px;
+	}
+	.buttonUnselected {
+		border: none;
+		background-color: #AAA; /* Gray */
+	    color: white;
+	    padding: 15px 32px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 14px;
+	    margin:5px;
+	}
+
 	</style>
 </head>
 <body>
+	<h1> Diversity in the Technology Industry </h1>
+	<h2>Diversity in Companies</h2>
+	<p>
+	 Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. 
+	</p>
+	<br>
+<br>
+<br>
+<br>
+<br>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 	<script src="js/biPartite.js"></script>
@@ -182,7 +227,7 @@
 	logoName = "US";
 	ethnicData = {};
 	</script>
-
+	<div>
 	<!-- Visualization 1 -->
 	<table>
 		<tr>
@@ -203,6 +248,7 @@
 		</td>
 	</tr>
 </table>
+</div>
 
 <br>
 <br>
@@ -210,7 +256,10 @@
 <br>
 <br>
 <br>
-
+<h2>Diversity in School</h2>
+<p>
+ Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. 
+</p>
 <div id="barchart">
 	<span id="breakdown-bar" style="font-size: 12pt; padding-top: 40px;display: inline-block;">
 		Breakdown by:
