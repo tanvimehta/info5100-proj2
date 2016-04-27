@@ -14,7 +14,7 @@ d3.bullet = function() {
   height = 30,
   tickFormat = null;
 
-  var colors =["#e41a1c", "#377eb8",  "#4daf4a", "#984ea3", "#ff7f00","#a65628", "#49006a", "#fa9f00", "#ff00af", "#969696"];
+  var colors =["#ef6548", "#a6bddb", "#a1d99b", "#c994c7", "#fe9929", "#993404","#e41a1c", "#377eb8",  "#4daf4a", "#984ea3", "#ff7f00","#a65628"];
 
 
   // For each small multiple…
@@ -47,10 +47,12 @@ d3.bullet = function() {
       .data(rangez);
 
       range.enter().append("rect")
-      .attr("class", function(d, i) { return "range s2"; })
+      .attr("class", function(d, i) { return "range s" + i; })
       .attr("width", w0)
+      .attr("fill",colors[i])
       .attr("height", height-25)
       .attr("x", reverse ? x0 : 0)
+      .attr("y", -15)
       .transition()
       .duration(duration)
       .attr("width", w1)
@@ -68,10 +70,10 @@ d3.bullet = function() {
 
       measure.enter().append("rect")
       .attr("class", function(d, i) { return "measure s" + i; })
-      .attr("fill",colors[i])
+      .attr("fill",colors[i+6])
       .attr("width", w0)
       .attr("height", height / 5)
-      .attr("x", reverse ? x0 : 0)
+      .attr("x", reverse ? x0 : 5)
       .attr("y", height / 3)
       .transition()
       .duration(duration)
@@ -85,7 +87,7 @@ d3.bullet = function() {
       .attr("x", reverse ? x1 : 0)
       .attr("y", height / 4);
 
-      // Update the marker lines.
+    /*  // Update the marker lines.
       var marker = g.selectAll("line.marker")
       .data(markerz);
 
@@ -93,8 +95,8 @@ d3.bullet = function() {
       .attr("class", "marker")
       .attr("x1", x0)
       .attr("x2", x0)
-      .attr("y1", height / 6)
-      .attr("y2", height * 5 / 6)
+      .attr("y1", 0)
+      .attr("y2", height)
       .transition()
       .duration(duration)
       .attr("x1", x1)
@@ -104,13 +106,13 @@ d3.bullet = function() {
       .duration(duration)
       .attr("x1", x1)
       .attr("x2", x1)
-      .attr("y1", height / 6)
-      .attr("y2", height * 5 / 6);
+      .attr("y1", -10)
+      .attr("y2", height);*/
 
       // Compute the tick format.
       var format = tickFormat || x1.tickFormat(8);
 
-      // Update the tick groups.
+     // Update the tick groups.
       var tick = g.selectAll("g.tick")
       .data(x1.ticks(8), function(d) {
         return this.textContent || format(d);
@@ -231,7 +233,7 @@ function bulletMeasures(d) {
 
 function bulletTranslate(x) {
   return function(d) {
-    return "translate(" + x(d) + ",0)";
+    return "translate(" + x(d) + ",-10)";
   };
 }
 
