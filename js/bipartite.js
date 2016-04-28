@@ -199,7 +199,7 @@
 	
 	function drawHeader(header, id){
 		d3.select("#"+id).append("g").attr("class","header").append("text").text(header[2])
-		.style("font-size","20").attr("x",108).attr("y",-20).style("text-anchor","middle")
+		.style("font-size","20").attr("x",108).attr("y",-25).style("text-anchor","middle")
 		.style("font-weight","bold");
 		
 		[0,1].forEach(function(d){
@@ -288,7 +288,7 @@
 						return bP.selectSegment(data, p, i, visData, biP.id); })
 			.on("mouseout",function(d, i){ 
 						//removeEdges(biP.id);
-						//resetMoreInfo(p);
+						resetMoreInfo(p);
 						return bP.deSelectSegment(data, p, i); });	
 		});
 	});	
@@ -311,7 +311,7 @@
 		showGenderInLogo("US");
 		showBulletChart("US");
 		var div = document.getElementById("moreInfoHeader");
-		div.innerHTML = "Total US Population";
+		div.innerHTML = "US Population vs Employees";
 		
 	}
 
@@ -321,7 +321,7 @@
 			logoName = data[0].data.keys[p][index];
 			showGenderInLogo(logoName);
 			var div = document.getElementById("moreInfoHeader");
-			div.innerHTML = "Employees vs US Population";
+			div.innerHTML = "US Population vs Employees";
 
 			/*var svg = d3.select("#bullet");
 			ethnicIndex = -1;
@@ -447,12 +447,12 @@
 		.attr("transform", "translate(150," + margin.top + ")");
 
 		svgL.append("rect").attr("x", "150").attr("y", "0").attr("x1", "10").attr("y2", "50")
-		.attr("height","12").attr("width","100").style("fill", "#ef6548");
-		svgL.append("text").text("Average US ethnicity").attr("fill","#000").style("text-anchor", "middle")
+		.attr("height","12").attr("width","100").style("fill", "#bdbdbd");
+		svgL.append("text").text("Average US Ethnicity").attr("fill","#000").style("text-anchor", "middle")
 		.attr("x","50").attr("y","12").style("font-size","10pt");
 		
 		svgL.append("rect").attr("x", "150").attr("y", "12").attr("x1", "20").attr("y2", "60")
-		.attr("height","12").attr("width","80").style("fill", "#e41a1c");
+		.attr("height","12").attr("width","80").style("fill", "#636363");
 		svgL.append("text").text(legendText).attr("fill","#000").style("text-anchor", "middle")
 		.attr("x","50").attr("y","25").style("font-size","10pt");
 
