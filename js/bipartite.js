@@ -118,8 +118,8 @@
 		.attr("x", 0).attr("y",function(d){ return d.middle-d.height/2; })
 		.attr("width",b).attr("height",function(d){ return d.height; })
 		.style("shape-rendering","auto")
-		.style("fill-opacity",0).style("stroke-width","0")
-		.style("stroke","#ccc").style("stroke-opacity",0);
+		.style("fill-opacity",0).style("stroke-width","3")
+		.style("stroke","#ccc").style("stroke-opacity",1);
 
 		d3.select("#"+id).select(".part"+p).select(".subbars")
 		.selectAll(".subbar").data(data.subBars[p]).enter()
@@ -288,7 +288,7 @@
 						return bP.selectSegment(data, p, i, visData, biP.id); })
 			.on("mouseout",function(d, i){ 
 						//removeEdges(biP.id);
-						resetMoreInfo(p);
+						//resetMoreInfo(p);
 						return bP.deSelectSegment(data, p, i); });	
 		});
 	});	
@@ -297,13 +297,13 @@
 	function drawTooltip(){
 		d3.select("#logo").append("div")	
 		.attr("class", "tooltip").attr("id","femaleP")		
-		.style("opacity", 0).style("left","750px")		
-		.style("top", "190px");
+		.style("opacity", 0.9).style("left","10%")		
+		.style("top", "13%");
 
 		d3.select("#logo").append("div")	
 		.attr("class", "tooltip").attr("id","maleP")		
-		.style("opacity", 0).style("left","1150px")		
-		.style("top", "190px");
+		.style("opacity", 0.9).style("left","75%")		
+		.style("top", "13%");
 	}
 
 	function drawMoreInfo(){
@@ -348,6 +348,7 @@
 	function removeLogo(){
 		d3.select(".companyLogo").remove();
 		d3.selectAll(".bullet").remove();
+		d3.selectAll(".bulletLegend").remove();
 		d3.selectAll(".horizontalBarChart").remove();
 		//d3.selectAll(".tooltip").remove();
 	}
@@ -355,14 +356,13 @@
 	function showGenderInLogo(logoName){
 		removeLogo();
 
-		var svg= d3.select("#logoSVG").append("svg").attr("class","companyLogo").attr("viewBox",genderData[logoName].viewbox)
+		var svg= d3.select("#logoSVG")
+		.append("svg").attr("class","companyLogo").attr("viewBox",genderData[logoName].viewbox)
 		.attr("fill-rule","nonzero").attr("clip-rule","evenodd").attr("stroke-linejoin","round")
-		.attr("stroke-miterlimit","1.414");
-		//.attr("width","200px").attr("height","200px")
-		//-50 -50 1000 700
-		//svg.append("text").text("Something").attr("x","-50").attr("y","0");
+		.attr("stroke-miterlimit","1.414").append("g");
+		//.attr("transform", "translate(50,50)");
 
-		var path = svg.append("path").attr("d",genderData[logoName].d)
+		var path = svg.append("path").attr("id","logoID").attr("d",genderData[logoName].d)
 		.attr("stroke", "black");
 		var defs = svg.append("defs");
 		var lg = defs.append("linearGradient").attr("id","gradient").attr("x1","0%").attr("y1","0%").attr("x2","100%").attr("y2","0%");
@@ -372,37 +372,38 @@
 		lg.append("stop").attr("offset","100%").attr("style","stop-color:#3657A8;stop-opacity:1");		
 		path.attr("fill-rule","nonzero").attr("fill","url(#gradient)");
 
-		//Show tooltip on hover above logo
-		var div = d3.select("#logoSVG").select("#femaleP");
+		/*svg.append("text").text("Female: "+ genderData[logoName].female).style("text-anchor", "middle")
+		.attr("x","-300").attr("y","300").style("font-size","50%");
+		svg.append("text").text("Male: "+ (100 - parseInt(genderData[logoName].female))+"%").style("text-anchor", "middle")
+		.attr("x","1200").attr("y","300").style("font-size","50%");
+		*/
+		
+		var div = d3.select("#femaleP");
 		div.transition()		
 		.duration(1000)		
 		.style("opacity", .9);		
+
 		div.html("Female: "+ genderData[logoName].female);
 		
-		//path.on("mouseover",function(d, i){ 
-			var div = d3.select("#logoSVG").select("#maleP");
-			div.transition()		
-			.duration(1000)		
-			.style("opacity", .9);		
-			div.html("Male: "+ (100 - parseInt(genderData[logoName].female))+"%")	
+		var div = d3.select("#maleP");
+		div.transition()		
+		.duration(1000)		
+		.style("opacity", .9);		
+		div.html("Male: "+ (100 - parseInt(genderData[logoName].female))+"%");
+	}
 
-		}
+	function showBulletChart(Name){
 
-		function showBulletChart(Name){
+		var margin = {top: 5, right: 40, bottom: 20, left: 20},
+		bWidth = 500 - margin.left - margin.right,
+		bHeight = 50 - margin.top - margin.bottom;
 
-		//	if(Name != "US"){
-				var margin = {top: 5, right: 40, bottom: 20, left: 20},
-				bWidth = 500 - margin.left - margin.right,
-				bHeight = 50 - margin.top - margin.bottom;
+		chart = d3.bullet()
+		.width(bWidth)
+		.height(bHeight);
 
-				chart = d3.bullet()
-				.width(bWidth)
-				.height(bHeight);
-
-			//chart.duration(1000);
-
-			d3.json("data/ethnicInTotal.json", function(error, data) {
-				if (error) throw error;
+		d3.json("data/ethnicInTotal.json", function(error, data) {
+			if (error) throw error;
 
 			//Global variable
 			ethnicData = data;
@@ -412,7 +413,7 @@
 			.enter().append("svg")
 			.attr("class", "bullet")
 			.attr("width", bWidth + margin.left + margin.right)
-			.attr("height", bHeight + margin.top + margin.bottom)
+			.attr("height", bHeight + margin.top + margin.bottom-10)
 			.append("g")
 			.attr("transform", "translate(50," + margin.top + ")")
 			.call(chart);
@@ -429,11 +430,31 @@
 			.attr("class", "subtitle")
 			.attr("dy", "1em")
 			.text(function(d) { return d.subtitle; });
+
 		});
-	//	}else{
-			//horizontalBarChart(Name);
-			
-	//	}
+
+		if(Name == "US"){
+			var legendText = "Average for 10 Companies";
+		}
+		else{
+			var legendText = "Company's Average Ethnicity";
+		}
+		var svgL = d3.select("#bulletLegend").append("svg")
+		.attr("class", "bullet")
+		.attr("width", bWidth + margin.left + margin.right)
+		.attr("height", bHeight + margin.top + margin.bottom-10)
+		.append("g")
+		.attr("transform", "translate(150," + margin.top + ")");
+
+		svgL.append("rect").attr("x", "150").attr("y", "0").attr("x1", "10").attr("y2", "50")
+		.attr("height","12").attr("width","100").style("fill", "#ef6548");
+		svgL.append("text").text("Average US ethnicity").attr("fill","#000").style("text-anchor", "middle")
+		.attr("x","50").attr("y","12").style("font-size","10pt");
+		
+		svgL.append("rect").attr("x", "150").attr("y", "12").attr("x1", "20").attr("y2", "60")
+		.attr("height","12").attr("width","80").style("fill", "#e41a1c");
+		svgL.append("text").text(legendText).attr("fill","#000").style("text-anchor", "middle")
+		.attr("x","50").attr("y","25").style("font-size","10pt");
 
 	}
 

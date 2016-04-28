@@ -2,44 +2,44 @@
 	"US": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [100, 100],
-		"measures": [64, 100],
-		"markers": [64, 60]
+		"ranges": [64, 100],
+		"measures": [59.3, 100],
+		"markers": [64, 59.3]
 	}, {
 		"title": "Asian",
 		"subtitle": "",
-		"ranges": [100, 100],
-		"measures": [4, 100],
-		"markers": [4]
+		"ranges": [4, 100],
+		"measures": [25.3, 100],
+		"markers": [4,25.3]
 	}, {
 		"title": "Latino",
 		"subtitle": "",
-		"ranges": [100, 100],
-		"measures": [16, 100],
-		"markers": [16]
+		"ranges": [16, 100],
+		"measures": [6.4, 100],
+		"markers": [16,6.4]
 	}, {
 		"title": "Black",
 		"subtitle": "",
-		"ranges": [100, 100],
-		"measures": [12, 100],
-		"markers": [12]
+		"ranges": [12, 100],
+		"measures": [5.7, 100],
+		"markers": [12,5.7]
 	}, {
 		"title": "Multi",
 		"subtitle": "",
-		"ranges": [100, 100],
-		"measures": [1, 100],
-		"markers": [1]
+		"ranges": [1, 100],
+		"measures": [1.56, 100],
+		"markers": [1,1.56]
 	}, {
 		"title": "Other",
 		"subtitle": "",
-		"ranges": [100, 100],
-		"measures": [3, 100],
-		"markers": [3, 3]
+		"ranges": [3, 100],
+		"measures": [1.4, 100],
+		"markers": [3, 1.4]
 	}],
 	"Amazon": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [64, 100],
+		"ranges": [0, 64, 100],
 		"measures": [60, 100],
 		"markers": [64, 60]
 	}, {
@@ -76,7 +76,7 @@
 	"Apple": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [64, 100],
+		"ranges": [0, 64, 100],
 		"measures": [54, 100],
 		"markers": [64, 54]
 	}, {
@@ -113,7 +113,7 @@
 	"Dell": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [64, 100],
+		"ranges": [0, 64, 100],
 		"measures": [69, 100],
 		"markers": [64, 69]
 	}, {
@@ -188,7 +188,7 @@
 	"Twitter": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [64, 100],
+		"ranges": [0, 64, 100],
 		"measures": [59, 100],
 		"markers": [64, 59]
 	}, {
@@ -225,7 +225,7 @@
 	"eBay": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [64, 100],
+		"ranges": [0, 64, 100],
 		"measures": [60, 100],
 		"markers": [64, 60]
 	}, {
@@ -262,7 +262,7 @@
 	"LinkedIn": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [64, 100],
+		"ranges": [0, 64, 100],
 		"measures": [56, 100],
 		"markers": [64, 56]
 	}, {
@@ -299,7 +299,7 @@
 	"Facebook": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [64, 100],
+		"ranges": [0, 64, 100],
 		"measures": [55, 100],
 		"markers": [64, 55]
 	}, {
@@ -336,7 +336,7 @@
 	"Microsoft": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [64, 100],
+		"ranges": [0, 64, 100],
 		"measures": [59, 100],
 		"markers": [64, 59]
 	}, {
@@ -373,7 +373,7 @@
 	"Intel": [{
 		"title": "White",
 		"subtitle": "",
-		"ranges": [64, 100],
+		"ranges": [0, 64, 100],
 		"measures": [61, 100],
 		"markers": [64, 61]
 	}, {
