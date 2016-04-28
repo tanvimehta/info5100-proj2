@@ -1,216 +1,216 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<link rel="stylesheet"
+<meta charset="utf-8">
+<link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<style>
-	body {
-		width: 1200px;
-		margin: 100px auto;
-		font: 10px sans-serif;
-		opacity: 0.8;
-	}
+<style>
+body {
+	width: 1200px;
+	margin: 100px auto;
+	font: 10px sans-serif;
+	opacity: 0.8;
+}
 
-	p {
-		font-family: 'Raleway', sans-serif;
-		font-size: 18px;
-	}
+p {
+	font-family: 'Raleway', sans-serif;
+	font-size: 18px;
+}
 
-	h1 {
-		color: #1A202C;
-	}
+h1 {
+	color: #1A202C;
+}
 
-	h2 {
-		color: #1F7872;
-	}
+h2 {
+	color: #1F7872;
+}
 
-	svg {
-		background-color: #EEE;
-		margin: 10px;
-	}
+svg {
+	background-color: #EEE;
+	margin: 10px;
+}
 
-	svg text {
-		font-size: 12px;
-		margin: 100px auto;
-	}
+svg text {
+	font-size: 12px;
+	margin: 100px auto;
+}
 
-	rect {
-		shape-rendering: crispEdges;
-	}
+rect {
+	shape-rendering: crispEdges;
+}
 
-	.axis path, .axis line {
-		fill: none;
-		stroke: #000;
-		shape-rendering: crispEdges;
-	}
+.axis path, .axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
 
-	.bar {
-		fill: steelblue;
-	}
+.bar {
+	fill: steelblue;
+}
 
-	.x.axis path {
-		display: none;
-	}
+.x.axis path {
+	display: none;
+}
 
-	.imgClass {
-		max-width: 100%;
-		height: auto;
-	}
+.imgClass {
+	max-width: 100%;
+	height: auto;
+}
 
-	#logoSVG {
-		margin: 0 auto;
-		display: block;
-	}
+#logoSVG {
+	margin: 0 auto;
+	display: block;
+}
 
-	#bullet {
-		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-		margin: auto;
-		padding-top: 40px;
-		position: relative;
-		width: 960px;
-	}
+#bullet {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	margin: auto;
+	padding-top: 40px;
+	position: relative;
+	width: 960px;
+}
 
-	button {
-		position: absolute;
-		right: 10px;
-		top: 10px;
-	}
+button {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
 
-	.svgBgColor{
-		background-color: #eee;
-	}
+.svgBgColor {
+	background-color: #eee;
+}
 
-	.bullet {
-		font: 10px sans-serif;
-	}
+.bullet {
+	font: 10px sans-serif;
+}
 
-	.bullet .marker {
-		stroke: #000;
-		stroke-width: 2px;
-	}
+.bullet .marker {
+	stroke: #000;
+	stroke-width: 2px;
+}
 
-	.bullet .tick line {
-		stroke: #666;
-		stroke-width: .5px;
-	}
+.bullet .tick line {
+	stroke: #666;
+	stroke-width: .5px;
+}
 
-	.bullet .range.s0 {
-		opacity: 0.5;
-	}
+.bullet .range.s0 {
+	opacity: 0.3;
+}
 
-	.bullet .range.s1 {
-		opacity: 1;
-	}
+.bullet .range.s1 {
+	opacity: 0.7;
+}
 
-	.bullet .range.s2 {
-		opacity: 0.5;
-	}
+.bullet .range.s2 {
+	opacity: 1;
+}
 
-	.bullet .measure.s0 {
-		opacity: 0.5;
-	}
+.bullet .measure.s0 {
+	opacity: 0.7;
+}
 
-	.bullet .measure.s1 {
-		opacity: 1;
-	}
+.bullet .measure.s1 {
+	opacity: 1;
+}
 
-	.bullet .title {
-		font-size: 14px;
-		font-weight: bold;
-	}
+.bullet .title {
+	font-size: 14px;
+	font-weight: bold;
+}
 
-	.bullet .subtitle {
-		fill: #999;
-	}
+.bullet .subtitle {
+	fill: #999;
+}
 
-	.degree {
-		font-size: 11px;
-		fill: #404048;
-	}
+.degree {
+	font-size: 11px;
+	fill: #404048;
+}
 
-	#logo .tooltip {
-		position: absolute;
-		text-align: center;
-		width: 80px;
-		height: 20px;
-		padding: 2px;
-		font: 12px sans-serif;
-		background: #bdbdbd;
-		border: 0px;
-		border-radius: 8px;
-		pointer-events: none;
-		display: inline;
-	}
+#logo .tooltip {
+	position: absolute;
+	text-align: center;
+	width: 80px;
+	height: 20px;
+	padding: 2px;
+	font: 12px sans-serif;
+	background: #bdbdbd;
+	border: 0px;
+	border-radius: 8px;
+	pointer-events: none;
+	display: inline;
+}
 
-	.outerDiv{
-		position: relative;
-	}
+.outerDiv {
+	position: relative;
+}
 
-	.alignClass {
-		display: inline;
-	}
+.alignClass {
+	display: inline;
+}
 
-	.headerClass {
-		font-size: 15pt;
-		text-align: center;
-		font-weight: bold;
-		color: black;
-	}
+.headerClass {
+	font-size: 15pt;
+	text-align: center;
+	font-weight: bold;
+	color: black;
+}
 
-	.d3-tip {
-		line-height: 1;
-		font-weight: bold;
-		padding: 12px;
-		background: rgba(0, 0, 0, 0.8);
-		color: #fff;
-		border-radius: 2px;
-	}
+.d3-tip {
+	line-height: 1;
+	font-weight: bold;
+	padding: 12px;
+	background: rgba(0, 0, 0, 0.8);
+	color: #fff;
+	border-radius: 2px;
+}
 
-	/* Creates a small triangle extender for the tooltip */
-	.d3-tip:after {
-		box-sizing: border-box;
-		display: inline;
-		font-size: 10px;
-		width: 100%;
-		line-height: 1;
-		color: rgba(0, 0, 0, 0.8);
-		content: "\25BC";
-		position: absolute;
-		text-align: center;
-	}
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+	box-sizing: border-box;
+	display: inline;
+	font-size: 10px;
+	width: 100%;
+	line-height: 1;
+	color: rgba(0, 0, 0, 0.8);
+	content: "\25BC";
+	position: absolute;
+	text-align: center;
+}
 
-	/* Style northward tooltips differently */
-	.d3-tip.n:after {
-		margin: -1px 0 0 0;
-		top: 100%;
-		left: 0;
-	}
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+	margin: -1px 0 0 0;
+	top: 100%;
+	left: 0;
+}
 
-	.buttonSelected {
-		background-color: #1F7872; /* Green */
-		border: none;
-		color: white;
-		padding: 15px 32px;
-		text-align: center;
-		text-decoration: none;
-		display: inline-block;
-		font-size: 14px;
-		margin: 5px;
-	}
+.buttonSelected {
+	background-color: #1F7872; /* Green */
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	margin: 5px;
+}
 
-	.buttonUnselected {
-		border: none;
-		background-color: #AAA; /* Gray */
-		color: white;
-		padding: 15px 32px;
-		text-align: center;
-		text-decoration: none;
-		display: inline-block;
-		font-size: 14px;
-		margin: 5px;
-	}
-	</style>
+.buttonUnselected {
+	border: none;
+	background-color: #AAA; /* Gray */
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	margin: 5px;
+}
+</style>
 </head>
 <body>
 	<h1>Diversity in the Technology Industry</h1>
@@ -227,7 +227,7 @@
 	<br>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script
-	src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+		src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 	<script src="js/biPartite.js"></script>
 	<script type="text/javascript" src="js/companyInfo.js"></script>
 	<script src="data/logos.json"></script>
@@ -243,22 +243,24 @@
 		<table>
 			<tr>
 				<td>
-					<div id="idCompanies" class="svgBgColor" style="height:600px;border: 1px solid;align-content: center;"></div>
+					<div id="idCompanies" class="svgBgColor"
+						style="height: 600px; border: 1px solid; align-content: center;"></div>
 				</td>
 
 				<td>
 
 					<div class="svgBgColor" id="moreInfo"
-					style="height: 600px; width: 600px; border: 1px solid; align-content: center;">
-					<div class="headerClass" id="moreInfoHeader">
-						<br>US Population vs Employees</div>
-						<div id="logo" class="outerDiv"> 
+						style="height: 600px; width: 600px; border: 1px solid; align-content: center;">
+						<div class="headerClass" id="moreInfoHeader">
+							<br>US Population vs Employees
+						</div>
+						<div id="logo" class="outerDiv">
 							<div id="logoSVG" style="height: 100px; width: 500px;"></div>
 							<div id="bullet" style="height: 400px; width: 500px;"></div>
 							<div id="bulletLegend" style="height: 100px; width: 500px;"></div>
 						</div>
 					</div>
-					
+
 				</td>
 			</tr>
 		</table>
@@ -278,15 +280,15 @@
 	</p>
 	<div id="barchart">
 		<span id="breakdown-bar"
-		style="font-size: 12pt; padding-top: 40px; display: inline-block;">
-		Category: <input id="gender-button" type="button" value="Gender"
-		onclick="categoryGender()" /> <input id="ethnicity-button"
-		type="button" value="Ethnicity" onclick="categoryEthnicity()" />
-		Select one or more from:
-	</span>
-</div>
+			style="font-size: 12pt; padding-top: 40px; display: inline-block;">
+			Category: <input id="gender-button" type="button" value="Gender"
+			onclick="categoryGender()" /> <input id="ethnicity-button"
+			type="button" value="Ethnicity" onclick="categoryEthnicity()" />
+			Select one or more from:
+		</span>
+	</div>
 
-<script>
+	<script>
 
 var width = 600, height = 530, margin = {
 	b : 0,
@@ -309,8 +311,8 @@ bP.draw(data, svg);
 
 </script>
 
-<!-- Visualization 2 -->
-<script>
+	<!-- Visualization 2 -->
+	<script>
 var margin = {
 	top : 40,
 	right : 50,
@@ -912,5 +914,5 @@ svg.append("g").attr("class", "x axis").attr(
 
 		}
 		</script>
-	</body>
-	</html>
+</body>
+</html>

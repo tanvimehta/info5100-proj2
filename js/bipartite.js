@@ -2,8 +2,10 @@
 	var bP={};	
 	var b=30, bb=150, height=530, buffMargin=1, minHeight=14;
 	var c1=[-130, 40], c2=[-50, 100], c3=[-10, 140]; //Column positions of labels.
-	var colors =["#e41a1c", "#377eb8",  "#4daf4a", "#984ea3", "#ff7f00","#a65628", "#49006a", "#fa9f00", "#ff00af", "#969696"];
-	
+//	var colors =["#e41a1c", "#ffff33",  "#4daf4a", "#984ea3", "#ff7f00","#a65628", "#49006a", "#fa9f00", "#ff00af", "#969696"];
+	var colors = ["#e31a1c","#33a02c","#ff7f00","#6a3d9a","#b15928","#4d4d4d"];
+
+	//var colors = ["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928"];
 	bP.partData = function(data,p){
 		var sData={};
 		
@@ -425,12 +427,12 @@
 		.attr("transform", "translate(150," + margin.top + ")");
 
 		svgL.append("rect").attr("x", "150").attr("y", "0").attr("x1", "10").attr("y2", "50")
-		.attr("height","12").attr("width","100").style("fill", "#bdbdbd");
+		.attr("height","12").attr("width","100").style("fill", "#80cdc1");
 		svgL.append("text").text("Average US Ethnicity").attr("fill","#000").style("text-anchor", "middle")
 		.attr("x","50").attr("y","12").style("font-size","10pt");
 		
 		svgL.append("rect").attr("x", "150").attr("y", "12").attr("x1", "20").attr("y2", "60")
-		.attr("height","12").attr("width","80").style("fill", "#636363");
+		.attr("height","12").attr("width","100").style("fill", "#01665e");
 		svgL.append("text").text(legendText).attr("fill","#000").style("text-anchor", "middle")
 		.attr("x","50").attr("y","25").style("font-size","10pt");
 

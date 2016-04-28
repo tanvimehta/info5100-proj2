@@ -14,7 +14,9 @@ d3.bullet = function() {
   height = 30,
   tickFormat = null;
 
-  var colors =["#ef6548", "#a6bddb", "#a1d99b", "#c994c7", "#fe9929", "#993404","#e41a1c", "#377eb8",  "#4daf4a", "#984ea3", "#ff7f00","#a65628"];
+//  var colors =["#ef6548", "#a6bddb", "#a1d99b", "#c994c7", "#fe9929", "#993404","#e41a1c", "#377eb8",  "#4daf4a", "#984ea3", "#ff7f00","#a65628"];
+//var colors = ["#fb9a99","#b2df8a","#fdbf6f","#cab2d6","#ffff99","#1f78b4","#33a02c","#e31a1c","#ff7f00","#6a3d9a","#b15928"];
+var colors = ["#e31a1c","#33a02c","#ff7f00","#6a3d9a","#b15928","#4d4d4d"]
 
 
   // For each small multiple…
@@ -70,7 +72,7 @@ d3.bullet = function() {
 
       measure.enter().append("rect")
       .attr("class", function(d, i) { return "measure s" + i; })
-      .attr("fill",colors[i+6])
+      .attr("fill",colors[i])
       .attr("width", w0)
       .attr("height", height / 6)
       .attr("x", reverse ? x0 : 5)
@@ -113,10 +115,10 @@ d3.bullet = function() {
       var format = tickFormat || x1.tickFormat(8);
 
      // Update the tick groups.
-      var tick = g.selectAll("g.tick")
-      .data(x1.ticks(8), function(d) {
-        return this.textContent || format(d);
-      });
+     var tick = g.selectAll("g.tick")
+     .data(x1.ticks(8), function(d) {
+      return this.textContent || format(d);
+    });
 
       // Initialize the ticks with the old scale, x0.
       var tickEnter = tick.enter().append("g")
