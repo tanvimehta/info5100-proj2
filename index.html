@@ -313,7 +313,7 @@ bP.draw(data, svg);
 <script>
 var margin = {
 	top : 40,
-	right : 80,
+	right : 50,
 	bottom : 90,
 	left : 40
 }, width = 1160 - margin.left - margin.right, height = 500 - margin.top
@@ -364,7 +364,6 @@ var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 				selection = genders.map(function (d) { return {name:d, sel:true}; });
 				displayGenderButtons();
 				updateBarChart();
-				drawLegend(svg, color, function (x) { return genders.indexOf(x) > -1});
 			}
 
 			function categoryEthnicity() {
@@ -372,7 +371,6 @@ var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 				selection = ethnicities.map(function (d) { return {name:d, sel:true}; });
 				displayEthnicityButtons();
 				updateBarChart();
-				drawLegend(svg, color, function (x) { return ethnicities.indexOf(x) > -1});
 			}
 
 			function updateBarChart() {
@@ -717,32 +715,6 @@ svg.append("g").attr("class", "x axis").attr(
 });
 });
 });
-
-function drawLegend(svg, color, f) {
-	svg.selectAll(".legend").remove();
-	var legend = svg.selectAll(".legend")
-	.data(color.domain().slice().filter(f))
-	.enter().append("g")
-	.attr("class", "legend")
-	.attr("transform", function(d, i) {
-		return "translate(0," + i * 20 + ")";
-	});
-
-	legend.append("rect")
-	.attr("x", width - 18)
-	.attr("width", 18)
-	.attr("height", 18)
-	.style("fill", color);
-
-	legend.append("text")
-	.attr("x", width - 24)
-	.attr("y", 9)
-	.attr("dy", ".35em")
-	.style("text-anchor", "end")
-	.text(function(d) {
-		return d;
-	});
-}
 
 	// the visualization starts with a breakdown by ethnicity
 	categoryEthnicity();
