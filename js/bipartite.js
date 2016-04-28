@@ -137,7 +137,7 @@
 
 			mainbar.append("text").attr("class","barvalue")
 			.attr("x", c2[p]).attr("y",function(d){ return d.middle+5;})
-			.text(function(d,i){ return d.value ;})
+			.text(function(d,i){ return d3.format(",")(d.value);})
 			.attr("text-anchor","end");
 
 			mainbar.append("text").attr("class","barpercent")
@@ -154,7 +154,7 @@
 
 			mainbar.append("text").attr("class","barvalue")
 			.attr("x", c2[p]+35).attr("y",function(d){ return d.middle+5;})
-			.text(function(d,i){ return d.value ;})
+			.text(function(d,i){ return d3.format(",")(d.value);})
 			.attr("text-anchor","end");
 
 			mainbar.append("text").attr("class","barpercent")
@@ -162,24 +162,7 @@
 			.text(function(d,i){ return "( "+Math.round(100*d.percent)+"%)" ;})
 			.attr("text-anchor","end").style("fill","grey");
 
-		}
-
-		/*mainbar.append("text").attr("class","barlabel")
-		.attr("x", c1[p]-5).attr("y",function(d){ return d.middle+5;})
-		.text(function(d,i){ return data.keys[p][i];})
-		.attr("text-anchor","start" );
-
-		mainbar.append("text").attr("class","barvalue")
-		.attr("x", c2[p]+20).attr("y",function(d){ return d.middle+5;})
-		.text(function(d,i){ return d.value ;})
-		.attr("text-anchor","end");
-
-		mainbar.append("text").attr("class","barpercent")
-		.attr("x", c3[p]+8).attr("y",function(d){ return d.middle+5;})
-		.text(function(d,i){ return "( "+Math.round(100*d.percent)+"%)" ;})
-		.attr("text-anchor","end").style("fill","grey");*/
-
-		
+		}		
 	}
 	
 	function drawEdges(data, id){
@@ -233,7 +216,7 @@
 		.attr("y",function(d){ return d.middle+5;});
 
 		mainbar.select(".barvalue").transition().duration(500)
-		.attr("y",function(d){ return d.middle+5;}).text(function(d,i){ return d.value ;});
+		.attr("y",function(d){ return d.middle+5;}).text(function(d,i){ return d3.format(",")(d.value); });
 
 		mainbar.select(".barpercent").transition().duration(500)
 		.attr("y",function(d){ return d.middle+5;})
@@ -371,12 +354,6 @@
 		lg.append("stop").attr("offset",genderData[logoName].female).attr("style","stop-color:#3657A8;stop-opacity:1");
 		lg.append("stop").attr("offset","100%").attr("style","stop-color:#3657A8;stop-opacity:1");		
 		path.attr("fill-rule","nonzero").attr("fill","url(#gradient)");
-
-		/*svg.append("text").text("Female: "+ genderData[logoName].female).style("text-anchor", "middle")
-		.attr("x","-300").attr("y","300").style("font-size","50%");
-		svg.append("text").text("Male: "+ (100 - parseInt(genderData[logoName].female))+"%").style("text-anchor", "middle")
-		.attr("x","1200").attr("y","300").style("font-size","50%");
-		*/
 		
 		var div = d3.select("#femaleP");
 		div.transition()		
@@ -429,7 +406,8 @@
 			title.append("text")
 			.attr("class", "subtitle")
 			.attr("dy", "1em")
-			.text(function(d) { return d.subtitle; });
+			.text("%");
+
 
 		});
 
