@@ -1,6 +1,6 @@
 !function(){
 	var bP={};	
-	var b=30, bb=150, height=600, buffMargin=1, minHeight=14;
+	var b=30, bb=150, height=530, buffMargin=1, minHeight=14;
 	var c1=[-130, 40], c2=[-50, 100], c3=[-10, 140]; //Column positions of labels.
 	var colors =["#e41a1c", "#377eb8",  "#4daf4a", "#984ea3", "#ff7f00","#a65628", "#49006a", "#fa9f00", "#ff00af", "#969696"];
 	
@@ -281,12 +281,12 @@
 		d3.select("#logo").append("div")	
 		.attr("class", "tooltip").attr("id","femaleP")		
 		.style("opacity", 0.9).style("left","10%")		
-		.style("top", "13%");
+		.style("top", "10%");
 
 		d3.select("#logo").append("div")	
 		.attr("class", "tooltip").attr("id","maleP")		
 		.style("opacity", 0.9).style("left","75%")		
-		.style("top", "13%");
+		.style("top", "10%");
 	}
 
 	function drawMoreInfo(){
