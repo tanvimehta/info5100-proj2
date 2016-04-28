@@ -417,7 +417,7 @@
 			var legendText = "Average for 10 Companies";
 		}
 		else{
-			var legendText = "Company's Average Ethnicity";
+			var legendText = "Average Company Ethnicity";
 		}
 		var svgL = d3.select("#bulletLegend").append("svg")
 		.attr("class", "bullet")
