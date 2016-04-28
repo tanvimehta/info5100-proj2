@@ -357,7 +357,7 @@ var x = d3.scale.ordinal().rangeRoundBands([ 0, width - margin.right], .1);
 			.html(function(d) {
 				var percentage = d.y1-d.y0;
 				return "<strong>"+ d.name + ":</strong> <span style='color:white'>" + d3.format(",")(d3.round(d.val, 0)) + "</br>" 
-				+ "</span><strong>Percentage:</strong> <span style='color:white'>" + d3.round(percentage, 2) + "</span>";
+				+ "</span><strong>Percentage:</strong> <span style='color:white'>" + d3.round(percentage, 2) + "%</span>";
 			})
 			svg.call(tip);
 
