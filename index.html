@@ -279,7 +279,7 @@
 	<div id="barchart">
 		<span id="breakdown-bar"
 		style="font-size: 12pt; padding-top: 40px; display: inline-block;">
-		Breakdown by: <input id="gender-button" type="button" value="Gender"
+		Category: <input id="gender-button" type="button" value="Gender"
 		onclick="categoryGender()" /> <input id="ethnicity-button"
 		type="button" value="Ethnicity" onclick="categoryEthnicity()" />
 		Select one or more from:
@@ -768,7 +768,7 @@ function drawLegend(svg, color, f) {
 							name : name,
 							y0 : y0,
 							y1 : y0 += +d[name],
-							val : d[name]*d["Total"]
+							val : d[name]*d["Total"]*0.01
 						}
 					} else {
 						return;
@@ -790,7 +790,7 @@ function drawLegend(svg, color, f) {
 							name : name,
 							y0 : y0,
 							y1 : y0 += +d[name],
-							val : d[name]*d["Total"]
+							val : d[name]*d["Total"]*0.01
 						}
 					} else {
 						return;
@@ -812,7 +812,7 @@ function drawLegend(svg, color, f) {
 							name : name,
 							y0 : y0,
 							y1 : y0 += +d[name],
-							val : d[name]*d["Total"]
+							val : d[name]*d["Total"]*0.01
 						}
 					} else {
 						return;
@@ -834,7 +834,7 @@ function drawLegend(svg, color, f) {
 							name : name,
 							y0 : y0,
 							y1 : y0 += +d[name],
-							val : d[name]*d["Total"]
+							val : d[name]*d["Total"]*0.01
 						}
 					} else {
 						return;
