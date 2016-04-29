@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<link rel="stylesheet"
+<meta charset="utf-8">
+<link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 	<h1>Diversity in the Technology Industry</h1>
 	<h2>How do the top companies compare?</h2>
-	<p style="text-align:justify;">Diversity in the technology industry is an important and increasingly relevant topic. As this topic becomes more prominent, companies are pressured to release their diversity statistics. With this data, technology companies face public scrutiny over their hiring practices. Below we show the diversity statistics for ten well known companies including the relative sizes of the companies are shown as well as the distribution of their employees. As a baseline, we compare against the distribution of the general US population. </br></br><b>Hover over each company and each ethnicity to see more detailed information</b>.
+	<p style="text-align: justify;">
+		Diversity in the technology industry is an important and increasingly
+		relevant topic. As this topic becomes more prominent, companies are
+		pressured to release their diversity statistics. With this data,
+		technology companies face public scrutiny over their hiring practices.
+		Below we show the diversity statistics for ten well known companies
+		including the relative sizes of the companies are shown as well as the
+		distribution of their employees. As a baseline, we compare against the
+		distribution of the general US population. </br> </br> <b>Hover over each
+			company and each ethnicity to see more detailed information</b>.
 	</p>
 	<br>
 	<br>
 	<br>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script
-	src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+		src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 	<script src="js/companyDiversity.js"></script>
 	<script type="text/javascript" src="js/companyInfo.js"></script>
 	<script src="data/logos.json"></script>
@@ -24,8 +33,8 @@
 	<script src="js/companyInfo.js"></script>
 
 	<script>
-	logoName = "US";
-	ethnicData = {};
+		logoName = "US";
+		ethnicData = {};
 	</script>
 	<div>
 		<!-- Visualization 1 -->
@@ -33,74 +42,66 @@
 			<tr>
 				<td>
 					<div id="idCompanies" class="svgBgColor"
-					style="height: 600px;align-content: center;"></div>
+						style="height: 600px; align-content: center;"></div>
 				</td>
-
 				<td>
-
 					<div class="svgBgColor" id="moreInfo"
-					style="height: 600px; width: 600px; align-content: center;">
-					<div class="headerClass" id="moreInfoHeader">
-						<br>US Population vs Employees
+						style="height: 600px; width: 600px; align-content: center;">
+						<div class="headerClass" id="moreInfoHeader">
+							<br>US Population vs Employees
+						</div>
+						<div id="logo" class="outerDiv">
+							<div id="logoSVG" style="height: 150px; width: 500px;"></div>
+							<div id="bulletLegend" style="height: 50px; width: 500px;"></div>
+							<div id="bullet" style="height: 400px; width: 500px;"></div>
+						</div>
 					</div>
-					<div id="logo" class="outerDiv">
-						<div id="logoSVG" style="height: 150px; width: 500px;"></div>
-						<div id="bulletLegend" style="height: 50px; width: 500px;"></div>
-						<div id="bullet" style="height: 400px; width: 500px;"></div>							
-					</div>
-				</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script>
+		var width = 600, height = 530, margin = {
+			b : 0,
+			t : 40,
+			l : 170,
+			r : 50
+		};
+		var svg = d3.select("#idCompanies").append("svg").attr('width', width)
+				.attr('height', (height + margin.b + margin.t)).append("g")
+				.attr("transform",
+						"translate(" + margin.l + "," + margin.t + ")");
 
-			</td>
-		</tr>
-	</table>
-</div>
+		var data = [ {
+			data : bP.partData(company_ethnic_data, 2),
+			id : 'TechDiversity',
+			header : [ "Company", "Ethnicity", "Diversity in Tech Companies" ]
+		}, ];
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<h2>Diversity in School</h2>
-<p>Text goes here. Text goes here. Text goes here. Text goes here.
-	Text goes here. Text goes here. Text goes here. Text goes here. Text
-	goes here. Text goes here. Text goes here. Text goes here. Text goes
-	here. Text goes here. Text goes here. Text goes here. Text goes here.
-</p>
-<div id="barchart">
-	<span id="breakdown-bar"
-	style="font-size: 12pt; padding-top: 40px; display: inline-block;">
-	Category: <input id="gender-button" type="button" value="Gender"
-	onclick="categoryGender()" /> <input id="ethnicity-button"
-	type="button" value="Ethnicity" onclick="categoryEthnicity()" />
-	Select one or more from:
-</span>
-</div>
-
-<script>
-
-var width = 600, height = 530, margin = {
-	b : 0,
-	t : 40,
-	l : 170,
-	r : 50
-};
-var svg = d3.select("#idCompanies").append("svg").attr('width', width)
-.attr('height', (height + margin.b + margin.t)).append("g")
-.attr("transform",
-	"translate(" + margin.l + "," + margin.t + ")");
-
-var data = [ {
-	data : bP.partData(company_ethnic_data, 2),
-	id : 'TechDiversity',
-	header : [ "Company", "Ethnicity", "Diversity in Tech Companies" ]
-}, ];
-
-bP.draw(data, svg);
-
-</script>
-
-<!-- Visualization 2 -->
-<script src="js/educationDiversity.js"></script>
+		bP.draw(data, svg);
+	</script>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<!-- Visualization 2 -->
+	<h2>Diversity in School</h2>
+	<p>Text goes here. Text goes here. Text goes here. Text goes here.
+		Text goes here. Text goes here. Text goes here. Text goes here. Text
+		goes here. Text goes here. Text goes here. Text goes here. Text goes
+		here. Text goes here. Text goes here. Text goes here. Text goes here.
+	</p>
+	<div id="barchart">
+		<span id="breakdown-bar"
+			style="font-size: 12pt; padding-top: 40px; display: inline-block;">
+			Category: <input id="gender-button" type="button" value="Gender"
+			onclick="categoryGender()" /> <input id="ethnicity-button"
+			type="button" value="Ethnicity" onclick="categoryEthnicity()" />
+			Select one or more from:
+		</span>
+	</div>
+	<script src="js/educationDiversity.js"></script>
 </body>
 </html>
