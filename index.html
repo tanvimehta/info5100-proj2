@@ -46,7 +46,7 @@
 				</td>
 				<td>
 					<div class="svgBgColor" id="moreInfo"
-						style="height: 600px; width: 600px; align-content: center;">
+						style="height: 600px; width: 600px; align-content: center;"> <br>
 						<div class="headerClass" id="moreInfoHeader">
 							<br>US Population vs Employees
 						</div>
@@ -61,9 +61,9 @@
 		</table>
 	</div>
 	<script>
-		var width = 600, height = 530, margin = {
+		var width = 540, height = 530, margin = {
 			b : 0,
-			t : 40,
+			t : 54,
 			l : 170,
 			r : 50
 		};
@@ -85,18 +85,17 @@
 	<br>
 	<br>
 	<br>
-	<br>
 	<!-- Visualization 2 -->
-	<h2>Diversity in School</h2>
-	<p>
-		Keeping in mind the diversity trends in the tech industry, we dive a little deeper to see if diversity in school gives us any clue into the source of the problem. Below we show the diversity statistics for 4 degrees over 5 years.
+	<h2>When does the diversity gap start?</h2>
+	<p style="text-align: justify;">
+		Keeping in mind the diversity trends in the tech industry, we dive a little deeper to see if diversity in school gives us any clue into the source of the problem. Below we show the diversity statistics for four levels of education in Computer Science from high school courses to doctorate degrees over five years, going from 2010 to 2014. The high school data comes from the number of students who take the annual computer science Advanced Placement (AP) test. The university data comes from responses to an annual national survey conducted by the Computing Research Association. An important note before diving into the data is that the Computing Research Association classifies international students into the "Other" category under ethnicity, making this category larger than one might expect. However, the trends in the data are still apparent, especially after filtering by selected ethnicities or gender. 
 	</br>
 	</br>
-	<b>Hover over each bar see more information about the diversity data.</b>
+	<b>Click to toggle or hover over each bar see more information about the diversity data.</b>
 	</p>
 	<div id="barchart">
 		<span id="breakdown-bar"
-			style="font-size: 12pt; padding-top: 40px; display: inline-block;">
+			style="font-size: 12pt; padding-top: 40px; padding-bottom: 10px; padding-left: 20px; display: inline-block;">
 			Category: <input id="gender-button" type="button" value="Gender"
 			onclick="categoryGender()" /> <input id="ethnicity-button"
 			type="button" value="Ethnicity" onclick="categoryEthnicity()" />
@@ -104,5 +103,15 @@
 		</span>
 	</div>
 	<script src="js/educationDiversity.js"></script>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<h2>Key Takeaways</h2>
+	<p style="text-align: justify;">
+		Even though the technology industry is often criticized for being full of white males, it's insightful to notice that whites are actually under-represented compared to their prevalence in the total US population. Of the represented ethnicities, Asians have a higher representation in technology than in the general population. Even though Blacks and Latinos are under-represented, they have higher percentages in industry compared to their precence in the education system. In Amazon, 15% of employees self-identify as black, showing over 400% increase over the percentage of Bachelor in Computer Science recipients. The data suggests that the root of the diversity problem starts in our education system.
+	</p>
 </body>
 </html>

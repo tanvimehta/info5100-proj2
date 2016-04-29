@@ -1,8 +1,8 @@
 var margin = {
 	top : 40,
-	right : 50,
-	bottom : 90,
-	left : 40
+	right : 10,
+	bottom : 10,
+	left : 60
 }, width = 1160 - margin.left - margin.right, height = 500 - margin.top
 		- margin.bottom;
 
@@ -22,7 +22,8 @@ var color = d3.scale.ordinal().domain(ethnicities.concat(genders)).range(
 
 var xAxis = d3.svg.axis().scale(x).orient("bottom");
 
-var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(d3.format(".2s"));
+function addPercentage(s) { return d3.format(".2s")(s) + "%"; }
+var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(addPercentage);
 
 var svg = d3.select("body").append("svg").attr("width",
 		width + margin.left + margin.right).attr("height",
@@ -365,13 +366,15 @@ d3.csv("Data/ap-stats.csv", function(error, ap_data) {
 				phd.selectAll("rect").on('mouseover', tip.show).on('mouseout',
 						tip.hide);
 
-				ap.append("text").attr("y", function(d) {
+				ap.append("g").attr("transform", "translate(-55,26)")
+				.append("text").attr("y", function(d) {
 					return y(0) + 20;
 				}).attr("class", "degree").attr("transform", function(d) {
 					return "translate(" + -290 + "," + 143 + ") rotate(-45)";
 				}).text("High School");
 
-				ugrad.append("text").attr("y", function(d) {
+				ugrad.append("g").attr("transform", "translate(-52,24)")
+				.append("text").attr("y", function(d) {
 					return y(0) + 20;
 				}).attr("class", "degree")
 						.attr(
@@ -383,7 +386,8 @@ d3.csv("Data/ap-stats.csv", function(error, ap_data) {
 											+ "," + 140 + ") rotate(-45)";
 								}).text("Undergrad");
 
-				masters.append("text").attr("y", function(d) {
+				masters.append("g").attr("transform", "translate(-52,24)")
+				.append("text").attr("y", function(d) {
 					return y(0) + 20;
 				}).attr("class", "degree")
 						.attr(
@@ -395,7 +399,8 @@ d3.csv("Data/ap-stats.csv", function(error, ap_data) {
 											+ "," + 130 + ") rotate(-45)";
 								}).text("Masters");
 
-				phd.append("text").attr("y", function(d) {
+				phd.append("g").attr("transform", "translate(-52,22)")
+				.append("text").attr("y", function(d) {
 					return y(0) + 20;
 				}).attr("class", "degree")
 						.attr(
