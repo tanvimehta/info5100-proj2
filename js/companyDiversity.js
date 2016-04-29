@@ -458,7 +458,7 @@
 			var svg = d3.select("#bullet").selectAll("svg").data(data[Name])
 					.enter().append("svg").attr("class", "bullet").attr(
 							"width", bWidth + margin.left + margin.right)
-					.attr("height", bHeight + margin.top + margin.bottom - 10)
+					.attr("height", bHeight + margin.top + margin.bottom)
 					.append("g").attr("transform",
 							"translate(50," + margin.top + ")").call(chart);
 

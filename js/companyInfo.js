@@ -11,7 +11,7 @@ d3.bullet = function() {
   markers = bulletMarkers,
   measures = bulletMeasures,
   width = 380,
-  height = 30,
+  height = 50,
   tickFormat = null;
 
 //  var colors =["#ef6548", "#a6bddb", "#a1d99b", "#c994c7", "#fe9929", "#993404","#e41a1c", "#377eb8",  "#4daf4a", "#984ea3", "#ff7f00","#a65628"];
@@ -88,29 +88,7 @@ var colors = ["#e31a1c","#33a02c","#ff7f00","#6a3d9a","#b15928","#4d4d4d"]
       .attr("height", height / 3)
       .attr("x", reverse ? x1 : 0)
       .attr("y", height / 4);
-
-    /*  // Update the marker lines.
-      var marker = g.selectAll("line.marker")
-      .data(markerz);
-
-      marker.enter().append("line")
-      .attr("class", "marker")
-      .attr("x1", x0)
-      .attr("x2", x0)
-      .attr("y1", 0)
-      .attr("y2", height)
-      .transition()
-      .duration(duration)
-      .attr("x1", x1)
-      .attr("x2", x1);
-
-      marker.transition()
-      .duration(duration)
-      .attr("x1", x1)
-      .attr("x2", x1)
-      .attr("y1", -10)
-      .attr("y2", height);*/
-
+      
       // Compute the tick format.
       var format = tickFormat || x1.tickFormat(8);
 
